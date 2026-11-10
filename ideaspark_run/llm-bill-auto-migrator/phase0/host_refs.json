@@ -1,0 +1,44 @@
+[
+  {
+    "paper_id": "dblp:journals/corr/abs-2607-25018",
+    "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+    "retrieved_via": "host_web",
+    "why": "Jul 2026; distribution-free accuracy guarantee for accept-or-defer cheap-tier decisions on multiple-choice (classification-shaped) tasks — closest frontier mechanism to a guaranteed swap gate"
+  },
+  {
+    "paper_id": "openalex:W4416159353",
+    "title": "C3PO: Optimized Large Language Model Cascades with Probabilistic Cost Constraints for Reasoning",
+    "retrieved_via": "host_web",
+    "why": "Nov 2025 (NeurIPS 2025); label-free cascade built from unlabeled outputs, using regret relative to the strongest model plus conformal cost bounds — matches using the incumbent model's past answers as reference"
+  },
+  {
+    "paper_id": "openalex:W7162773354",
+    "title": "Prediction-Powered Inference Across Many Tasks for AI Evaluation & Social Science Research",
+    "retrieved_via": "host_web",
+    "why": "May 2026 (ICML 2026); multi-task PPI that pools scarce human labels across many tasks — directly relevant to certifying many migrated call sites at once with few labels per site"
+  },
+  {
+    "paper_id": "openalex:W4414893795",
+    "title": "Conformal Arbitrage: Risk-Controlled Balancing of Competing Objectives in Language Models",
+    "retrieved_via": "host_web",
+    "why": "Jun 2025 (NeurIPS 2025); conformal-risk-controlled threshold between a primary and a fallback model with finite-sample guarantees — template for a risk-controlled cheap/incumbent switch"
+  },
+  {
+    "paper_id": "openalex:W4393111369",
+    "title": "SMART: Automatically Scaling Down Language Models with Accuracy Guarantees for Reduced Processing Fees",
+    "retrieved_via": "host_web",
+    "why": "2024; direct precedent baseline — picks the cheapest LLM whose accuracy against the reference best LLM meets a tolerance, using binomial confidence intervals; the swap gate must beat it"
+  },
+  {
+    "paper_id": "openalex:W4402466848",
+    "title": "Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement",
+    "retrieved_via": "host_web",
+    "why": "2024/ICLR 2025; cascaded selective evaluation with a provable human-agreement guarantee via fixed-sequence testing — the baseline for risk control on cheap-then-escalate decisions"
+  },
+  {
+    "paper_id": "openalex:W4392539015",
+    "title": "Active Statistical Inference",
+    "retrieved_via": "host_web",
+    "why": "2024; foundational method for budgeted, uncertainty-guided label collection with valid CIs — the backbone for choosing which production calls get human labels"
+  }
+]

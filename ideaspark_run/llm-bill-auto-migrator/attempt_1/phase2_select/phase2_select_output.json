@@ -1,0 +1,44 @@
+{
+  "contract_version": 2,
+  "selected_gaps": [
+    {
+      "gap": "(additive; site: frontier leaves BARGAIN openalex:W7109229324, Conformal Cascade dblp:journals/corr/abs-2607-25018, No Free Lunch openalex:W4414588259) No retrieved leaf produces a valid, non-vacuous bound on the ground-truth accuracy CHANGE caused by substituting a candidate for the incumbent while drawing most of its evidence from the incumbent's free logged outputs: agreement certificates over-charge the candidate by the incumbent's own error mass, ground-truth certificates ignore the logs and pay gold labels at the full 1/epsilon^2 rate, and the proxy-plus-gold leaves analyse single-population estimands in which the proxy is not also a comparison arm — stakes: a practitioner with a 1–2 point tolerance either rejects swaps that are actually safe whenever the frontier model's own error on noisy business labels exceeds the tolerance (forfeiting the savings), or pays on the order of thousands of gold labels per call site (Hoeffding at epsilon=0.02, delta=0.05 needs roughly 3.7k), which for low-volume call sites exceeds the API savings the swap was meant to capture.",
+      "chosen_pattern_id": "assumption_audit_and_pivot",
+      "anchor_alternates": [
+        "heterogeneous_decomposition",
+        "reframe_as_solvable_object"
+      ],
+      "companion_pattern": null,
+      "sibling_dependency": null,
+      "companion_dependency": null,
+      "companion_rationale": "",
+      "selection_rationale": "(a) This is the only construction-verb gap and it is the pre-swap half of the bottleneck the CI gate needs: without a valid, label-cheap bound on the ground-truth paired accuracy change there is nothing for any gate (pre- or post-swap) to test. (b) The pivot audits the two assumptions baked into every retrieved certificate's acquisition rule — that the incumbent is the reference (L1/n11/L4) and that gold labels must be drawn from the whole target population (n0, L2, L3) — and replaces them with the ground-truth paired estimand plus an acquisition rule restricted to the label-free set where the two arms disagree, on which alone the paired change can be non-zero; OCCUPIED-SOURCE CONSTRAINT for Phase 2.2: the cure must not reduce to a uniform gold-label paired test (n0), PPI++/active inference with the incumbent as proxy (n10/n12), single-model active risk estimation (c3), a difference estimator for survey totals (n0a) or BARGAIN's oracle-agreement threshold test (L1) — its novelty must live in the exact-zero stratum defined by the comparison arm itself, the label pool shared across nested partial-migration hypotheses, and a superpopulation certificate whose extra slack is paid in unlabeled log counts only."
+    }
+  ],
+  "coherence_thread_type": "n_a",
+  "deliverable_coverage": "method — anchor gap → assumption_audit_and_pivot (pivot the certificate's reference and label-acquisition assumptions) yields the runnable disagreement-restricted certificate of the ground-truth accuracy change and the CI swap gate built on it.",
+  "user_direction_disposition": {
+    "verdict": "adopted",
+    "user_wanted": "build an evaluation set from production traffic using the incumbent frontier model's past answers plus limited human labels, and safely migrate those calls to a much cheaper constrained decision model (typed classifier such as a System-One model, or a small/distilled model) with a statistical guarantee that task accuracy does not drop beyond a tolerance, gating the swap in CI",
+    "chosen": "A CI swap gate whose evidence is the incumbent's logged answers (used label-free to locate where candidate and incumbent disagree and to fix the exact stratum weights) plus gold labels bought only on those disagreements, certifying that the ground-truth accuracy change of the (partial or full) migration is at least -epsilon with probability 1-delta; call-site discovery, answer-space induction and post-swap re-certification are deferred."
+  },
+  "composition_note": "",
+  "deferred_gaps": [
+    {
+      "gap": "(additive; site: frontier leaves Conformal Cascade dblp:journals/corr/abs-2607-25018, Conformal LLM Routing openalex:W7166878141, BARGAIN openalex:W7109229324, ParetoBandit openalex:W7148297671) No retrieved leaf keeps a substitution guarantee meaningful on the traffic a call site receives after the swap: the conformal leaves assume calibration/deployment exchangeability and do not evaluate shift, BARGAIN's guarantee covers only the finite dataset it sampled, and the drift-adaptive router needs per-request feedback with no certificate — and the structural property is that any migration which retires the reference model also retires the free signal the certificate was measured against — stakes: silent post-migration accuracy loss when prompts, upstream data, or user mix shift (the CI gate passes once and never re-fires), and teams must either keep paying for shadow incumbent calls, eroding the savings, or operate blind on decisions such as moderation, routing, or triage.",
+      "reason": "independently publishable second problem: the anchor stands without it (it certifies the logged traffic distribution and states that scope); post-swap re-certification is future work that could reuse the anchor's disagreement decomposition on a shadow-sampled stream."
+    },
+    {
+      "gap": "(additive; site: frontier leaf Conformal Cascade dblp:journals/corr/abs-2607-25018, which states open-ended extension via answer clustering is future work; BARGAIN assumes a given class set) No retrieved leaf certifies a substitution when the call's answer space is not declared but must be induced from the incumbent's logged free-text outputs, so errors in the induced option set (missing long-tail labels, merged or split categories, an implicit 'other') sit entirely outside the guarantee — stakes: typed decision models that accept a Choice over a fixed option set (≤255 options) cannot even be evaluated until an option set exists, and a mis-induced set lets a certificate pass while the migrated call silently changes behaviour on exactly the rare categories that motivated using a frontier model.",
+      "reason": "out of scope: the anchor assumes a declared option set; answer-space induction is a separate construction with no object the anchor consumes."
+    },
+    {
+      "gap": "(subtractive; shared ancestor n0 'acceptance testing on a held-out sample of the target population', inherited by every certificate-bearing leaf: BARGAIN, Conformal Cascade, Conformal LLM Routing, Conformal Arbitrage openalex:W4414893795, Semi-Supervised Risk Control openalex:W4405469767) No retrieved paper tests whether a substitution certificate must assume that the population it certifies is available, or exchangeable with the calibration sample, at certification time, rather than assuming it — stakes: intellectual — the published guarantees of this whole line are statements about a calibration population, and if production deployments routinely violate the assumption (logs always precede the swap), the reported coverage/accuracy numbers do not transfer to the setting they are cited for; practitioner — CI gates built on them give false assurance.",
+      "reason": "analysis gap (test whether), not a method capability; for a method anchor the measurement belongs in falsification, and the anchor makes its own population scope explicit (logged-traffic distribution)."
+    },
+    {
+      "gap": "(subtractive; shared ancestor n5 'proxy/oracle query processing', inherited by SUPG, BARGAIN, SMART openalex:W4393111369, C3PO openalex:W4416159353) No retrieved paper tests whether treating the expensive model's outputs as the reference (the 'oracle') is necessary rather than assumed when the decision at stake is to retire that very model — stakes: intellectual — cost-quality results reported as 'X% savings at Y% quality' in this line are relative to a reference whose own error is never measured, so conclusions about which cheap model is 'safe' may be artefacts of the reference; practitioner — a swap that would actually raise accuracy is scored as a regression and blocked.",
+      "reason": "fails removal test as a separate leg: the anchor drops the oracle assumption by construction, and the measurement this gap asks for (agreement certificates blocking safe swaps as incumbent error grows) is an arm of the anchor's falsification_prediction."
+    }
+  ]
+}

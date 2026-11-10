@@ -1,0 +1,191 @@
+[
+  {
+    "title": "Conformal LLM Routing with Distribution-Free Safety Guarantees",
+    "title_norm": "conformal llm routing with distribution free safety guarantees",
+    "abstract": "LLM routing directs queries to a cheaper model when it suffices and to an expensive model otherwise, reducing inference cost.Existing input-based routers optimize costperformance trade-offs but provide no formal bound on how often the cheaper model fails among routed queries.We adapt a proactive conformal gate framework to LLM routing.A logistic regression gate trained on text embeddings predicts per-query safety, and Clopper-Pearson conformal calibration selects a routing threshold that guarantees the violation rate among routed queries stays below α (the violation tolerance) with probability at least 1δ (the confidence level).On two benchmarks covering math reasoning (GSM8K) and multidomain knowledge (MMLU), routing between Mixtral-8x7B and GPT-4 (a 24.5× cost difference), our method maintains the target α within the δ tolerance across a sweep from 0.05 to 0.50, while a validation-tuned baseline crosses the violation boundary on GSM8K.A feasibility analysis across all 10 Router-Bench models reveals that routability is jointly model-and task-dependent.To our knowledge, this is the first input-based LLM router with distribution-free safety guarantees.",
+    "year": 2026,
+    "venue": "Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "authors": [
+      "Iqtedar Uddin",
+      "André Bauer"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W7166878141",
+    "doi": "10.18653/v1/2026.acl-srw.70",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2026.acl-srw.70.pdf",
+    "published_iso": "2026-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7166878141",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Cut Costs, Not Accuracy: LLM-Powered Data Processing with Guarantees",
+    "title_norm": "cut costs not accuracy llm powered data processing with guarantees",
+    "abstract": "Large Language Models (LLMs) are being increasingly used as a building block in data systems to process large text datasets. To do so, LLM model providers offer multiple LLMs with different sizes, spanning various cost-quality trade-offs when processing text at scale. Top-of-the-line LLMs (e.g., GPT-4o, Claude Sonnet) operate with high accuracy but are prohibitively expensive when processing many records. To avoid high costs, more affordable but lower quality LLMs (e.g., GPT-4o-mini, Claude Haiku) can be used to process records, but we need to ensure that the overall accuracy does not deviate substantially from that of the top-of-the-line LLMs. The model cascade framework provides a blueprint to manage this trade-off, by using the confidence of LLMs in their output (e.g., log-probabilities) to decide on which records to use the affordable LLM. However, existing solutions following this framework provide only marginal cost savings and weak theoretical guarantees because of poor estimation of the quality of the affordable LLM's outputs. We present BARGAIN, a method that judiciously uses affordable LLMs in data processing to significantly reduce cost while providing strong theoretical guarantees on the solution quality. BARGAIN employs a novel adaptive sampling strategy and statistical estimation procedure that uses data and task characteristics and builds on recent statistical tools to make accurate estimations with tight theoretical guarantees. Variants of BARGAIN can support guarantees on accuracy, precision, or recall of the output. Experimental results across 8 real-world datasets show that BARGAIN reduces cost, on average, by up to 86% more than state-of-the-art, while providing stronger theoretical guarantees on accuracy of output, with similar gains when guaranteeing a desired level of precision or recall.",
+    "year": 2025,
+    "venue": "Proceedings of the ACM on Management of Data",
+    "authors": [
+      "Sepanta Zeighami",
+      "Shreya Shankar",
+      "Aditya Parameswaran"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W7109229324",
+    "doi": "10.1145/3769776",
+    "arxiv_id": null,
+    "paper_url": "https://dl.acm.org/doi/pdf/10.1145/3769776",
+    "published_iso": "2025-12-04",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7109229324",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "No Free Lunch: Non-Asymptotic Analysis of Prediction-Powered Inference",
+    "title_norm": "no free lunch non asymptotic analysis of prediction powered inference",
+    "abstract": "Prediction-Powered Inference (PPI) is a popular strategy for combining gold-standard and possibly noisy pseudo-labels to perform statistical estimation. Prior work has shown an asymptotic \\enquote{free lunch} for PPI++, an adaptive form of PPI, showing that the \\textit{asymptotic} variance of PPI++ is always less than or equal to the variance obtained from using gold-standard labels alone. Notably, this result holds \\textit{regardless of the quality of the pseudo-labels}. In this work, we demystify this result by conducting an exact finite-sample analysis of the estimation error of PPI++ on the mean estimation problem. We give a \\enquote{no free lunch} result, characterizing the settings (and sample sizes) where PPI++ has provably worse estimation error than using gold-standard labels alone. Specifically, PPI++ will outperform if and only if the correlation between pseudo- and gold-standard is above a certain level that depends on the number of labeled samples ($n$). In some cases our results simplify considerably: For Gaussian data, for instance, the correlation must be at least $1/\\sqrt{n - 2}$ in order to see improvement. More broadly, by providing exact non-asymptotic expressions for the variance of PPI++ under sample splitting, we aim to empower practitioners to transparently reason about the benefits of PPI++ in specific applications. In experiments, we illustrate that our theoretical findings hold on real-world datasets.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Pranav Mani",
+      "Peng Xu",
+      "Zachary C. Lipton",
+      "Michael Oberst"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414588259",
+    "doi": "10.48550/arxiv.2505.20178",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2505.20178",
+    "published_iso": "2025-05-26",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4414588259",
+    "year_month": "2025-05",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "ParetoBandit: Budget-Paced Adaptive Routing for Non-Stationary LLM Serving",
+    "title_norm": "paretobandit budget paced adaptive routing for non stationary llm serving",
+    "abstract": "Multi-model LLM serving operates in a non-stationary, noisy environment: providers revise pricing, model quality can shift or regress without notice, and new models arrive regularly. More than a dozen recent methods have proposed learned routers to navigate the resulting quality--cost tradeoff across portfolios spanning a $\\sim$530$\\times$ cost range. Despite this activity, two gaps in the current solution space limit routing effectiveness under these conditions: no existing router enforces a dollar-denominated cost ceiling in closed loop over an open-ended request stream, and none provides principled online adaptation to post-deployment shifts in pricing or model quality. We present ParetoBandit, an open-source adaptive router built on cost-aware contextual bandits that addresses both gaps. Its core contributions are: (1) an online primal--dual budget pacer that enforces a per-request cost ceiling without a known horizon, and (2) geometric forgetting on sufficient statistics that gives the bandit bounded memory for tracking quality and cost shifts. A hot-swap model registry further supports runtime model changes with budget-controlled exploration. On 1,824 benchmark prompts with a three-model portfolio, the router maintains budget compliance within 0.4%, adapts to price and quality shifts with up to +0.071 quality lift, and integrates a cold-started model within $\\sim$142 steps.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Annette Taberner-Miller"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7148297671",
+    "doi": "10.48550/arxiv.2604.00136",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2604.00136",
+    "published_iso": "2026-03-31",
+    "oa_field": "Decision Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7148297671",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+    "title_norm": "conformal cascade distribution free accuracy guarantees for multi tier llm infer",
+    "abstract": "Large language model (LLM) cascades reduce inference cost by routing easy queries to a small model and deferring hard queries to a larger one. Production cascades govern this deferral through a confidence threshold, but LLM confidence scores are miscalibrated, the threshold must be tuned per model pair and per domain, and no setting yields a formal bound on cascade accuracy. We introduce \\textbf{Conformal Cascade} (CC), a multi-tier inference framework that uses conformal prediction set size as the deferral rule: accept when the calibrated set collapses to a single answer, defer otherwise. The procedure delivers a distribution-free, finite-sample accuracy guarantee. By a per-tier union bound, the prediction set at the accepting tier covers the correct answer with probability at least $1 - K\\alpha$ for any user-specified $\\alpha$; under a selection-preservation condition (consistent with, but not strictly implied by, our marginal coverage results), the bound tightens to $1 - \\alpha$. We further characterise expected cascade cost as an explicit function of $\\alpha$ and the calibration-set acceptance rate. Across 18 multiple-choice benchmarks spanning science, medicine, commonsense, and standardized exams, evaluated on two-tier cascades drawn from four open-weight model families, CC strictly improves over the strongest calibration-tuned heuristic cascade on the majority of family--benchmark pairs, with the largest gains on reasoning-heavy benchmarks where majority vote is unreliable; on easier benchmarks the cascade commits the vast majority of queries to the small model at no accuracy cost. Extension to open-ended generation requires an answer-clustering step that we leave for future work. The method requires no model training and only black-box API access.",
+    "tldr": "Conformal Cascade (CC), a multi-tier inference framework that uses conformal prediction set size as the deferral rule: accept when the calibrated set collapses to a single answer, defer otherwise, delivers a distribution-free, finite-sample accuracy guarantee.",
+    "year": 2026,
+    "venue": "arXiv.org",
+    "publication_types": [
+      "JournalArticle"
+    ],
+    "authors": [
+      "Yi-Fan Dou",
+      "Shikan Lian",
+      "Shibo Li"
+    ],
+    "citations": 1,
+    "source": "semanticscholar",
+    "source_id": "50e40d53a189b47e84195559eee26cd7e20003cd",
+    "paper_id": "dblp:journals/corr/abs-2607-25018",
+    "doi": "10.48550/arXiv.2607.25018",
+    "arxiv_id": "2607.25018",
+    "dblp_key": "journals/corr/abs-2607-25018",
+    "paper_url": "https://www.semanticscholar.org/paper/50e40d53a189b47e84195559eee26cd7e20003cd",
+    "published_iso": "2026-07-27",
+    "retrieved_via": "host_web",
+    "host_why": "Jul 2026; distribution-free accuracy guarantee for accept-or-defer cheap-tier decisions on multiple-choice (classification-shaped) tasks — closest frontier mechanism to a guaranteed swap gate",
+    "relevance": "core"
+  },
+  {
+    "title": "C3PO: Optimized Large Language Model Cascades with Probabilistic Cost Constraints for Reasoning",
+    "title_norm": "c3po optimized large language model cascades with probabilistic cost constraints",
+    "abstract": "Large language models (LLMs) have achieved impressive results on complex reasoning tasks, but their high inference cost remains a major barrier to real-world deployment. A promising solution is to use cascaded inference, where small, cheap models handle easy queries, and only the hardest examples are escalated to more powerful models. However, existing cascade methods typically rely on supervised training with labeled data, offer no theoretical generalization guarantees, and provide limited control over test-time computational cost. We introduce C3PO (Cost Controlled Cascaded Prediction Optimization), a self-supervised framework for optimizing LLM cascades under probabilistic cost constraints. By focusing on minimizing regret with respect to the most powerful model (MPM), C3PO avoids the need for labeled data by constructing a cascade using only unlabeled model outputs. It leverages conformal prediction to bound the probability that inference cost exceeds a user-specified budget. We provide theoretical guarantees on both cost control and generalization error, and show that our optimization procedure is effective even with small calibration sets. Empirically, C3PO achieves state-of-the-art performance across a diverse set of reasoning benchmarks including GSM8K, MATH-500, BigBench-Hard and AIME, outperforming strong LLM cascading baselines in both accuracy and cost-efficiency. Our results demonstrate that principled, label-free cascade optimization can enable scalable LLM deployment.",
+    "year": 2025,
+    "venue": "neural information processing systems",
+    "authors": [
+      "Antonios Valkanas",
+      "Soumyasundar Pal",
+      "Pavel Rumiantsev",
+      "Yingxue Zhang",
+      "Mark Coates"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4416159353",
+    "doi": "10.52202/085713-2832",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2511.07396",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "Nov 2025 (NeurIPS 2025); label-free cascade built from unlabeled outputs, using regret relative to the strongest model plus conformal cost bounds — matches using the incumbent model's past answers as reference",
+    "relevance": "core",
+    "paper_id": "openalex:W4416159353"
+  },
+  {
+    "title": "SMART: Automatically Scaling Down Language Models with Accuracy Guarantees for Reduced Processing Fees",
+    "title_norm": "smart automatically scaling down language models with accuracy guarantees for re",
+    "abstract": "The advancement of Large Language Models (LLMs) has significantly boosted performance in natural language processing (NLP) tasks. However, the deployment of high-performance LLMs incurs substantial costs, primarily due to the increased number of parameters aimed at enhancing model performance. This has made the use of state-of-the-art LLMs more expensive for end-users. AI service providers, such as OpenAI and Anthropic, often offer multiple versions of LLMs with varying prices and performance. However, end-users still face challenges in choosing the appropriate LLM for their tasks that balance result quality with cost. We introduce SMART, Scaling Models Adaptively for Reduced Token Fees, a novel LLM framework designed to minimize the inference costs of NLP tasks while ensuring sufficient result quality. It enables users to specify an accuracy constraint in terms of the equivalence of outputs to those of the most powerful LLM. SMART then generates results that deviate from the outputs of this LLM only with a probability below a user-defined threshold. SMART employs a profiling phase that evaluates the performance of multiple LLMs to identify those that meet the user-defined accuracy level. SMART optimizes the tradeoff between profiling overheads and the anticipated cost savings resulting from profiling. Moreover, our approach significantly reduces inference costs by strategically leveraging a mix of LLMs. Our experiments on three real-world datasets show that, based on OpenAI models, SMART achieves significant cost savings, up to 25.6x in comparison to GPT-4.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Saehan Jo",
+      "Immanuel Trummer"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4393111369",
+    "doi": "10.48550/arxiv.2403.13835",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2403.13835",
+    "published_iso": "2024-03-11",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "2024; direct precedent baseline — picks the cheapest LLM whose accuracy against the reference best LLM meets a tolerance, using binomial confidence intervals; the swap gate must beat it",
+    "relevance": "adjacent",
+    "paper_id": "openalex:W4393111369"
+  }
+]

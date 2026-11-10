@@ -1,0 +1,227 @@
+{
+  "dblp:journals/corr/abs-2607-25018": {
+    "file": "fulltext/dblp_journals_corr_abs-2607-25018.md",
+    "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+    "tier": "H",
+    "source_used": "html_arxiv",
+    "intro_chars": 4546,
+    "method_chars": 12657,
+    "warning": null
+  },
+  "openalex:W4414034782": {
+    "file": "fulltext/openalex_W4414034782.md",
+    "title": "LLM-Powered Nuanced Video Attribute Annotation for Enhanced Recommendations",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 2463,
+    "method_chars": 10167,
+    "warning": null
+  },
+  "openalex:W7126182749": {
+    "file": "fulltext/openalex_W7126182749.md",
+    "title": "Pay for Hints, Not Answers: LLM Shepherding for Cost-Efficient Inference",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 6878,
+    "method_chars": 11290,
+    "warning": null
+  },
+  "openalex:W7162773354": {
+    "file": "fulltext/openalex_W7162773354.md",
+    "title": "Prediction-Powered Inference Across Many Tasks for AI Evaluation & Social Science Research",
+    "tier": "H",
+    "source_used": "html_arxiv",
+    "intro_chars": 8666,
+    "method_chars": 11799,
+    "warning": null
+  },
+  "openalex:W7127652961": {
+    "file": "fulltext/openalex_W7127652961.md",
+    "title": "Distilling LLM Reasoning into Graph of Concept Predictors",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 7781,
+    "method_chars": 20799,
+    "warning": null
+  },
+  "openalex:W7166878141": {
+    "file": "fulltext/openalex_W7166878141.md",
+    "title": "Conformal LLM Routing with Distribution-Free Safety Guarantees",
+    "tier": "T2",
+    "source_used": "pdf_acl_pymupdf",
+    "intro_chars": 2753,
+    "method_chars": 1117,
+    "warning": null
+  },
+  "openalex:W4405469767": {
+    "file": "fulltext/openalex_W4405469767.md",
+    "title": "Semi-Supervised Risk Control via Prediction-Powered Inference",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 7350,
+    "method_chars": 1181,
+    "warning": null
+  },
+  "openalex:W4407571717": {
+    "file": "fulltext/openalex_W4407571717.md",
+    "title": "Cost-Saving LLM Cascades with Early Abstention",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 3339,
+    "method_chars": 9980,
+    "warning": null
+  },
+  "openalex:W4416159353": {
+    "file": "fulltext/openalex_W4416159353.md",
+    "title": "C3PO: Optimized Large Language Model Cascades with Probabilistic Cost Constraints for Reasoning",
+    "tier": "H",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 1390,
+    "method_chars": 3387,
+    "warning": null
+  },
+  "openalex:W4414893795": {
+    "file": "fulltext/openalex_W4414893795.md",
+    "title": "Conformal Arbitrage: Risk-Controlled Balancing of Competing Objectives in Language Models",
+    "tier": "H",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 354,
+    "method_chars": 3628,
+    "warning": null
+  },
+  "openalex:W7117277408": {
+    "file": "fulltext/openalex_W7117277408.md",
+    "title": "Reliable LLM-Based Edge-Cloud-Expert Cascades for Telecom Knowledge Systems",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 2754,
+    "method_chars": 16622,
+    "warning": null
+  },
+  "openalex:W7131427349": {
+    "file": "fulltext/openalex_W7131427349.md",
+    "title": "Pyramid MoA: A Probabilistic Framework for Cost-Optimized Anytime Inference",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 3986,
+    "method_chars": 10049,
+    "warning": null
+  },
+  "openalex:W7125877781": {
+    "file": "fulltext/openalex_W7125877781.md",
+    "title": "PRECISE: Reducing the Bias of LLM Evaluations Using Prediction-Powered Ranking Estimation",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 8819,
+    "method_chars": 96,
+    "warning": null
+  },
+  "openalex:W4412886793": {
+    "file": "fulltext/openalex_W4412886793.md",
+    "title": "Prompt Candidates, then Distill: A Teacher-Student Framework for LLM-driven Data Annotation",
+    "tier": "T2",
+    "source_used": "pdf_acl_pymupdf",
+    "intro_chars": 1567,
+    "method_chars": 35,
+    "warning": null
+  },
+  "openalex:W4405468031": {
+    "file": "fulltext/openalex_W4405468031.md",
+    "title": "COEF-VQ: Cost-Efficient Video Quality Understanding through a Cascaded Multimodal LLM Framework",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 195,
+    "method_chars": 2225,
+    "warning": null
+  },
+  "openalex:W7124513808": {
+    "file": "fulltext/openalex_W7124513808.md",
+    "title": "ADMEDTAGGER: an annotation framework for distillation of expert knowledge for the Polish medical language",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 10000,
+    "method_chars": 475,
+    "warning": null
+  },
+  "openalex:W4406548552": {
+    "file": "fulltext/openalex_W4406548552.md",
+    "title": "Rational Tuning of LLM Cascades via Probabilistic Modeling",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 4279,
+    "method_chars": 13172,
+    "warning": null
+  },
+  "openalex:W7109229324": {
+    "file": "fulltext/openalex_W7109229324.md",
+    "title": "Cut Costs, Not Accuracy: LLM-Powered Data Processing with Guarantees",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 13348,
+    "method_chars": 28583,
+    "warning": null
+  },
+  "openalex:W4411119345": {
+    "file": "fulltext/openalex_W4411119345.md",
+    "title": "DIRAS: Efficient LLM Annotation of Document Relevance for Retrieval Augmented Generation",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 5591,
+    "method_chars": 1689,
+    "warning": null
+  },
+  "openalex:W4404088945": {
+    "file": "fulltext/openalex_W4404088945.md",
+    "title": "Optimal Query Allocation in Extractive QA with LLMs: A Learning-to-Defer Framework with Theoretical Guarantees",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 2869,
+    "method_chars": 453,
+    "warning": null
+  },
+  "openalex:W4414588259": {
+    "file": "fulltext/openalex_W4414588259.md",
+    "title": "No Free Lunch: Non-Asymptotic Analysis of Prediction-Powered Inference",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 7089,
+    "method_chars": 21907,
+    "warning": null
+  },
+  "openalex:W4404574185": {
+    "file": "fulltext/openalex_W4404574185.md",
+    "title": "Regression for the Mean: Auto-Evaluation and Inference with Few Labels through Post-hoc Regression",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 2797,
+    "method_chars": 129,
+    "warning": null
+  },
+  "openalex:W4415330375": {
+    "file": "fulltext/openalex_W4415330375.md",
+    "title": "FusionFactory: Fusing LLM Capabilities with Multi-LLM Log Data",
+    "tier": "T2",
+    "source_used": "pdf_paper_url_pymupdf",
+    "intro_chars": 2093,
+    "method_chars": 20000,
+    "warning": null
+  },
+  "openalex:W4411112894": {
+    "file": "fulltext/openalex_W4411112894.md",
+    "title": "The Promises and Pitfalls of LLM Annotations in Dataset Labeling: a Case Study on Media Bias Detection",
+    "tier": "T2",
+    "source_used": "pdf_acl_pymupdf",
+    "intro_chars": 818,
+    "method_chars": 4439,
+    "warning": null
+  },
+  "openalex:W4414581596": {
+    "file": "fulltext/openalex_W4414581596.md",
+    "title": "Large Language Models in the Task of Automatic Validation of Text Classifier Predictions",
+    "tier": "T2",
+    "source_used": "html_arxiv",
+    "intro_chars": 1705,
+    "method_chars": 24225,
+    "warning": null
+  }
+}

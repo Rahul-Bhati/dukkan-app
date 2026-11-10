@@ -1,0 +1,14 @@
+﻿=== p_d = 1 regime: mechanism vs constructed naive, labels-to-decision (budget B = |L|) ===
+  N=20000 Delta_P=0.060 | mech tau*=-inf labels=7923 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0202 res=certified | naive tau*=-inf labels=1109
+  N=20000 Delta_P=0.080 | mech tau*=-inf labels=3773 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0202 res=certified | naive tau*=-inf labels=691
+  N=100000 Delta_P=0.060 | mech tau*=-inf labels=923 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0090 res=certified | naive tau*=-inf labels=259
+
+=== split rule feasibility: popw <= labw at ANY delta_pop in (0, delta)? ratio ~ sqrt(B/nD * ln(2/dp)/ln(1/dl)) ===
+  p_d=0.107 |L|=20000 B=4000 nD=2140 : feasible=False first=None
+  p_d=0.107 |L|=20000 B=1000 nD=2140 : feasible=True first=0.04925000000000001
+  p_d=0.107 |L|=200000 B=4000 nD=21400 : feasible=True first=0.017750000000000002
+  p_d=0.010 |L|=20000 B=4000 nD=200 : feasible=False first=None
+  p_d=0.010 |L|=1000000 B=4000 nD=10000 : feasible=True first=0.04800000000000001
+
+=== un-clamped bracket: LCB_D - slack below -1 ===
+  p_d,L=0.00535 p_up=0.00688 slack=0.2626  bound unclamped p_up*(-1-slack)=-0.00868  clamped p_up*(-1)=-0.00688

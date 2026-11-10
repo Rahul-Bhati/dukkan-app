@@ -1,0 +1,1858 @@
+[
+  {
+    "title": "Pay for Hints, Not Answers: LLM Shepherding for Cost-Efficient Inference",
+    "title_norm": "pay for hints not answers llm shepherding for cost efficient inference",
+    "abstract": "Large Language Models (LLMs) deliver state-of-the-art performance on complex reasoning tasks, but their inference costs limit deployment at scale. Small Language Models (SLMs) offer dramatic cost savings yet lag substantially in accuracy. Existing approaches - routing and cascading - treat the LLM as an all-or-nothing resource: either the query bypasses the LLM entirely, or the LLM generates a complete response at full cost. We introduce LLM Shepherding, a framework that requests only a short prefix (a hint) from the LLM and provides it to SLM. This simple mechanism is surprisingly effective for math and coding tasks: even hints comprising 10-30% of the full LLM response improve SLM accuracy significantly. Shepherding generalizes both routing and cascading, and it achieves lower cost under oracle decision-making. We develop a two-stage predictor that jointly determines whether a hint is needed and how many tokens to request. On the widely-used mathematical reasoning (GSM8K, CNK12) and code generation (HumanEval, MBPP) benchmarks, Shepherding reduces costs by 42-94% relative to LLM-only inference. Compared to state-of-the-art routing and cascading baselines, shepherding delivers up to 2.8x cost reduction while matching accuracy. To our knowledge, this is the first work to exploit token-level budget control for SLM-LLM collaboration.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Ziming Dong",
+      "Hardik Sharma",
+      "Evan O'Toole",
+      "Jaya Prakash Champati",
+      "Kui Wu"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7126182749",
+    "doi": "10.48550/arxiv.2601.22132",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2601.22132",
+    "published_iso": "2026-01-29",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W7126182749",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Prompt Candidates, then Distill: A Teacher-Student Framework for LLM-driven Data Annotation",
+    "title_norm": "prompt candidates then distill a teacher student framework for llm driven data a",
+    "abstract": "Mingxuan Xia, Haobo Wang, Yixuan Li, Zewei Yu, Jindong Wang, Junbo Zhao, Runze Wu. Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2025.",
+    "year": 2025,
+    "venue": "Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "authors": [
+      "Mingxuan Xia",
+      "Haobo Wang",
+      "Yixuan Li",
+      "Zewei Yu",
+      "Jindong Wang",
+      "Junbo Zhao"
+    ],
+    "citations": 2,
+    "source": "openalex",
+    "source_id": "W4412886793",
+    "doi": "10.18653/v1/2025.acl-long.139",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2025.acl-long.139.pdf",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4412886793",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Conformal LLM Routing with Distribution-Free Safety Guarantees",
+    "title_norm": "conformal llm routing with distribution free safety guarantees",
+    "abstract": "LLM routing directs queries to a cheaper model when it suffices and to an expensive model otherwise, reducing inference cost.Existing input-based routers optimize costperformance trade-offs but provide no formal bound on how often the cheaper model fails among routed queries.We adapt a proactive conformal gate framework to LLM routing.A logistic regression gate trained on text embeddings predicts per-query safety, and Clopper-Pearson conformal calibration selects a routing threshold that guarantees the violation rate among routed queries stays below α (the violation tolerance) with probability at least 1δ (the confidence level).On two benchmarks covering math reasoning (GSM8K) and multidomain knowledge (MMLU), routing between Mixtral-8x7B and GPT-4 (a 24.5× cost difference), our method maintains the target α within the δ tolerance across a sweep from 0.05 to 0.50, while a validation-tuned baseline crosses the violation boundary on GSM8K.A feasibility analysis across all 10 Router-Bench models reveals that routability is jointly model-and task-dependent.To our knowledge, this is the first input-based LLM router with distribution-free safety guarantees.",
+    "year": 2026,
+    "venue": "Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "authors": [
+      "Iqtedar Uddin",
+      "André Bauer"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W7166878141",
+    "doi": "10.18653/v1/2026.acl-srw.70",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2026.acl-srw.70.pdf",
+    "published_iso": "2026-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7166878141",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Cost-Saving LLM Cascades with Early Abstention",
+    "title_norm": "cost saving llm cascades with early abstention",
+    "abstract": "LLM cascades deploy small LLMs to answer most queries, limiting the use of large and expensive LLMs to difficult queries. This approach can significantly reduce costs without impacting performance. However, risk-sensitive domains such as finance or medicine place an additional premium on avoiding model errors. Since even the most expensive models are susceptible to making mistakes, applications in these domains benefit from allowing LLM systems to completely abstain from answering difficult queries. Introducing abstention poses a design question for LLM cascades: should abstention only be allowed at the final model or also at earlier models? Since the error patterns of small and large models are correlated, allowing earlier models to abstain may reduce inference costs and latency by anticipating abstention decisions by expensive and slow models, thus avoiding the need to run these models. We investigate the benefits of such \"early abstention\" in LLM cascades and find that it reduces overall test loss by 2.2% on average across six benchmarks (GSM8K, MedMCQA, MMLU, TriviaQA, TruthfulQA, and XSum). These gains result from a more effective use of abstention, trading a 4.1% average increase in the overall abstention rate for a 13.0% reduction in cost and a 5.0% reduction in error rate. Our findings demonstrate the possibility of leveraging correlations between the error patterns of different language models to drive performance improvements for LLM systems with abstention.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Michael J. Zellinger",
+      "Rex Liu",
+      "Matt Thomson"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4407571717",
+    "doi": "10.48550/arxiv.2502.09054",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2502.09054",
+    "published_iso": "2025-02-13",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W4407571717",
+    "year_month": "2025-02",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "When Routing Collapses: On the Degenerate Convergence of LLM Routers",
+    "title_norm": "when routing collapses on the degenerate convergence of llm routers",
+    "abstract": "LLM routing aims to achieve a favorable quality--cost trade-off by dynamically assigning easy queries to smaller models and harder queries to stronger ones. However, across both unimodal and multimodal settings, we uncover a pervasive yet underexplored failure mode in existing routers: as the user's cost budget increases, routers systematically default to the most capable and most expensive model even when cheaper models already suffice. As a result, current routers under-utilize small models, wasting computation and monetary cost and undermining the core promise of routing; we term this phenomenon routing collapse. We attribute routing collapse to an objective--decision mismatch: many routers are trained to predict scalar performance scores, whereas routing decisions ultimately depend on discrete comparisons among candidate models. Consequently, small prediction errors can flip relative orderings and trigger suboptimal selections. To bridge this gap, we propose EquiRouter, a decision-aware router that directly learns model rankings, restoring the role of smaller models and mitigating routing collapse. On RouterBench, EquiRouter reduces cost by about 17\\% at GPT-4-level performance compared to the strongest prior router. Our code is available at https://github.com/AIGNLAI/EquiRouter.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Guannan Lai",
+      "Han-Jia Ye"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7127584649",
+    "doi": "10.48550/arxiv.2602.03478",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.03478",
+    "published_iso": "2026-02-03",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7127584649",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Regression for the Mean: Auto-Evaluation and Inference with Few Labels through Post-hoc Regression",
+    "title_norm": "regression for the mean auto evaluation and inference with few labels through po",
+    "abstract": "The availability of machine learning systems that can effectively perform arbitrary tasks has led to synthetic labels from these systems being used in applications of statistical inference, such as data analysis or model evaluation. The Prediction Powered Inference (PPI) framework provides a way of leveraging both a large pool of pseudo-labelled data and a small sample with real, high-quality labels to produce a low-variance, unbiased estimate of the quantity being evaluated for. Most work on PPI considers a relatively sizable set of labelled samples, which can be resource intensive to obtain. However, we find that when labelled data is scarce, the PPI++ method can perform even worse than classical inference. We analyze this phenomenon by relating PPI++ to ordinary least squares regression, which also experiences high variance with small sample sizes, and use this regression framework to better understand the efficacy of PPI. Motivated by this, we present two new PPI-based techniques that leverage robust regressors to produce even lower variance estimators in the few-label regime.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Benjamin Eyre",
+      "David Madras"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4404574185",
+    "doi": "10.48550/arxiv.2411.12665",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2411.12665",
+    "published_iso": "2024-11-19",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4404574185",
+    "year_month": "2024-11",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Distilling LLM Reasoning into Graph of Concept Predictors",
+    "title_norm": "distilling llm reasoning into graph of concept predictors",
+    "abstract": "Deploying Large Language Models (LLMs) for discriminative workloads is often limited by inference latency, compute, and API costs at scale. Active distillation reduces these costs by querying an LLM oracle to train small discriminative students, but most pipelines distill only final labels, discarding intermediate reasoning signals and offering limited diagnostics of what reasoning is missing and where errors arise. We propose Graph of Concept Predictors (GCP), a reasoning-aware active distillation framework in which the teacher's reasoning is elicited as a directed acyclic graph of intermediate concepts and mirrored in the student. GCP enhances sample efficiency through a graph-aware acquisition strategy that weights per-concept uncertainty, gradient diversity, and coverage by node centrality. Additionally, it improves training stability and efficiency by performing targeted sub-module retraining, which attributes downstream loss to specific concept predictors and updates only the most influential modules. Experiments on eight NLP classification benchmarks demonstrate that GCP enhances performance under limited annotation budgets while yielding more interpretable and controllable training dynamics. Code is available at https://github.com/Ziyang-Yu/GCP.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Ziyang Yu",
+      "Liang Zhao"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7127652961",
+    "doi": "10.48550/arxiv.2602.03006",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.03006",
+    "published_iso": "2026-02-03",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7127652961",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Adaptive LLM Routing under Budget Constraints",
+    "title_norm": "adaptive llm routing under budget constraints",
+    "abstract": "Large Language Models (LLMs) have revolutionized natural language processing, but their varying capabilities and costs pose challenges in practical applications.LLM routing addresses this by dynamically selecting the most suitable LLM for each query/task.Previous approaches treat this as a supervised learning problem, assuming complete knowledge of optimal query-LLM pairings.However, realworld scenarios lack such comprehensive mappings and face evolving user queries.We thus propose to study LLM routing as a contextual bandit problem, enabling adaptive decisionmaking using bandit feedback without requiring exhaustive inference across all LLMs for all queries (in contrast to supervised routing).To address this problem, we develop a shared embedding space for queries and LLMs, where query and LLM embeddings are aligned to reflect their affinity.This space is initially learned from offline human preference data and refined through online bandit feedback.We instantiate this idea through Preference-prior Informed LinUCB fOr Adaptive RouTing (PILOT), a novel extension of LinUCB.To handle diverse user budgets for model routing, we introduce an online cost policy modeled as a multi-choice knapsack problem, ensuring resource-efficient routing.",
+    "year": 2025,
+    "venue": "",
+    "authors": [
+      "Pranoy Panda",
+      "Raghav Magazine",
+      "Chaitanya Devaguptapu",
+      "Sho Takemori",
+      "Vishal Sharma"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4416034518",
+    "doi": "10.18653/v1/2025.findings-emnlp.1301",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2025.findings-emnlp.1301.pdf",
+    "published_iso": "2025-01-01",
+    "oa_field": "Decision Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4416034518",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Prediction-Powered Causal Inferences",
+    "title_norm": "prediction powered causal inferences",
+    "abstract": "In many scientific experiments, the data annotating cost constraints the pace for testing novel hypotheses. Yet, modern machine learning pipelines offer a promising solution, provided their predictions yield correct conclusions. We focus on Prediction-Powered Causal Inferences (PPCI), i.e., estimating the treatment effect in an unlabeled target experiment, relying on training data with the same outcome annotated but potentially different treatment or effect modifiers. We first show that conditional calibration guarantees valid PPCI at population level. Then, we introduce a sufficient representation constraint transferring validity across experiments, which we propose to enforce in practice in Deconfounded Empirical Risk Minimization, our new model-agnostic training objective. We validate our method on synthetic and real-world scientific data, solving impossible problem instances for Empirical Risk Minimization even with standard invariance constraints. In particular, for the first time, we achieve valid causal inference on a scientific experiment with complex recording and no human annotations, fine-tuning a foundational model on our similar annotated experiment.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Riccardo Cadei",
+      "İlker Demirel",
+      "Piersilvio De Bartolomeis",
+      "Lukas Lindorfer",
+      "Sylvia Cremer",
+      "Cordelia Schmid"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4407358740",
+    "doi": "10.48550/arxiv.2502.06343",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2502.06343",
+    "published_iso": "2025-02-10",
+    "oa_field": "Mathematics",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4407358740",
+    "year_month": "2025-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Not All Layers of LLMs Are Necessary During Inference",
+    "title_norm": "not all layers of llms are necessary during inference",
+    "abstract": "Due to the large number of parameters, the inference phase of Large Language Models (LLMs) is resource-intensive. However, not all requests posed to LLMs are equally difficult to handle. Through analysis, we show that for some tasks, LLMs can achieve results comparable to the final output at some intermediate layers. That is, not all layers of LLMs are necessary during inference. If we can predict at which layer the inferred results match the final results (produced by evaluating all layers), we could significantly reduce the inference cost. To this end, we propose a simple yet effective algorithm named AdaInfer to adaptively terminate the inference process for an input instance. AdaInfer relies on easily obtainable statistical features and classic classifiers like SVM. Experiments on well-known LLMs like the Llama2 series and OPT, show that AdaInfer can achieve an average of 17.8% pruning ratio, and up to 43% on sentiment tasks, with nearly no performance drop (<1%). Because AdaInfer does not alter LLM parameters, the LLMs incorporated with AdaInfer maintain generalizability across tasks.",
+    "year": 2025,
+    "venue": "International Joint Conference on Artificial Intelligence",
+    "authors": [
+      "Siqi Fan",
+      "Xin Jiang",
+      "Xiang Li",
+      "Xuying Meng",
+      "Han Peng",
+      "Shuo Shang"
+    ],
+    "citations": 3,
+    "source": "openalex",
+    "source_id": "W4414359404",
+    "doi": "10.24963/ijcai.2025/566",
+    "arxiv_id": null,
+    "paper_url": "https://www.ijcai.org/proceedings/2025/0566.pdf",
+    "published_iso": "2025-09-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W4414359404",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Semantic Span Annotation: An Exploratory Study of LLM Annotation",
+    "title_norm": "semantic span annotation an exploratory study of llm annotation",
+    "abstract": "Structured span extraction research is siloed by context length, annotation task, and domain, making it difficult to assess how well large language models (LLMs) generalize across realistic extraction settings.We introduce SSA (Structured Span Annotation), a unified evaluation framework bringing together five datasets across four domains: finance, biomedicine, affective analysis, and privacy, under a common JSONL format with character-level offsets.We conduct an exploratory study evaluating eight models (three closed, five open-weight) under three prompting configurations: zero-shot, definition-augmented, and few-shot, formulating extraction as inline XML generation where models reproduce the document with tagged spans.Our results reveal two distinct performance regimes: on tasks requiring complex ontology reasoning, zero-shot performance is near zero (e.g., 0.00% F1 on FiNER-139) but improves substantially with label definitions (e.g., Claude Opus 4.6 rises from 8.8% to 57.5% F1); on pattern-based tasks like PII detection, definitions consistently hurt performance across all models.These findings suggest that prompting strategy must be matched to task structure, and that unified evaluation frameworks spanning varied domains and input lengths are essential for understanding LLM extraction capabilities.",
+    "year": 2026,
+    "venue": "Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "authors": [
+      "Tejas Goyal",
+      "Dhriti Krishnan",
+      "Anuj Gupta",
+      "Jaromir Savelka"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7166806354",
+    "doi": "10.18653/v1/2026.acl-srw.39",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2026.acl-srw.39.pdf",
+    "published_iso": "2026-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7166806354",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "R2-Router: A New Paradigm for LLM Routing with Reasoning",
+    "title_norm": "r2 router a new paradigm for llm routing with reasoning",
+    "abstract": "As LLMs proliferate with diverse capabilities and costs, LLM routing has emerged by learning to predict each LLM's quality and cost for a given query, then selecting the one with high quality and low cost. However, existing routers implicitly assume a single fixed quality and cost per LLM for each query, ignoring that the same LLM's quality varies with its output length. This causes routers to exclude powerful LLMs when their estimated cost exceeds the budget, missing the opportunity that these LLMs could still deliver high quality at reduced cost with shorter outputs. To address this, we introduce R2-Router, which treats output length budget as a controllable variable and jointly selects the best LLM and length budget, enforcing the budget via length-constrained instructions. This enables R2-Router to discover that a powerful LLM with constrained output can outperform a weaker LLM at comparable cost-efficient configurations invisible to prior methods. Together with the router framework, we construct R2-Bench, the first routing dataset capturing LLM behavior across diverse output length budgets. Experiments show that R2-Router achieves state-of-the-art performance at 4-5\\times lower cost compared with existing routers. This work opens a new direction: routing as reasoning, where routers evolve from reactive selectors to deliberate reasoners that explore which LLM to use and at what cost budget. The code is publicly available at https://github.com/UCF-ML-Research/R2-Router.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Jiaqi Xue",
+      "Qian Lou",
+      "Jiarong Xing",
+      "Heng Huang"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7127574626",
+    "doi": "10.48550/arxiv.2602.02823",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.02823",
+    "published_iso": "2026-02-02",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7127574626",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Prediction-Powered Inference with Imputed Covariates and Nonuniform Sampling",
+    "title_norm": "prediction powered inference with imputed covariates and nonuniform sampling",
+    "abstract": "Machine learning models are increasingly used to produce predictions that serve as input data in subsequent statistical analyses. For example, computer vision predictions of economic and environmental indicators based on satellite imagery are used in downstream regressions; similarly, language models are widely used to approximate human ratings and opinions in social science research. However, failure to properly account for errors in the machine learning predictions renders standard statistical procedures invalid. Prior work uses what we call the Predict-Then-Debias estimator to give valid confidence intervals when machine learning algorithms impute missing variables, assuming a small complete sample from the population of interest. We expand the scope by introducing bootstrap confidence intervals that apply when the complete data is a nonuniform (i.e., weighted, stratified, or clustered) sample and to settings where an arbitrary subset of features is imputed. Importantly, the method can be applied to many settings without requiring additional calculations. We prove that these confidence intervals are valid under no assumptions on the quality of the machine learning model and are no wider than the intervals obtained by methods that do not use machine learning predictions.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Dan M. Kluger",
+      "Kerri Lu",
+      "Tijana Zrnic",
+      "Sherrie Wang",
+      "Stephen Bates"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4407012644",
+    "doi": "10.48550/arxiv.2501.18577",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2501.18577",
+    "published_iso": "2025-01-30",
+    "oa_field": "Mathematics",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4407012644",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Huff-LLM: End-to-End Lossless Compression for Efficient LLM Inference",
+    "title_norm": "huff llm end to end lossless compression for efficient llm inference",
+    "abstract": "As they become more capable, large language models (LLMs) have continued to rapidly increase in size. This has exacerbated the difficulty in running state of the art LLMs on small, edge devices. Standard techniques advocate solving this problem through lossy compression techniques such as quantization or pruning. However, such compression techniques are lossy, and have been shown to change model behavior in unpredictable manners. We propose Huff-LLM, an \\emph{end-to-end, lossless} model compression method that lets users store LLM weights in compressed format \\emph{everywhere} -- cloud, disk, main memory, and even in on-chip memory/buffers. This allows us to not only load larger models in main memory, but also reduces bandwidth required to load weights on chip, and makes more efficient use of on-chip weight buffers. In addition to the memory savings achieved via compression, we also show latency and energy efficiency improvements when performing inference with the compressed model.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Patrick Yubeaton",
+      "Mahmoud, Tareq",
+      "Shehab Naga",
+      "Pooria Taheri",
+      "Tianhua Xia",
+      "Arun George"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4407124521",
+    "doi": "10.48550/arxiv.2502.00922",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2502.00922",
+    "published_iso": "2025-02-02",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W4407124521",
+    "year_month": "2025-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Expanding the Category of Classifiers with LLM Supervision",
+    "title_norm": "expanding the category of classifiers with llm supervision",
+    "abstract": "Zero-shot learning has shown significant potential for creating cost-effective and flexible systems to expand classifiers to new categories. However, existing methods still rely on manually created attributes designed by domain experts. Motivated by the widespread success of large language models (LLMs), we introduce an LLM-driven framework for class-incremental learning that removes the need for human intervention, termed Classifier Expansion with Multi-vIew LLM knowledge (CEMIL). In CEMIL, an LLM agent autonomously generates detailed textual multi-view descriptions for unseen classes, offering richer and more flexible class representations than traditional expert-constructed vectorized attributes. These LLM-derived textual descriptions are integrated through a contextual filtering attention mechanism to produce discriminative class embeddings. Subsequently, a weight injection module maps the class embeddings to classifier weights, enabling seamless expansion to new classes. Experimental results show that CEMIL outperforms existing methods using expert-constructed attributes, demonstrating its effectiveness for fully automated classifier expansion without human participation.",
+    "year": 2025,
+    "venue": "International Joint Conference on Artificial Intelligence",
+    "authors": [
+      "Derui Lyu",
+      "Xiangyu Wang",
+      "Taiyu Ban",
+      "Lyuzhou Chen",
+      "Xiren Zhou",
+      "Huanhuan Chen"
+    ],
+    "citations": 3,
+    "source": "openalex",
+    "source_id": "W4414359647",
+    "doi": "10.24963/ijcai.2025/657",
+    "arxiv_id": null,
+    "paper_url": "https://www.ijcai.org/proceedings/2025/0657.pdf",
+    "published_iso": "2025-09-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4414359647",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Routing, Cascades, and User Choice for LLMs",
+    "title_norm": "routing cascades and user choice for llms",
+    "abstract": "To mitigate the trade-offs between performance and costs, LLM providers route user tasks to different models based on task difficulty and latency. We study the effect of LLM routing with respect to user behavior. We propose a game between an LLM provider with two models (standard and reasoning) and a user who can re-prompt or abandon tasks if the routed model cannot solve them. The user's goal is to maximize their utility minus the delay from using the model, while the provider minimizes the cost of servicing the user. We solve this Stackelberg game by fully characterizing the user best response and simplifying the provider problem. We observe that in nearly all cases, the optimal routing policy involves a static policy with no cascading that depends on the expected utility of the models to the user. Furthermore, we reveal a misalignment gap between the provider-optimal and user-preferred routes when the user's and provider's rankings of the models with respect to utility and cost differ. Finally, we demonstrate conditions for extreme misalignment where providers are incentivized to throttle the latency of the models to minimize their costs, consequently depressing user utility. The results yield simple threshold rules for single-provider, single-user interactions and clarify when routing, cascading, and throttling help or harm.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Rafid Mahmood"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7128633360",
+    "doi": "10.48550/arxiv.2602.09902",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.09902",
+    "published_iso": "2026-02-10",
+    "oa_field": "Decision Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7128633360",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Semi-Supervised Risk Control via Prediction-Powered Inference",
+    "title_norm": "semi supervised risk control via prediction powered inference",
+    "abstract": "The risk-controlling prediction sets (RCPS) framework is a general tool for transforming the output of any machine learning model to design a predictive rule with rigorous error rate control. The key idea behind this framework is to use labeled hold-out calibration data to tune a hyper-parameter that affects the error rate of the resulting prediction rule. However, the limitation of such a calibration scheme is that with limited hold-out data, the tuned hyper-parameter becomes noisy and leads to a prediction rule with an error rate that is often unnecessarily conservative. To overcome this sample-size barrier, we introduce a semi-supervised calibration procedure that leverages unlabeled data to rigorously tune the hyper-parameter without compromising statistical validity. Our procedure builds upon the prediction-powered inference framework, carefully tailoring it to risk-controlling tasks. We demonstrate the benefits and validity of our proposal through two real-data experiments: few-shot image classification and early time series classification.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Bat-Sheva Einbinder",
+      "Liran Ringel",
+      "Yaniv Romano"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4405469767",
+    "doi": "10.48550/arxiv.2412.11174",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2412.11174",
+    "published_iso": "2024-12-15",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4405469767",
+    "year_month": "2024-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Token-Budget-Aware Pool Routing for Cost-Efficient LLM Inference",
+    "title_norm": "token budget aware pool routing for cost efficient llm inference",
+    "abstract": "Production vLLM fleets provision every instance for worst-case context length, wasting 4-8x concurrency on the 80-95% of requests that are short and simultaneously triggering KV-cache failures -- OOM crashes, preemption storms, and request rejections. Both problems share a single root cause: configuration-traffic mismatch. We propose token-budget-aware pool routing: estimate each request's total token budget using a self-calibrating per-category bytes-per-token ratio, then dispatch it to one of two vLLM pools -- a high-throughput short pool or a high-capacity long pool -- each right-sized for its workload class. The ratio is learned online via exponential moving average from usage.prompt_tokens feedback, requiring no tokenizer. A closed-form cost model, savings = alpha * (1 - 1/rho), predicts fleet-level GPU savings from two observable quantities: the short-traffic fraction alpha and the throughput gain ratio rho. On traces from the Azure LLM Inference Dataset and LMSYS-Chat-1M serving Llama-3-70B on A100 GPUs, token-budget routing reduces GPU instances by 17-39% (\\$1.2-2.0M/yr at 1,000 req/s), with savings verified by a self-contained discrete-event simulator. A case study projecting Qwen3-235B-A22B on AMD MI300X at 10,000 req/s shows \\$15.4M/yr in savings. The algorithm adds O(1) dispatch overhead, self-calibrates across content types without a tokenizer, and composes with PagedAttention, continuous batching, and prefill-decode disaggregation.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "H Chen",
+      "X Liu",
+      "Junchen Jiang",
+      "Bowei He",
+      "Xue Liu"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7154387796",
+    "doi": "10.48550/arxiv.2604.09613",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2604.09613",
+    "published_iso": "2026-03-13",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W7154387796",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "LLM-Powered Nuanced Video Attribute Annotation for Enhanced Recommendations",
+    "title_norm": "llm powered nuanced video attribute annotation for enhanced recommendations",
+    "abstract": "This paper presents a case study on deploying Large Language Models (LLMs) as an advanced \"annotation\" mechanism to achieve nuanced content understanding (e.g., discerning content \"vibe\") at scale within a large-scale industrial short-form video recommendation system. Traditional machine learning classifiers for content understanding face protracted development cycles and a lack of deep, nuanced comprehension. The \"LLM-as-annotators\" approach addresses these by significantly shortening development times and enabling the annotation of subtle attributes. This work details an end-to-end workflow encompassing: (1) iterative definition and robust evaluation of target attributes, refined by offline metrics and online A/B testing; (2) scalable offline bulk annotation of video corpora using LLMs with multimodal features, optimized inference, and knowledge distillation for broad application; and (3) integration of these rich annotations into the online recommendation serving system, for example, through personalized restrict retrieval. Experimental results demonstrate the efficacy of this approach, with LLMs outperforming human raters in offline annotation quality for nuanced attributes and yielding significant improvements of user participation and satisfied consumption in online A/B tests. The study provides insights into designing and scaling production-level LLM pipelines for rich content evaluation, highlighting the adaptability and benefits of LLM-generated nuanced understanding for enhancing content discovery, user satisfaction, and the overall effectiveness of modern recommendation systems.",
+    "year": 2025,
+    "venue": "",
+    "authors": [
+      "Boyuan Long",
+      "Yueqi Wang",
+      "Hiloni Mehta",
+      "Mick Zomnir",
+      "Omkar Pathak",
+      "Changping Meng"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4414034782",
+    "doi": "10.1145/3705328.3748103",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2510.06657",
+    "published_iso": "2025-09-06",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4414034782",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Cut Costs, Not Accuracy: LLM-Powered Data Processing with Guarantees",
+    "title_norm": "cut costs not accuracy llm powered data processing with guarantees",
+    "abstract": "Large Language Models (LLMs) are being increasingly used as a building block in data systems to process large text datasets. To do so, LLM model providers offer multiple LLMs with different sizes, spanning various cost-quality trade-offs when processing text at scale. Top-of-the-line LLMs (e.g., GPT-4o, Claude Sonnet) operate with high accuracy but are prohibitively expensive when processing many records. To avoid high costs, more affordable but lower quality LLMs (e.g., GPT-4o-mini, Claude Haiku) can be used to process records, but we need to ensure that the overall accuracy does not deviate substantially from that of the top-of-the-line LLMs. The model cascade framework provides a blueprint to manage this trade-off, by using the confidence of LLMs in their output (e.g., log-probabilities) to decide on which records to use the affordable LLM. However, existing solutions following this framework provide only marginal cost savings and weak theoretical guarantees because of poor estimation of the quality of the affordable LLM's outputs. We present BARGAIN, a method that judiciously uses affordable LLMs in data processing to significantly reduce cost while providing strong theoretical guarantees on the solution quality. BARGAIN employs a novel adaptive sampling strategy and statistical estimation procedure that uses data and task characteristics and builds on recent statistical tools to make accurate estimations with tight theoretical guarantees. Variants of BARGAIN can support guarantees on accuracy, precision, or recall of the output. Experimental results across 8 real-world datasets show that BARGAIN reduces cost, on average, by up to 86% more than state-of-the-art, while providing stronger theoretical guarantees on accuracy of output, with similar gains when guaranteeing a desired level of precision or recall.",
+    "year": 2025,
+    "venue": "Proceedings of the ACM on Management of Data",
+    "authors": [
+      "Sepanta Zeighami",
+      "Shreya Shankar",
+      "Aditya Parameswaran"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W7109229324",
+    "doi": "10.1145/3769776",
+    "arxiv_id": null,
+    "paper_url": "https://dl.acm.org/doi/pdf/10.1145/3769776",
+    "published_iso": "2025-12-04",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7109229324",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "No Free Lunch: Non-Asymptotic Analysis of Prediction-Powered Inference",
+    "title_norm": "no free lunch non asymptotic analysis of prediction powered inference",
+    "abstract": "Prediction-Powered Inference (PPI) is a popular strategy for combining gold-standard and possibly noisy pseudo-labels to perform statistical estimation. Prior work has shown an asymptotic \\enquote{free lunch} for PPI++, an adaptive form of PPI, showing that the \\textit{asymptotic} variance of PPI++ is always less than or equal to the variance obtained from using gold-standard labels alone. Notably, this result holds \\textit{regardless of the quality of the pseudo-labels}. In this work, we demystify this result by conducting an exact finite-sample analysis of the estimation error of PPI++ on the mean estimation problem. We give a \\enquote{no free lunch} result, characterizing the settings (and sample sizes) where PPI++ has provably worse estimation error than using gold-standard labels alone. Specifically, PPI++ will outperform if and only if the correlation between pseudo- and gold-standard is above a certain level that depends on the number of labeled samples ($n$). In some cases our results simplify considerably: For Gaussian data, for instance, the correlation must be at least $1/\\sqrt{n - 2}$ in order to see improvement. More broadly, by providing exact non-asymptotic expressions for the variance of PPI++ under sample splitting, we aim to empower practitioners to transparently reason about the benefits of PPI++ in specific applications. In experiments, we illustrate that our theoretical findings hold on real-world datasets.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Pranav Mani",
+      "Peng Xu",
+      "Zachary C. Lipton",
+      "Michael Oberst"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414588259",
+    "doi": "10.48550/arxiv.2505.20178",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2505.20178",
+    "published_iso": "2025-05-26",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4414588259",
+    "year_month": "2025-05",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Two-dimensional early exit optimisation of LLM inference",
+    "title_norm": "two dimensional early exit optimisation of llm inference",
+    "abstract": "We introduce a two-dimensional (2D) early exit strategy that coordinates layer-wise and sentence-wise exiting for classification tasks in large language models. By processing input incrementally sentence-by-sentence while progressively activating deeper layers, our method achieves multiplicative computational savings that exceed those from optimizing either dimension independently. Experimental evaluation across four state-of-the-art LLMs (Llama 3.1, Llama 3.2, Gemma, Qwen; 3B-8B parameters) on three sentiment classification datasets demonstrates additional speed-ups of 1.4--2.3$\\times$ over optimal layer-wise early exit for simpler tasks with vanilla models, with graceful degradation on complex multi-class problems. Fine-tuning reduces but does not eliminate this advantage. The approach is model-agnostic, requires only lightweight classification adapters, and is orthogonal to complementary efficiency methods such as quantization and pruning. Our findings indicate that 2D early exit strategies excel when semantic information accumulates predictably across input structure, suggesting possible applicability to sequence-processing tasks beyond sentiment classification.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Jan Hůla",
+      "David Adamczyk",
+      "Tomáš Filip",
+      "Martin Pavlíček",
+      "Petr Sosı́k"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7155182753",
+    "doi": "10.48550/arxiv.2604.18592",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2604.18592",
+    "published_iso": "2026-03-27",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W7155182753",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "LAMDAS: LLM as an Implicit Classifier for Domain-specific Data Selection",
+    "title_norm": "lamdas llm as an implicit classifier for domain specific data selection",
+    "abstract": "Adapting large language models (LLMs) to specific domains often faces a critical bottleneck: the scarcity of high-quality, human-curated data. While large volumes of unchecked data are readily available, indiscriminately using them for fine-tuning risks introducing noise and degrading performance. Strategic data selection is thus crucial, requiring a method that is both accurate and efficient. Existing approaches, categorized as similarity-based and direct optimization methods, struggle to simultaneously achieve these goals. In this paper, we introduce LAMDAS (LLM as an implicit classifier for domain-specific Data Selection), a novel approach that leverages the pre-trained LLM itself as an implicit classifier, thereby bypassing explicit feature engineering and computationally intensive optimization process. LAMDAS reframes data selection as a one-class classification problem, identifying candidate data that \"belongs\" to the target domain defined by a small reference dataset. Extensive experimental results demonstrate that LAMDAS not only exceeds the performance of full-data training using a fraction of the data but also outperforms nine state-of-the-art (SOTA) baselines under various scenarios. Furthermore, LAMDAS achieves the most compelling balance between performance gains and computational efficiency compared to all evaluated baselines.",
+    "year": 2026,
+    "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+    "authors": [
+      "Jianmin Wu",
+      "Hang Yu",
+      "Bingchang Liu",
+      "Yang Wenjie",
+      "Peng Di",
+      "Jianguo Li"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7138943460",
+    "doi": "10.1609/aaai.v40i40.40684",
+    "arxiv_id": null,
+    "paper_url": "https://ojs.aaai.org/index.php/AAAI/article/download/40684/44645",
+    "published_iso": "2026-03-14",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7138943460",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Multi-LLM Orchestration for High-Quality Code Generation: Exploiting Complementary Model Strengths",
+    "title_norm": "multi llm orchestration for high quality code generation exploiting complementar",
+    "abstract": "Large Language Models (LLMs) have become central to automated code generation, yet existing approaches operate within a single-LLM paradigm: one model is selected and applied throughout the entire generation process. We observe that different LLMs exhibit complementary strengths: no single model dominates across all programming languages, algorithmic problem categories, or development stages. Multi-LLM collaboration, structured as per-stage, per-category routing rather than majority voting, produces higher-quality code than any individual model. Based on this observation, we propose PerfOrch, a multi-agent orchestration system that decomposes code generation into four collaborative agents: categorization, generation, debugging, and refinement. Each agent maintains a Memory module: a ranking matrix indexed by programming language and problem category, constructed from offline profiling and consulted at runtime to select the most suitable model for each task. We evaluate PerfOrch on two benchmarks, HumanEval-X and EffiBench-X, totaling 2,500 problems across five languages (Python, Java, C++, Go, and Rust). PerfOrch achieves average pass@1 rates of 97.19% on HumanEval-X and 95.83% on EffiBench-X, improving over the strongest single-model pipeline by 1.22-14.58 percentage points across languages. Notably, Memory rankings constructed solely from HumanEval-X profiling generalize to the entirely unseen EffiBench-X benchmark without re-profiling, demonstrating that the complementary-strength patterns PerfOrch exploits are properties of the models rather than artifacts of a specific problem distribution. Beyond correctness, PerfOrch improves execution time for 61-90% of solved problems with mean speedups of 4.7-29.9%, matching the refinement coverage of exhaustive multi-model evaluation at roughly half the token cost.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Huashan Chen",
+      "Zhenyu Qi",
+      "Haotang Li",
+      "Hong Chen",
+      "Jin-Fu Chen",
+      "Kebin Peng"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414816475",
+    "doi": "10.48550/arxiv.2510.01379",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2510.01379",
+    "published_iso": "2025-10-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4414816475",
+    "year_month": "2025-10",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Recidivism Prediction, Peer Effect Estimation, and Prediction-Powered Inference with LLM Text Measures",
+    "title_norm": "recidivism prediction peer effect estimation and prediction powered inference wi",
+    "abstract": "We provide a new framework for estimating peer effects when outcomes are multivariate behavioral measures derived from written text using an LLM and the network formation is endogenous. We obtain LLM embeddings and zero shot classification of more than 200,000 written exchanges among residents of low-security correctional facilities. We find that LLM embeddings improve out-of-sample recidivism prediction by up to 30% over pre-entry covariates alone using LASSO and LoRA fine-tuning, showing that text representations capture meaningful signals. For peer effect estimation, we develop a novel instrumental variable estimator that accommodates multivariate outcomes, sparse networks, and multidimensional latent homophily. We show that this estimator is $\\sqrt{N}$-consistent and asymptotically normal under sparsity conditions that relax dense-network assumptions prevalent in the peer effect literature. Limited human annotations are then combined with LLM zero-shot vectors in a new prediction-powered peer inference (PPPI) approach to obtain de-biased estimates and valid inference. Results reveal significant peer effects in the behavioral profiles.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Shanjukta Nath",
+      "Hong, Jiwon",
+      "Chang, Jae Ho",
+      "Keith Warren",
+      "Subhadeep Paul"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414788631",
+    "doi": "10.48550/arxiv.2509.20634",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2509.20634",
+    "published_iso": "2025-09-25",
+    "oa_field": "Social Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4414788631",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Reliable LLM-Based Edge-Cloud-Expert Cascades for Telecom Knowledge Systems",
+    "title_norm": "reliable llm based edge cloud expert cascades for telecom knowledge systems",
+    "abstract": "Large language models (LLMs) are emerging as key enablers of automation in domains such as telecommunications, assisting with tasks including troubleshooting, standards interpretation, and network optimization. However, their deployment in practice must balance inference cost, latency, and reliability. In this work, we study an edge-cloud-expert cascaded LLM-based knowledge system that supports decision-making through a question-and-answer pipeline. In it, an efficient edge model handles routine queries, a more capable cloud model addresses complex cases, and human experts are involved only when necessary. We define a misalignment-cost constrained optimization problem, aiming to minimize average processing cost, while guaranteeing alignment of automated answers with expert judgments. We propose a statistically rigorous threshold selection method based on multiple hypothesis testing (MHT) for a query processing mechanism based on knowledge and confidence tests. The approach provides finite-sample guarantees on misalignment risk. Experiments on the TeleQnA dataset -- a telecom-specific benchmark -- demonstrate that the proposed method achieves superior cost-efficiency compared to conventional cascaded baselines, while ensuring reliability at prescribed confidence levels.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Qiushuo Hou",
+      "Sangwoo Park",
+      "Matteo Zecchin",
+      "Yunlong Cai",
+      "Guanding Yu",
+      "Osvaldo Simeone"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7117277408",
+    "doi": "",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2512.20012",
+    "published_iso": "2025-12-23",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W7117277408",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "DIRAS: Efficient LLM Annotation of Document Relevance for Retrieval Augmented Generation",
+    "title_norm": "diras efficient llm annotation of document relevance for retrieval augmented gen",
+    "abstract": "Jingwei Ni, Tobias Schimanski, Meihong Lin, Mrinmaya Sachan, Elliott Ash, Markus Leippold. Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers). 2025.",
+    "year": 2025,
+    "venue": "Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL)",
+    "authors": [
+      "Jingwei Ni",
+      "Tobias Schimanski",
+      "Meihong Lin",
+      "Mrinmaya Sachan",
+      "Elliott Ash",
+      "Markus Leippold"
+    ],
+    "citations": 3,
+    "source": "openalex",
+    "source_id": "W4411119345",
+    "doi": "10.18653/v1/2025.naacl-long.271",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2025.naacl-long.271.pdf",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4411119345",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Enhancing Text-to-SQL Systems Through LLM Routing and Effective Evaluation",
+    "title_norm": "enhancing text to sql systems through llm routing and effective evaluation",
+    "abstract": "version:NA",
+    "year": 2025,
+    "venue": "PolyPublie (École Polytechnique de Montréal)",
+    "authors": [
+      "Mohammadhossein Malekpour"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7140350757",
+    "doi": "",
+    "arxiv_id": null,
+    "paper_url": "https://publications.polymtl.ca/71174/36/2025_MohammadhosseinMalekpour.pdf",
+    "published_iso": "2025-12-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7140350757",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "PRECISE: Reducing the Bias of LLM Evaluations Using Prediction-Powered Ranking Estimation",
+    "title_norm": "precise reducing the bias of llm evaluations using prediction powered ranking es",
+    "abstract": "Evaluating the quality of search, ranking and RAG systems traditionally requires a significant number of human relevance annotations. In recent times, several deployed systems have explored the usage of Large Language Models (LLMs) as automated judges for this task while their inherent biases prevent direct use for metric estimation. We present a statistical framework extending Prediction-Powered Inference (PPI) that combines minimal human annotations with LLM judgments to produce reliable estimates of metrics which require sub-instance annotations. Our method requires as few as 100 human-annotated queries and 10,000 unlabeled examples, reducing annotation requirements significantly compared to traditional approaches. We formulate our proposed framework (PRECISE) for inference of relevance uplift for an LLM-based query reformulation application, extending PPI to sub-instance annotations at the query-document level. By reformulating the metric-integration space, we reduced the computational complexity from O(2^|C|) to O(2^K), where |C| represents corpus size (in order of millions). Detailed experiments across prominent retrieval datasets demonstrate that our method reduces the variance of estimates for the business-critical Precision@K metric, while effectively correcting for LLM bias in low-resource settings.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Abhishek Divekar",
+      "Anirban Majumder"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7125877781",
+    "doi": "",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2601.18777",
+    "published_iso": "2026-01-26",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W7125877781",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "SEMIROUTER: Sparse-Data Enhanced Routing for Adaptive Multi-LLM System",
+    "title_norm": "semirouter sparse data enhanced routing for adaptive multi llm system",
+    "abstract": "Zijie Wang, Xinyu Yan, Che Wang, Zeng Zihao, Lei Xiao, Wei Yang Bryan Lim. Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers). 2026.",
+    "year": 2026,
+    "venue": "Conference of the European Chapter of the Association for Computational Linguistics",
+    "authors": [
+      "Zijie Wang",
+      "Xinyu Yan",
+      "Che Wang",
+      "ZENG Zihao",
+      "Lei Xiao",
+      "Wei Yang Bryan Lim"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7140133272",
+    "doi": "10.18653/v1/2026.eacl-long.228",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2026.eacl-long.228.pdf",
+    "published_iso": "2026-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7140133272",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Pyramid MoA: A Probabilistic Framework for Cost-Optimized Anytime Inference",
+    "title_norm": "pyramid moa a probabilistic framework for cost optimized anytime inference",
+    "abstract": "We observe that LLM cascading and routing implicitly solves an anytime computation problem -- a class of algorithms, well-studied in classical AI, that improve solutions as additional computation is allocated. We formalize this connection and propose Pyramid MoA, a hierarchical Mixture-of-Agents architecture governed by a decision-theoretic router that escalates queries only when necessary. We establish a Probabilistic Anytime Property with provable monotonicity guarantees and derive a generalized escalation rule from Value of Computation theory that accounts for imperfect oracles, extending the Hansen-Zilberstein monitoring framework to stochastic LLM inference. On MBPP, the router intercepts 81.6% of bugs; on GSM8K/MMLU, the system nearly matches the 68.1% Oracle baseline while achieving up to 42.9% compute savings. The router transfers zero-shot to unseen benchmarks: matching Oracle accuracy on HumanEval (81.1%) and MATH 500 (58.0%) with significant cost reductions. We further discover a context-conditioned anchoring effect across four benchmarks: passing correct SLM reasoning improves Oracle accuracy by up to +19.2pp, while incorrect reasoning degrades it by up to -18.0pp, revealing a fundamental tension in hierarchical MoA architectures.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Arindam Khaled"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7131427349",
+    "doi": "10.48550/arxiv.2602.19509",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.19509",
+    "published_iso": "2026-02-23",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W7131427349",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "DART: Mitigating Harm Drift in Difference-Aware LLMs via Distill-Audit-Repair Training",
+    "title_norm": "dart mitigating harm drift in difference aware llms via distill audit repair tra",
+    "abstract": "Large language models (LLMs) tuned for safety often avoid acknowledging demographic differences, even when such acknowledgment is factually correct (e.g., ancestry-based disease incidence) or contextually justified (e.g., religious hiring preferences).This identityblindness yields incorrect responses, unnecessary refusals, or generic \"equal-treatment\" defaults.We study this via difference-awareness classification: given a question involving demographic groups, the task is not to answer directly, but to classify whether a correct answer requires recognizing group differences (YES) or whether groups should be treated identically (NO).Crucially, fine-tuning for accuracy triggers harm drift: model-generated explanations become increasingly harmful as decision accuracy improves, whether by elaborating harmful content, introducing problematic assumptions, or failing to flag harms the baseline identified.To mitigate this, we introduce DART (Distill-Audit-Repair Training), which distills label-conditioned reasoning from a teacher, audits outputs for harm drift cases relative to baseline, and repairs problematic cases via severity-weighted fine-tuning.On eight benchmarks, DART improves Llama-3-8B-Instruct accuracy from 39.0% to 68.8%, with largest gains on equal-treatment prompts (11.3% → 72.6%), while reducing harm drift cases by 72.6%.It also transfers to 280 openended real-world queries across medical, legal, policy, and educational domains, improving difference-appropriate responses from 39.8% to 77.5% while reducing refusals from 34.3% to 3.0%.Our results demonstrate that accuracy and safety need not conflict when explicit detection and repair mechanisms are in place.",
+    "year": 2026,
+    "venue": "",
+    "authors": [
+      "Ziwen Pan",
+      "Zihan Liang",
+      "Jad Kabbara",
+      "Ali Emami"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7166820209",
+    "doi": "10.18653/v1/2026.findings-acl.244",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2026.findings-acl.244.pdf",
+    "published_iso": "2026-01-01",
+    "oa_field": "Social Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7166820209",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "ParetoBandit: Budget-Paced Adaptive Routing for Non-Stationary LLM Serving",
+    "title_norm": "paretobandit budget paced adaptive routing for non stationary llm serving",
+    "abstract": "Multi-model LLM serving operates in a non-stationary, noisy environment: providers revise pricing, model quality can shift or regress without notice, and new models arrive regularly. More than a dozen recent methods have proposed learned routers to navigate the resulting quality--cost tradeoff across portfolios spanning a $\\sim$530$\\times$ cost range. Despite this activity, two gaps in the current solution space limit routing effectiveness under these conditions: no existing router enforces a dollar-denominated cost ceiling in closed loop over an open-ended request stream, and none provides principled online adaptation to post-deployment shifts in pricing or model quality. We present ParetoBandit, an open-source adaptive router built on cost-aware contextual bandits that addresses both gaps. Its core contributions are: (1) an online primal--dual budget pacer that enforces a per-request cost ceiling without a known horizon, and (2) geometric forgetting on sufficient statistics that gives the bandit bounded memory for tracking quality and cost shifts. A hot-swap model registry further supports runtime model changes with budget-controlled exploration. On 1,824 benchmark prompts with a three-model portfolio, the router maintains budget compliance within 0.4%, adapts to price and quality shifts with up to +0.071 quality lift, and integrates a cold-started model within $\\sim$142 steps.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Annette Taberner-Miller"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7148297671",
+    "doi": "10.48550/arxiv.2604.00136",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2604.00136",
+    "published_iso": "2026-03-31",
+    "oa_field": "Decision Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7148297671",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "M-estimation under Two-Phase Multiwave Sampling with Applications to Prediction-Powered Inference",
+    "title_norm": "m estimation under two phase multiwave sampling with applications to prediction ",
+    "abstract": "In two-phase multiwave sampling, inexpensive measurements are collected on a large sample and expensive, more informative measurements are adaptively obtained on subsets of units across multiple waves. Adaptively collecting the expensive measurements can increase efficiency but complicates statistical inference. We give valid estimators and confidence intervals for M-estimation under adaptive two-phase multiwave sampling. We focus on the case where proxies for the expensive variables -- such as predictions from pretrained machine learning models -- are available for all units and propose a Multiwave Predict-Then-Debias estimator that combines proxy information with the expensive, higher-quality measurements to improve efficiency while removing bias. We establish asymptotic linearity and normality and propose asymptotically valid confidence intervals. We also develop an approximately greedy sampling strategy that improves efficiency relative to uniform sampling. Data-based simulation studies support the theoretical results and demonstrate efficiency gains.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Dan M. Kluger",
+      "Stephen Bates"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7130676567",
+    "doi": "10.48550/arxiv.2602.16933",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.16933",
+    "published_iso": "2026-02-18",
+    "oa_field": "Mathematics",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W7130676567",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "FineTuneBench: How well do commercial fine-tuning APIs infuse knowledge into LLMs?",
+    "title_norm": "finetunebench how well do commercial fine tuning apis infuse knowledge into llms",
+    "abstract": "There is great interest in fine-tuning frontier large language models (LLMs) to inject new information and update existing knowledge. While commercial LLM fine-tuning APIs from providers such as OpenAI and Google promise flexible adaptation for various applications, the efficacy of fine-tuning remains unclear. In this study, we introduce FineTuneBench, an evaluation framework and dataset for understanding how well commercial fine-tuning APIs can successfully learn new and updated knowledge. We analyze five frontier LLMs with commercially available fine-tuning APIs, including GPT-4o and Gemini 1.5 Pro, on their effectiveness in two settings: (1) ingesting novel information, such as recent news events and new people profiles, and (2) updating existing knowledge, such as updated medical guidelines and code frameworks. Our results reveal substantial shortcomings in all the models' abilities to effectively learn new information through fine-tuning, with an average generalization accuracy of 37% across all models. When updating existing knowledge, such as incorporating medical guideline updates, commercial fine-tuning APIs show even more limited capability (average generalization accuracy of 19%). Overall, fine-tuning GPT-4o mini is the most effective for infusing new knowledge and updating knowledge, followed by GPT-3.5 Turbo and GPT-4o. The fine-tuning APIs for Gemini 1.5 Flesh and Gemini 1.5 Pro are unable to learn new knowledge or update existing knowledge. These findings underscore a major shortcoming in using current commercial fine-tuning services to achieve reliable knowledge infusion in common scenarios. We open source the FineTuneBench dataset at https://github.com/kevinwu23/StanfordFineTuneBench.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Eric Wu",
+      "Kevin Wu",
+      "James Zou"
+    ],
+    "citations": 2,
+    "source": "openalex",
+    "source_id": "W4404390537",
+    "doi": "10.48550/arxiv.2411.05059",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2411.05059",
+    "published_iso": "2024-11-07",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM API call sites in software repositories"
+    ],
+    "paper_id": "openalex:W4404390537",
+    "year_month": "2024-11",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Rational Tuning of LLM Cascades via Probabilistic Modeling",
+    "title_norm": "rational tuning of llm cascades via probabilistic modeling",
+    "abstract": "Understanding the reliability of large language models (LLMs) has recently garnered significant attention. Given LLMs' propensity to hallucinate, as well as their high sensitivity to prompt design, it is already challenging to predict the performance of an individual LLM. However, the problem becomes more complex for compound LLM systems such as cascades, where in addition to each model's standalone performance, we must understand how the error rates of different models interact. In this paper, we present a probabilistic model for the joint performance distribution of a sequence of LLMs, which enables a framework for rationally tuning the confidence thresholds of a LLM cascade using continuous optimization. Compared to selecting confidence thresholds using Bayesian optimization, our parametric Markov-copula model yields more favorable error-cost trade-offs, improving the area under the error-cost curve by 4.3% on average for cascades with $k\\geq 3$ models. In the low-sample regime with $n \\leq 30$ training examples, the performance improvement widens to 10.2%, suggesting that our framework's inductive assumptions about the interactions between the error rates of different LLMs enhance sample efficiency. Overall, our Markov-copula model provides a rational basis for tuning LLM cascade performance and points to the potential of probabilistic methods in analyzing systems of LLMs.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Michael J. Zellinger",
+      "Matt Thomson"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4406548552",
+    "doi": "10.48550/arxiv.2501.09345",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2501.09345",
+    "published_iso": "2025-01-16",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W4406548552",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Faster Than the Teacher, Smarter Than the Student: Classifying with Wisdom via Knowledge Distillation in LLMs",
+    "title_norm": "faster than the teacher smarter than the student classifying with wisdom via kno",
+    "abstract": "Large language models (LLMs) have achieved remarkable success across various natural language processing (NLP) tasks, driven by their ability to capture complex language patterns through large-scale pretraining. However, their substantial computational demands limit their deployment in resource-constrained environments. To address this, this research introduced Knowledge distillation-based framework for text classification using a multiclass approach across three domains: entertainment, sports, and politics. We utilize both hard labels (ground-truth categories) and soft labels (logits from a teacher model) to train a student and a distilled model. The teacher model is accurate but computationally expensive. The student model is lightweight and fast, yet less accurate. Through distillation, we derive a task-specific distilled model that balances speed and accuracy. We also compare the performance of these models against traditional classifiers such as LSTM, SVM, and Naive Bayes. Traditional models excel comparing to the LLMs. Considering only task agnostic language models, evaluation shows that the distilled model performs significantly better than the student and competitively against the teacher, offering a practical trade-off. Our study demonstrates the value of soft label transfer and semantic alignment for improving classification performance in resource-constrained environments. The text classification code can be found at: https://github.com/Abishethvarman/KD-Text-Classification KEYWORDS: Knowledge Distillation, Text Classification, Multiclass Classification, Teacher-Student Framework.",
+    "year": 2025,
+    "venue": "Proceedings of the sliit international conference on engineering and technology",
+    "authors": [
+      "B. Gobihanath",
+      "Vadivel Abishethvarman",
+      "S. Prasanth",
+      "K. Banujan",
+      "B.T.G.S. Kumara"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7202408253",
+    "doi": "10.54389/lqak9453",
+    "arxiv_id": null,
+    "paper_url": "https://rda.sliit.lk/bitstreams/39cc215c-4a34-4f4a-b4b7-56904650957a/download",
+    "published_iso": "2025-09-10",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7202408253",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Optimal Query Allocation in Extractive QA with LLMs: A Learning-to-Defer Framework with Theoretical Guarantees",
+    "title_norm": "optimal query allocation in extractive qa with llms a learning to defer framewor",
+    "abstract": "Large Language Models excel in generative tasks but exhibit inefficiencies in structured text selection, particularly in extractive question answering. This challenge is magnified in resource-constrained environments, where deploying multiple specialized models for different tasks is impractical. We propose a Learning-to-Defer framework that allocates queries to specialized experts, ensuring high-confidence predictions while optimizing computational efficiency. Our approach integrates a principled allocation strategy with theoretical guarantees on optimal deferral that balances performance and cost. Empirical evaluations on SQuADv1, SQuADv2, and TriviaQA demonstrate that our method enhances answer reliability while significantly reducing computational overhead, making it well-suited for scalable and efficient EQA deployment.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Yannis Montreuil",
+      "Yeo, Shu Heng",
+      "Carlier, Axel",
+      "Ng, Lai Xing",
+      "Ooi, Wei Tsang"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4404088945",
+    "doi": "10.48550/arxiv.2410.15761",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2410.15761",
+    "published_iso": "2024-10-21",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4404088945",
+    "year_month": "2024-10",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Accurate predictions on small data with a tabular foundation model",
+    "title_norm": "accurate predictions on small data with a tabular foundation model",
+    "abstract": "Abstract Tabular data, spreadsheets organized in rows and columns, are ubiquitous across scientific fields, from biomedicine to particle physics to economics and climate science 1,2 . The fundamental prediction task of filling in missing values of a label column based on the rest of the columns is essential for various applications as diverse as biomedical risk models, drug discovery and materials science. Although deep learning has revolutionized learning from raw data and led to numerous high-profile success stories 3–5 , gradient-boosted decision trees 6–9 have dominated tabular data for the past 20 years. Here we present the Tabular Prior-data Fitted Network (TabPFN), a tabular foundation model that outperforms all previous methods on datasets with up to 10,000 samples by a wide margin, using substantially less training time. In 2.8 s, TabPFN outperforms an ensemble of the strongest baselines tuned for 4 h in a classification setting. As a generative transformer-based foundation model, this model also allows fine-tuning, data generation, density estimation and learning reusable embeddings. TabPFN is a learning algorithm that is itself learned across millions of synthetic datasets, demonstrating the power of this approach for algorithm development. By improving modelling abilities across diverse fields, TabPFN has the potential to accelerate scientific discovery and enhance important decision-making in various domains.",
+    "year": 2025,
+    "venue": "Nature",
+    "authors": [
+      "Noah Hollmann",
+      "Samuel Müller",
+      "Lennart Purucker",
+      "Arjun Krishnakumar",
+      "Max Körfer",
+      "Shi Bin Hoo"
+    ],
+    "citations": 971,
+    "source": "openalex",
+    "source_id": "W4406170795",
+    "doi": "10.1038/s41586-024-08328-6",
+    "arxiv_id": null,
+    "paper_url": "https://www.nature.com/articles/s41586-024-08328-6.pdf",
+    "published_iso": "2025-01-08",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W4406170795",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "COEF-VQ: Cost-Efficient Video Quality Understanding through a Cascaded Multimodal LLM Framework",
+    "title_norm": "coef vq cost efficient video quality understanding through a cascaded multimodal",
+    "abstract": "Recently, with the emergence of recent Multimodal Large Language Model (MLLM) technology, it has become possible to exploit its video understanding capability on different classification tasks. In practice, we face the difficulty of huge requirements for GPU resource if we need to deploy MLLMs online. In this paper, we propose COEF-VQ, a novel cascaded MLLM framework designed to enhance video quality understanding on the short-video platform while optimizing computational efficiency. Our approach integrates an entropy-based pre-filtering stage, where a lightweight model assesses uncertainty and selectively filters cases before passing them to the more computationally intensive MLLM for final evaluation. By prioritizing high-uncertainty samples for deeper analysis, our framework significantly reduces GPU usage while maintaining the strong classification performance of a full MLLM deployment. To demonstrate the effectiveness of COEF-VQ, we deploy this new framework onto the video management platform (VMP) at the short-video platform, and perform a series of detailed experiments on two in-house tasks related to video quality understanding. We show that COEF-VQ leads to substantial performance gains from the offline evaluation in these two tasks and effectively enhances platform safety with limit resource consumption, significantly reducing inappropriate content video view rate by 9.9% in a online A/B test without affecting engagement. Post-launch monitoring confirmed sustained improvements, validating its real-world impact.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Dong Xin",
+      "Jia, Sen",
+      "Wang, Ming Rui",
+      "Li, Yan",
+      "Yang, Zhenheng",
+      "Deng, Bingfeng"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4405468031",
+    "doi": "10.48550/arxiv.2412.10435",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2412.10435",
+    "published_iso": "2024-12-11",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM cascade inference cost reduction"
+    ],
+    "paper_id": "openalex:W4405468031",
+    "year_month": "2024-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "DistillSem: LLM-Distilled Financial Headline Semantics for Cross-Sectional Return Prediction",
+    "title_norm": "distillsem llm distilled financial headline semantics for cross sectional return",
+    "abstract": "",
+    "year": 2026,
+    "venue": "SSRN Electronic Journal",
+    "authors": [
+      "Bo Guo"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7203448912",
+    "doi": "10.2139/ssrn.7272623",
+    "arxiv_id": null,
+    "paper_url": "https://doi.org/10.2139/ssrn.7272623",
+    "published_iso": "2026-01-01",
+    "oa_field": "Decision Sciences",
+    "semantic_recall": false,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7203448912",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "FusionFactory: Fusing LLM Capabilities with Multi-LLM Log Data",
+    "title_norm": "fusionfactory fusing llm capabilities with multi llm log data",
+    "abstract": "The rapid advancement of large language models (LLMs) has created a diverse landscape of models, each excelling at different tasks. This diversity drives researchers to employ multiple LLMs in practice, leaving behind valuable multi-LLM log data. This naturally leads to the question of whether such logs can be fully leveraged to fuse LLMs' complementary capabilities. Although prior work has explored various strategies for integrating multiple LLMs, we argue that practical fusion must meet two essential requirements: (1) compatibility with real-world serving scenarios (e.g., local and API-based serving), and (2) flexibility to operate at different stages of the LLM pipeline to meet varied user needs (e.g., fine-tuning and inference stages). To this end, we introduce LLMFusionBench, a large-scale benchmark for LLM fusion that spans 14 tasks across five domains, with responses from 20 open-source LLMs (8B--671B) totaling 103M tokens. Building on LLMFusionBench, we propose FusionFactory, a systematic framework with three elaborated levels: (1) query-level fusion via tailored LLM routers, (2) thought-level fusion leveraging retrieved abstract reasoning templates, and (3) model-level fusion via distillation from top-ranked responses. Experiments show that FusionFactory consistently outperforms the best individual LLM across all 14 benchmarks, with the optimal fusion configuration varying across benchmarks, highlighting the promise of multi-LLM log data as a practical foundation for fusing diverse LLM capabilities.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Feng, Tao",
+      "Haozhen Zhang",
+      "Lei, Zijie",
+      "Han, Pengrui",
+      "Mostofa Ali Patwary",
+      "Mohammad Shoeybi"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4415330375",
+    "doi": "10.48550/arxiv.2507.10540",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2507.10540",
+    "published_iso": "2025-07-14",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4415330375",
+    "year_month": "2025-07",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Certified Self-Consistency: Statistical Guarantees and Test-Time Training for Reliable Reasoning in LLMs",
+    "title_norm": "certified self consistency statistical guarantees and test time training for rel",
+    "abstract": "Recent advances such as self-consistency and test-time reinforcement learning (TTRL) improve the reliability of large language models (LLMs) without additional supervision, yet their underlying mechanisms and statistical guarantees remain poorly understood. We present a unified framework for certifiable inference in LLMs, showing that majority voting provides a statistical certificate of self-consistency: under mild assumptions, the aggregated answer coincides with the mode of the model's terminal distribution with high probability. We derive finite-sample and anytime-valid concentration bounds that quantify this confidence, and introduce the Martingale Majority Certificate (MMC), a sequential stopping rule that adaptively determines when sufficient samples have been drawn. We further prove that label-free post-training methods such as TTRL implicitly sharpen the answer distribution by exponentially tilting it toward its mode, thereby reducing the number of samples required for certification. Building on this insight, we propose new post-training objectives that explicitly optimise this trade-off between sharpness and bias. Together, these results explain and connect two central test-time scaling strategies, self-consistency and TTRL, within a single statistical framework for label-free, certifiable reliability in reasoning LLMs.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Paula Cordero-Encinar",
+      "A. Duncan"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4415964470",
+    "doi": "10.48550/arxiv.2510.17472",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2510.17472",
+    "published_iso": "2025-10-20",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4415964470",
+    "year_month": "2025-10",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "ADMEDTAGGER: an annotation framework for distillation of expert knowledge for the Polish medical language",
+    "title_norm": "admedtagger an annotation framework for distillation of expert knowledge for the",
+    "abstract": "In this work, we present an annotation framework that demonstrates how a multilingual LLM pretrained on a large corpus can be used as a teacher model to distill the expert knowledge needed for tagging medical texts in Polish. This work is part of a larger project called ADMEDVOICE, within which we collected an extensive corpus of medical texts representing five clinical categories - Radiology, Oncology, Cardiology, Hypertension, and Pathology. Using this data, we had to develop a multi-class classifier, but the fundamental problem turned out to be the lack of resources for annotating an adequate number of texts. Therefore, in our solution, we used the multilingual Llama3.1 model to annotate an extensive corpus of medical texts in Polish. Using our limited annotation resources, we verified only a portion of these labels, creating a test set from them. The data annotated in this way were then used for training and validation of 3 different types of classifiers based on the BERT architecture - the distilled DistilBERT model, BioBERT fine-tuned on medical data, and HerBERT fine-tuned on the Polish language corpus. Among the models we trained, the DistilBERT model achieved the best results, reaching an F1 score > 0.80 for each clinical category and an F1 score > 0.93 for 3 of them. In this way, we obtained a series of highly effective classifiers that represent an alternative to large language models, due to their nearly 500 times smaller size, 300 times lower GPU VRAM consumption, and several hundred times faster inference.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Franciszek Górski",
+      "Andrzej Czyżewski"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7124513808",
+    "doi": "",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2601.09722",
+    "published_iso": "2025-12-27",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7124513808",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "The Promises and Pitfalls of LLM Annotations in Dataset Labeling: a Case Study on Media Bias Detection",
+    "title_norm": "the promises and pitfalls of llm annotations in dataset labeling a case study on",
+    "abstract": "High annotation costs from hiring or crowdsourcing complicate the creation of large, highquality datasets needed for training reliable text classifiers.Recent research suggests using Large Language Models (LLMs) to automate the annotation process, reducing these costs while maintaining data quality.LLMs have shown promising results in annotating downstream tasks like hate speech detection and political framing.Building on the success in these areas, this study investigates whether LLMs are viable for annotating a complex task of media bias detection and whether a downstream media bias classifier can be trained on such data.We create Anno-lexical , the first large-scale dataset for media bias classification with over 48k synthetically annotated examples.Our classifier fine-tuned on it surpasses all of the annotator LLMs by 5-9% in Mathew's Correlation Coefficient (MCC) and performs close to or outperforms the model trained on humanlabeled data when evaluated on two media bias benchmark datasets (BABE and BASIL).This study demonstrates how our approach significantly reduces the cost of dataset creation in the media bias domain and, by extension -the development of the classifiers, while our subsequent behavioral stress-testing reveals some of its current limitations and trade-offs.",
+    "year": 2025,
+    "venue": "Findings of the Association for Computational Linguistics: NAACL",
+    "authors": [
+      "Tomáš Horych",
+      "Christoph Mandl",
+      "Terry Ruas",
+      "André Greiner-Petter",
+      "Béla Gipp",
+      "Akiko Aizawa"
+    ],
+    "citations": 10,
+    "source": "openalex",
+    "source_id": "W4411112894",
+    "doi": "10.18653/v1/2025.findings-naacl.75",
+    "arxiv_id": null,
+    "paper_url": "https://aclanthology.org/2025.findings-naacl.75.pdf",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4411112894",
+    "year_month": "2025-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Large Language Models in the Task of Automatic Validation of Text Classifier Predictions",
+    "title_norm": "large language models in the task of automatic validation of text classifier pre",
+    "abstract": "Machine learning models for text classification are trained to predict a class for a given text. To do this, training and validation samples must be prepared: a set of texts is collected, and each text is assigned a class. These classes are usually assigned by human annotators with different expertise levels, depending on the specific classification task. Collecting such samples from scratch is labor-intensive because it requires finding specialists and compensating them for their work; moreover, the number of available specialists is limited, and their productivity is constrained by human factors. While it may not be too resource-intensive to collect samples once, the ongoing need to retrain models (especially in incremental learning pipelines) to address data drift (also called model drift) makes the data collection process crucial and costly over the model's entire lifecycle. This paper proposes several approaches to replace human annotators with Large Language Models (LLMs) to test classifier predictions for correctness, helping ensure model quality and support high-quality incremental learning.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Aleksandr Tsymbalov",
+      "Mikhail A. Khovrichev"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414581596",
+    "doi": "10.48550/arxiv.2505.18688",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2505.18688",
+    "published_iso": "2025-05-24",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4414581596",
+    "year_month": "2025-05",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "From LLM-anation to LLM-orchestrator: Coordinating Small Models for Data Labeling",
+    "title_norm": "from llm anation to llm orchestrator coordinating small models for data labeling",
+    "abstract": "Although the annotation paradigm based on Large Language Models (LLMs) has made significant breakthroughs in recent years, its actual deployment still has two core bottlenecks: first, the cost of calling commercial APIs in large-scale annotation is very expensive; second, in scenarios that require fine-grained semantic understanding, such as sentiment classification and toxicity classification, the annotation accuracy of LLMs is even lower than that of Small Language Models (SLMs) dedicated to this field. To address these problems, we propose a new paradigm of multi-model cooperative annotation and design a fully automatic annotation framework AutoAnnotator based on this. Specifically, AutoAnnotator consists of two layers. The upper-level meta-controller layer uses the generation and reasoning capabilities of LLMs to select SLMs for annotation, automatically generate annotation code and verify difficult samples; the lower-level task-specialist layer consists of multiple SLMs that perform annotation through multi-model voting. In addition, we use the difficult samples obtained by the secondary review of the meta-controller layer as the reinforcement learning set and fine-tune the SLMs in stages through a continual learning strategy, thereby improving the generalization of SLMs. Extensive experiments show that AutoAnnotator outperforms existing open-source/API LLMs in zero-shot, one-shot, CoT, and majority voting settings. Notably, AutoAnnotator reduces the annotation cost by 74.15% compared to directly annotating with GPT-3.5-turbo, while still improving the accuracy by 6.21%. Project page: https://github.com/Zhaiyuan-Ji/AutoAnnotator.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Lu, Yao",
+      "Ji, Zhaiyuan",
+      "Du, Jiawei",
+      "Shanqing, Yu",
+      "Xuan, Qi",
+      "Zhou, Tianyi"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4417538289",
+    "doi": "10.48550/arxiv.2506.16393",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2506.16393",
+    "published_iso": "2025-06-19",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W4417538289",
+    "year_month": "2025-06",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "LLM Tool: A Hybrid Pipeline for Automated High-Throughput Text Annotation Using Local Language Models and BERT Classifiers",
+    "title_norm": "llm tool a hybrid pipeline for automated high throughput text annotation using l",
+    "abstract": "Replication materials for the LLM Tool SocArXiv preprint. LLM Tool is an open-source Python package that runs a full hybrid text-annotation workflow from the command line: decoder-based LLMs generate structured annotations from a codebook, and encoder-based transformer classifiers (XLM-RoBERTa) are then fine-tuned to reproduce the labeling logic with a 109-395x inference speedup. The repository ships the SocArXiv LaTeX source, all figures and tables, the Python scripts that regenerate them from the vendored annotator and training session logs, and a full replication package validated on a bilingual Canadian corpus of 38,451 parliamentary debates and news media texts. GitHub: https://github.com/antoinelemor/LLM_Tool",
+    "year": 2026,
+    "venue": "",
+    "authors": [
+      "Antoine Claude Lemor"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7153717223",
+    "doi": "10.17605/osf.io/bdu2w",
+    "arxiv_id": null,
+    "paper_url": "https://openalex.org/W7153717223",
+    "published_iso": "2026-01-01",
+    "oa_field": "Social Sciences",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7153717223",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "More Human, More Efficient: Aligning Annotations with Quantized SLMs",
+    "title_norm": "more human more efficient aligning annotations with quantized slms",
+    "abstract": "As Large Language Model (LLM) capabilities advance, the demand for high-quality annotation of exponentially increasing text corpora has outpaced human capacity, leading to the widespread adoption of LLMs in automatic evaluation and annotation. However, proprietary LLMs often exhibit systematic biases that diverge from human expert consensus, lacks reproducibility, and raises data privacy concerns. Our work examines the viability of finetuning a quantized Small Language Model of 1.7B parameter size on limited human-annotated data to serve as a highly aligned, deterministic evaluator and annotator. By implementing a custom, multi-dimensional rubric framework and simple augmentation and regularization techniques, the proposed approach achieves higher inter-annotator agreement (0.23 points increase in Krippendorff's $α$) than the best performing state-of-the-art proprietary LLM. We also demonstrate the generalizability of the proposed training pipeline on a separate emotion classification task. The results show that task-specific alignment and efficient 4-bit quantized fine-tuning provide superior open-source alternative to using proprietary models for evaluation and annotation. Our finetuning approach is publicly available at https://github.com/jylee-k/slm-judge.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Jiayu Wang",
+      "Junyoung Lee"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7148345711",
+    "doi": "10.48550/arxiv.2604.00586",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2604.00586",
+    "published_iso": "2026-04-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "distilling LLM annotations into small classifier"
+    ],
+    "paper_id": "openalex:W7148345711",
+    "year_month": "2026-04",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "RouterArena: An Open Platform for Comprehensive Comparison of LLM Routers",
+    "title_norm": "routerarena an open platform for comprehensive comparison of llm routers",
+    "abstract": "Today's LLM ecosystem comprises a wide spectrum of models that differ in size, capability, and cost. No single model is optimal for all scenarios; hence, LLM routers have become essential for selecting the most appropriate model under varying circumstances. However, the rapid emergence of various routers makes choosing the right one increasingly challenging. To address this problem, we need a comprehensive router comparison and a standardized leaderboard, similar to those available for models. In this work, we introduce RouterArena, the first open platform enabling comprehensive comparison of LLM routers. RouterArena has (1) a principally constructed dataset with broad knowledge domain coverage, (2) distinguishable difficulty levels for each domain, (3) an extensive list of evaluation metrics, and (4) an automated framework for leaderboard updates. Leveraging our framework, we have produced the initial leaderboard with detailed metrics comparison as shown in Figure 1. Our framework for evaluating new routers is on https://github.com/RouteWorks/RouterArena. Our leaderboard is on https://routeworks.github.io/.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Yifan Lu",
+      "Rixin Liu",
+      "Jiayi Yuan",
+      "Cui, Xingqi",
+      "S.B. Zhang",
+      "Hongyi Liu"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4414804952",
+    "doi": "10.48550/arxiv.2510.00202",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2510.00202",
+    "published_iso": "2025-09-30",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4414804952",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "CARROT: A Cost Aware Rate Optimal Router",
+    "title_norm": "carrot a cost aware rate optimal router",
+    "abstract": "With the rapid growth in the number of Large Language Models (LLMs), there has been a recent interest in LLM routing, or directing queries to the cheapest LLM that can deliver a suitable response. We conduct a minimax analysis of the routing problem, providing a lower bound and finding that a simple router that predicts both cost and accuracy for each question can be minimax optimal. Inspired by this, we introduce CARROT, a Cost AwaRe Rate Optimal rouTer that selects a model based on estimates of the models' cost and performance. Alongside CARROT, we also introduce the Smart Price-aware ROUTing (SPROUT) dataset to facilitate routing on a wide spectrum of queries with the latest state-of-the-art LLMs. Using SPROUT and prior benchmarks such as Routerbench and open-LLM-leaderboard-v2 we empirically validate CARROT's performance against several alternative routers.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Seamus Somerstep",
+      "Felipe Maia Polo",
+      "Allysson Flavio Melo de Oliveira",
+      "Prattyush Mangal",
+      "Mírian Silva",
+      "Onkar Bhardwaj"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4407231303",
+    "doi": "10.48550/arxiv.2502.03261",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2502.03261",
+    "published_iso": "2025-02-05",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4407231303",
+    "year_month": "2025-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "OmniRouter: Budget and Performance Controllable Multi-LLM Routing",
+    "title_norm": "omnirouter budget and performance controllable multi llm routing",
+    "abstract": "Large language models (LLMs) deliver superior performance but require substantial computational resources and operate with relatively low efficiency, while smaller models can efficiently handle simpler tasks with fewer resources. LLMrouting is a crucial paradigm that dynamically selects the most suitable large language models from a pool of candidates to process diverse inputs, ensuring optimal resource utilization while maintaining response quality. Existing routing frameworks typically model this as a locally optimal decision-making problem, selecting the presumed best-fit LLM for each query individually, which overlooks global budget constraints, resulting in ineffective resource allocation. To tackle this problem, we introduce OmniRouter, a fundamentally controllable routing framework for multi- LLM serving. Instead of making per-query greedy choices, OmniRouter models the routing task as a constrained optimization problem, assigning models that minimize total cost while ensuring the required performance level. Specifically, a hybrid retrieval-augmented predictor is designed to predict the capabilities and costs of LLMs. After obtaining the predicted cost and performance, we utilize a constrained optimizer for cost-optimal assignments that employs Lagrangian dual decomposition with adaptive multipliers. It iteratively converges toward the globally optimal query-model allocation, dynamically balancing latency minimization against quality thresholds while adhering to heterogeneous capacity constraints. Experiments show that OmniRouter achieves up to 6.30% improvement in response accuracy while simultaneously reducing computational costs by at least 10.15% compared to competitive router baselines. The code and the dataset are available at https: //github.com/dongyuanjushi/OmniRouter.",
+    "year": 2025,
+    "venue": "ACM SIGKDD Explorations Newsletter",
+    "authors": [
+      "Kai Mei",
+      "Wujiang Xu",
+      "Minghao Guo",
+      "Shuhang Lin",
+      "Y. Zhang"
+    ],
+    "citations": 2,
+    "source": "openalex",
+    "source_id": "W7117870265",
+    "doi": "10.1145/3787470.3787480",
+    "arxiv_id": null,
+    "paper_url": "https://openalex.org/W7117870265",
+    "published_iso": "2025-12-30",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7117870265",
+    "year_month": "2025-12",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "One Head, Many Models: Cross-Attention Routing for Cost-Aware LLM Selection",
+    "title_norm": "one head many models cross attention routing for cost aware llm selection",
+    "abstract": "The proliferation of large language models (LLMs) with varying computational costs and performance profiles presents a critical challenge for scalable, cost-effective deployment in real-world applications. We introduce a unified routing framework that leverages a single-head cross-attention mechanism to jointly model query and model embeddings, enabling dynamic selection of the optimal LLM for each input query. Our approach is evaluated on RouterBench, a large-scale, publicly available benchmark encompassing diverse LLM pools and domains. By explicitly capturing fine-grained query-model interactions, our router predicts both response quality and generation cost, achieving up to 6.6% improvement in Average Improvement in Quality (AIQ) and 2.9% in maximum performance over existing routers. To robustly balance performance and cost, we propose an exponential reward function that enhances stability across user preferences. The resulting architecture is lightweight, generalizes effectively across domains, and demonstrates improved efficiency compared to prior methods, establishing a new standard for cost-aware LLM routing.",
+    "year": 2025,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Roshini Pulishetty",
+      "Mani Kishan Ghantasala",
+      "Keerthy Kaushik Dasoju",
+      "Niti Mangwani",
+      "Vishal Garimella",
+      "Aditya Mate"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4414591870",
+    "doi": "10.48550/arxiv.2509.09782",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2509.09782",
+    "published_iso": "2025-09-11",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W4414591870",
+    "year_month": "2025-09",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "How Robust Are Router-LLMs? Analysis of the Fragility of LLM Routing Capabilities",
+    "title_norm": "how robust are router llms analysis of the fragility of llm routing capabilities",
+    "abstract": "Large language model (LLM) routing has emerged as a crucial strategy for balancing computational costs with performance by dynamically assigning queries to the most appropriate model based on query complexity. Despite recent advances showing that preference-data-based routers can outperform traditional methods, current evaluation benchmarks remain limitedвЂ”they largely focus on general model capabilities while overlooking task-specific behaviors and critical concerns such as privacy, safety, and potential backdoor vulnerabilities introduced through preference data. In response, we propose the DSC benchmark: Diverse, simple, and categorized, an evaluation framework that categorizes router performance across a broad spectrum of query typesвЂ”including coding, translation, mathematics, human instructions, general knowledge, and LLM jailbreakingвЂ”and integrates privacy and safety assessments to reveal hidden risks. Our experiments on three preference-based routers and two commercial counterparts demonstrate that while these systems improve efficiency, they often make suboptimal, category-driven decisions; for instance, a BERT-based router directs all coding and mathematics queries to the most powerful LLMвЂ”even when simpler models would sufficeвЂ”while routing jailbreaking attempts to weaker models, thereby elevating safety risks.",
+    "year": 2026,
+    "venue": "Underline Science Inc.",
+    "authors": [
+      "Association for Computational Linguistics 2026",
+      "Zhijing Jin",
+      "Aly Kassem",
+      "Bernhard Schölkopf"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7155380957",
+    "doi": "10.48448/xq0j-sy78",
+    "arxiv_id": null,
+    "paper_url": "https://openalex.org/W7155380957",
+    "published_iso": "2026-03-06",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7155380957",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "PromRouter: Bridging the Quality-Latency Gap in Memory-Constrained LLM Serving",
+    "title_norm": "promrouter bridging the quality latency gap in memory constrained llm serving",
+    "abstract": "",
+    "year": 2026,
+    "venue": "",
+    "authors": [
+      "Yiheng Wang",
+      "Zhibo Chen",
+      "Hao Luo",
+      "Yizhe Li"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7171711700",
+    "doi": "10.23919/csiteccps00081.2026.00047",
+    "arxiv_id": null,
+    "paper_url": "https://openalex.org/W7171711700",
+    "published_iso": "2026-03-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "LLM router cheaper model quality guarantee"
+    ],
+    "paper_id": "openalex:W7171711700",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Prediction-Powered Inference with Model-Assisted Validation Labels",
+    "title_norm": "prediction powered inference with model assisted validation labels",
+    "abstract": "",
+    "year": 2026,
+    "venue": "",
+    "authors": [
+      "Anjana Yatawara"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7172081505",
+    "doi": "10.17605/osf.io/4tzhm",
+    "arxiv_id": null,
+    "paper_url": "https://openalex.org/W7172081505",
+    "published_iso": "2026-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": true,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W7172081505",
+    "year_month": "2026-01",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Do More Predictions Improve Statistical Inference? Filtered Prediction-Powered Inference",
+    "title_norm": "do more predictions improve statistical inference filtered prediction powered in",
+    "abstract": "Recent advances in artificial intelligence have enabled the generation of large-scale, low-cost predictions with increasingly high fidelity. As a result, the primary challenge in statistical inference has shifted from data scarcity to data reliability. Prediction-powered inference methods seek to exploit such predictions to improve efficiency when labeled data are limited. However, existing approaches implicitly adopt a use-all philosophy, under which incorporating more predictions is presumed to improve inference. When prediction quality is heterogeneous, this assumption can fail, and indiscriminate use of unlabeled data may dilute informative signals and degrade inferential accuracy. In this paper, we propose Filtered Prediction-Powered Inference (FPPI), a framework that selectively incorporates predictions by identifying a data-adaptive filtered region in which predictions are informative for inference. We show that this region can be consistently estimated under a margin condition, achieving fast rates of convergence. By restricting the prediction-powered correction to the estimated filtered region, FPPI adaptively mitigates the impact of biased or noisy predictions. We establish that FPPI attains strictly improved asymptotic efficiency compared with existing prediction-powered inference methods. Numerical studies and a real-data application to large language model evaluation demonstrate that FPPI substantially reduces reliance on expensive labels by selectively leveraging reliable predictions, yielding accurate inference even in the presence of heterogeneous prediction quality.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Shirong Xu",
+      "Will Wei Sun"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7128704716",
+    "doi": "10.48550/arxiv.2602.10464",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2602.10464",
+    "published_iso": "2026-02-11",
+    "oa_field": "Mathematics",
+    "semantic_recall": true,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W7128704716",
+    "year_month": "2026-02",
+    "retrieved_via": "openalex",
+    "relevance": "adjacent"
+  },
+  {
+    "title": "Power Analysis for Prediction-Powered Inference",
+    "title_norm": "power analysis for prediction powered inference",
+    "abstract": "Modern studies increasingly leverage outcomes predicted by machine learning and artificial intelligence (AI/ML) models, and recent work, such as prediction-powered inference (PPI), has developed valid downstream statistical inference procedures. However, classical power and sample size formulas do not readily account for these predictions. In this work, we tackle a simple yet practical question: given a new AI/ML model with high predictive power, how many labeled samples are needed to achieve a desired level of statistical power? We derive closed-form power formulas by characterizing the asymptotic variance of the PPI estimator and applying Wald test inversion to obtain the required labeled sample size. Our results cover widely used settings including two-sample comparisons and risk measures in 2x2 tables. We find that a useful rule of thumb is that the reduction in required labeled samples relative to classical designs scales roughly with the R2 between the predictions and the ground truth. Our analytical formulas are validated using Monte Carlo simulations, and we illustrate the framework in three contemporary biomedical applications spanning single-cell transcriptomics, clinical blood pressure measurement, and dermoscopy imaging. We provide our software as an R package and online calculators at https://github.com/yiqunchen/pppower.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Yiqun T Chen",
+      "Moran Guo",
+      "Shengy Li"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7139068573",
+    "doi": "10.48550/arxiv.2603.16041",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2603.16041",
+    "published_iso": "2026-03-17",
+    "oa_field": "Mathematics",
+    "semantic_recall": true,
+    "from_query": [
+      "prediction-powered inference few human labels model evaluation"
+    ],
+    "paper_id": "openalex:W7139068573",
+    "year_month": "2026-03",
+    "retrieved_via": "openalex",
+    "relevance": "core"
+  },
+  {
+    "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+    "title_norm": "conformal cascade distribution free accuracy guarantees for multi tier llm infer",
+    "abstract": "Large language model (LLM) cascades reduce inference cost by routing easy queries to a small model and deferring hard queries to a larger one. Production cascades govern this deferral through a confidence threshold, but LLM confidence scores are miscalibrated, the threshold must be tuned per model pair and per domain, and no setting yields a formal bound on cascade accuracy. We introduce \\textbf{Conformal Cascade} (CC), a multi-tier inference framework that uses conformal prediction set size as the deferral rule: accept when the calibrated set collapses to a single answer, defer otherwise. The procedure delivers a distribution-free, finite-sample accuracy guarantee. By a per-tier union bound, the prediction set at the accepting tier covers the correct answer with probability at least $1 - K\\alpha$ for any user-specified $\\alpha$; under a selection-preservation condition (consistent with, but not strictly implied by, our marginal coverage results), the bound tightens to $1 - \\alpha$. We further characterise expected cascade cost as an explicit function of $\\alpha$ and the calibration-set acceptance rate. Across 18 multiple-choice benchmarks spanning science, medicine, commonsense, and standardized exams, evaluated on two-tier cascades drawn from four open-weight model families, CC strictly improves over the strongest calibration-tuned heuristic cascade on the majority of family--benchmark pairs, with the largest gains on reasoning-heavy benchmarks where majority vote is unreliable; on easier benchmarks the cascade commits the vast majority of queries to the small model at no accuracy cost. Extension to open-ended generation requires an answer-clustering step that we leave for future work. The method requires no model training and only black-box API access.",
+    "tldr": "Conformal Cascade (CC), a multi-tier inference framework that uses conformal prediction set size as the deferral rule: accept when the calibrated set collapses to a single answer, defer otherwise, delivers a distribution-free, finite-sample accuracy guarantee.",
+    "year": 2026,
+    "venue": "arXiv.org",
+    "publication_types": [
+      "JournalArticle"
+    ],
+    "authors": [
+      "Yi-Fan Dou",
+      "Shikan Lian",
+      "Shibo Li"
+    ],
+    "citations": 1,
+    "source": "semanticscholar",
+    "source_id": "50e40d53a189b47e84195559eee26cd7e20003cd",
+    "paper_id": "dblp:journals/corr/abs-2607-25018",
+    "doi": "10.48550/arXiv.2607.25018",
+    "arxiv_id": "2607.25018",
+    "dblp_key": "journals/corr/abs-2607-25018",
+    "paper_url": "https://www.semanticscholar.org/paper/50e40d53a189b47e84195559eee26cd7e20003cd",
+    "published_iso": "2026-07-27",
+    "retrieved_via": "host_web",
+    "host_why": "Jul 2026; distribution-free accuracy guarantee for accept-or-defer cheap-tier decisions on multiple-choice (classification-shaped) tasks — closest frontier mechanism to a guaranteed swap gate",
+    "relevance": "core"
+  },
+  {
+    "title": "C3PO: Optimized Large Language Model Cascades with Probabilistic Cost Constraints for Reasoning",
+    "title_norm": "c3po optimized large language model cascades with probabilistic cost constraints",
+    "abstract": "Large language models (LLMs) have achieved impressive results on complex reasoning tasks, but their high inference cost remains a major barrier to real-world deployment. A promising solution is to use cascaded inference, where small, cheap models handle easy queries, and only the hardest examples are escalated to more powerful models. However, existing cascade methods typically rely on supervised training with labeled data, offer no theoretical generalization guarantees, and provide limited control over test-time computational cost. We introduce C3PO (Cost Controlled Cascaded Prediction Optimization), a self-supervised framework for optimizing LLM cascades under probabilistic cost constraints. By focusing on minimizing regret with respect to the most powerful model (MPM), C3PO avoids the need for labeled data by constructing a cascade using only unlabeled model outputs. It leverages conformal prediction to bound the probability that inference cost exceeds a user-specified budget. We provide theoretical guarantees on both cost control and generalization error, and show that our optimization procedure is effective even with small calibration sets. Empirically, C3PO achieves state-of-the-art performance across a diverse set of reasoning benchmarks including GSM8K, MATH-500, BigBench-Hard and AIME, outperforming strong LLM cascading baselines in both accuracy and cost-efficiency. Our results demonstrate that principled, label-free cascade optimization can enable scalable LLM deployment.",
+    "year": 2025,
+    "venue": "neural information processing systems",
+    "authors": [
+      "Antonios Valkanas",
+      "Soumyasundar Pal",
+      "Pavel Rumiantsev",
+      "Yingxue Zhang",
+      "Mark Coates"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4416159353",
+    "doi": "10.52202/085713-2832",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2511.07396",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "Nov 2025 (NeurIPS 2025); label-free cascade built from unlabeled outputs, using regret relative to the strongest model plus conformal cost bounds — matches using the incumbent model's past answers as reference",
+    "relevance": "core",
+    "paper_id": "openalex:W4416159353"
+  },
+  {
+    "title": "Prediction-Powered Inference Across Many Tasks for AI Evaluation & Social Science Research",
+    "title_norm": "prediction powered inference across many tasks for ai evaluation social science ",
+    "abstract": "Many applications require statistically valid inference across many related tasks, while using only a handful of high-quality labels per hypothesis. In AI evaluation, these tasks may correspond to model behaviors across prompts, subgroups, or hypotheses; in social science surveys, they may correspond to related questions, populations, or measurement conditions. Prediction-powered inference (PPI) uses abundant but inexpensive proxy measurements to improve inference from limited, ground-truth labels, but commonly used methods treat tasks independently and therefore fail to exploit shared structure across related tasks. This limitation is especially important in settings where only a small number of labels are available per task. To address this issue, we introduce a multi-task prediction-powered inference framework that uses labeled data from related tasks to improve power while preserving task-specific inference. Our methods exploit the shared structure in the proxy-ground-truth relationship through cross-task recalibration, while retaining within-task rectification and power tuning to construct accurate point estimates and confidence intervals. We prove that efficiency gains beyond power-tuned PPI are only possible when the proxy-ground-truth relationship contains nonlinear structure; affine cross-task recalibrations are asymptotically equivalent to using the original proxy. We complement our theoretical findings with experiments on synthetic and semi-synthetic datasets, as well as a case study auditing language models on election-related information during the 2024 U.S. presidential election. Using a large human-annotation study, we show that cross-task recalibration can substantially reduce confidence interval widths when labels are scarce.",
+    "year": 2026,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Nicolas Emmenegger",
+      "Ellery Stahler",
+      "Chara Podimata"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W7162773354",
+    "doi": "10.48550/arxiv.2605.29249",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2605.29249",
+    "published_iso": "2026-05-28",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "May 2026 (ICML 2026); multi-task PPI that pools scarce human labels across many tasks — directly relevant to certifying many migrated call sites at once with few labels per site",
+    "relevance": "core",
+    "paper_id": "openalex:W7162773354"
+  },
+  {
+    "title": "Conformal Arbitrage: Risk-Controlled Balancing of Competing Objectives in Language Models",
+    "title_norm": "conformal arbitrage risk controlled balancing of competing objectives in languag",
+    "abstract": "Modern language model deployments must often balance competing objectives, for example, helpfulness versus harmlessness, cost versus accuracy, and reward versus safety. We introduce Conformal Arbitrage, a post hoc framework that learns a data driven threshold to mediate between a Primary model optimized for a primary objective and a more conservative Guardian which could be another model or a human domain expert aligned with a guardrail objective. The threshold is calibrated with conformal risk control, yielding finite sample, distribution free guarantees that the long run frequency of undesirable events, such as factual errors or safety violations, does not exceed a user specified quota. Because Conformal Arbitrage operates wholly at the API level, without requiring access to model logits or updating model weights, it complements weight based alignment techniques and integrates seamlessly with existing cost aware cascades. Empirically, Conformal Arbitrage traces an efficient frontier, allowing users to define an acceptable performance level for one objective while maximizing utility in another. We observe that our method outperforms, in terms of accuracy, cost matched random routing between models. These properties make Conformal Arbitrage a practical, theoretically grounded tool for trustworthy and economical deployment of large language models across a broad range of potentially competing objectives.",
+    "year": 2025,
+    "venue": "neural information processing systems",
+    "authors": [
+      "William Overman",
+      "Mohsen Bayati"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4414893795",
+    "doi": "10.52202/085713-2364",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2506.00911",
+    "published_iso": "2025-01-01",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "Jun 2025 (NeurIPS 2025); conformal-risk-controlled threshold between a primary and a fallback model with finite-sample guarantees — template for a risk-controlled cheap/incumbent switch",
+    "relevance": "core",
+    "paper_id": "openalex:W4414893795"
+  },
+  {
+    "title": "SMART: Automatically Scaling Down Language Models with Accuracy Guarantees for Reduced Processing Fees",
+    "title_norm": "smart automatically scaling down language models with accuracy guarantees for re",
+    "abstract": "The advancement of Large Language Models (LLMs) has significantly boosted performance in natural language processing (NLP) tasks. However, the deployment of high-performance LLMs incurs substantial costs, primarily due to the increased number of parameters aimed at enhancing model performance. This has made the use of state-of-the-art LLMs more expensive for end-users. AI service providers, such as OpenAI and Anthropic, often offer multiple versions of LLMs with varying prices and performance. However, end-users still face challenges in choosing the appropriate LLM for their tasks that balance result quality with cost. We introduce SMART, Scaling Models Adaptively for Reduced Token Fees, a novel LLM framework designed to minimize the inference costs of NLP tasks while ensuring sufficient result quality. It enables users to specify an accuracy constraint in terms of the equivalence of outputs to those of the most powerful LLM. SMART then generates results that deviate from the outputs of this LLM only with a probability below a user-defined threshold. SMART employs a profiling phase that evaluates the performance of multiple LLMs to identify those that meet the user-defined accuracy level. SMART optimizes the tradeoff between profiling overheads and the anticipated cost savings resulting from profiling. Moreover, our approach significantly reduces inference costs by strategically leveraging a mix of LLMs. Our experiments on three real-world datasets show that, based on OpenAI models, SMART achieves significant cost savings, up to 25.6x in comparison to GPT-4.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Saehan Jo",
+      "Immanuel Trummer"
+    ],
+    "citations": 0,
+    "source": "openalex",
+    "source_id": "W4393111369",
+    "doi": "10.48550/arxiv.2403.13835",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2403.13835",
+    "published_iso": "2024-03-11",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "2024; direct precedent baseline — picks the cheapest LLM whose accuracy against the reference best LLM meets a tolerance, using binomial confidence intervals; the swap gate must beat it",
+    "relevance": "adjacent",
+    "paper_id": "openalex:W4393111369"
+  },
+  {
+    "title": "Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement",
+    "title_norm": "trust or escalate llm judges with provable guarantees for human agreement",
+    "abstract": "We present a principled approach to provide LLM-based evaluation with a rigorous guarantee of human agreement. We first propose that a reliable evaluation method should not uncritically rely on model preferences for pairwise evaluation, but rather assess the confidence of judge models and selectively decide when to trust its judgement. We then show that under this selective evaluation framework, human agreement can be provably guaranteed -- such that the model evaluation aligns with that of humans to a user-specified agreement level. As part of our framework, we also introduce Simulated Annotators, a novel confidence estimation method that significantly improves judge calibration and thus enables high coverage of evaluated instances. Finally, we propose Cascaded Selective Evaluation, where we use cheaper models as initial judges and escalate to stronger models only when necessary -- again, while still providing a provable guarantee of human agreement. Experimental results show that Cascaded Selective Evaluation guarantees strong alignment with humans, far beyond what LLM judges could achieve without selective evaluation. For example, on a subset of Chatbot Arena where GPT-4 almost never achieves 80% human agreement, our method, even while employing substantially cost-effective models such as Mistral-7B, guarantees over 80% human agreement with almost 80% test coverage.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Jaehun Jung",
+      "Faeze Brahman",
+      "Yejin Choi"
+    ],
+    "citations": 3,
+    "source": "openalex",
+    "source_id": "W4402466848",
+    "doi": "10.48550/arxiv.2407.18370",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2407.18370",
+    "published_iso": "2024-07-25",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "2024/ICLR 2025; cascaded selective evaluation with a provable human-agreement guarantee via fixed-sequence testing — the baseline for risk control on cheap-then-escalate decisions",
+    "relevance": "adjacent",
+    "paper_id": "openalex:W4402466848"
+  },
+  {
+    "title": "Active Statistical Inference",
+    "title_norm": "active statistical inference",
+    "abstract": "Inspired by the concept of active learning, we propose active inference$\\unicode{x2013}$a methodology for statistical inference with machine-learning-assisted data collection. Assuming a budget on the number of labels that can be collected, the methodology uses a machine learning model to identify which data points would be most beneficial to label, thus effectively utilizing the budget. It operates on a simple yet powerful intuition: prioritize the collection of labels for data points where the model exhibits uncertainty, and rely on the model's predictions where it is confident. Active inference constructs provably valid confidence intervals and hypothesis tests while leveraging any black-box machine learning model and handling any data distribution. The key point is that it achieves the same level of accuracy with far fewer samples than existing baselines relying on non-adaptively-collected data. This means that for the same number of collected samples, active inference enables smaller confidence intervals and more powerful p-values. We evaluate active inference on datasets from public opinion research, census analysis, and proteomics.",
+    "year": 2024,
+    "venue": "arXiv (Cornell University)",
+    "authors": [
+      "Tijana Zrnic",
+      "Emmanuel J. Candès"
+    ],
+    "citations": 1,
+    "source": "openalex",
+    "source_id": "W4392539015",
+    "doi": "10.48550/arxiv.2403.03208",
+    "arxiv_id": null,
+    "paper_url": "https://arxiv.org/pdf/2403.03208",
+    "published_iso": "2024-03-05",
+    "oa_field": "Computer Science",
+    "semantic_recall": false,
+    "retrieved_via": "host_web",
+    "host_why": "2024; foundational method for budgeted, uncertainty-guided label collection with valid CIs — the backbone for choosing which production calls get human labels",
+    "relevance": "adjacent",
+    "paper_id": "openalex:W4392539015"
+  }
+]

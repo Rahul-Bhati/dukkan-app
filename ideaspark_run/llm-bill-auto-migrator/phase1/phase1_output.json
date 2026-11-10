@@ -1,0 +1,521 @@
+{
+  "lit_grounding_mode": "real",
+  "fulltext_degraded": false,
+  "retrieval_caveat": "Phase 0 grounding is connector-degraded: only OpenAlex returned records (arXiv failed on a local SSL error, Semantic Scholar timed out, OpenReview unavailable); 7 host-nominated papers were verified and admitted (rows retrieved_via=host_web). The 0-2y frontier may be under-sampled, so 2-4y parametric nodes in method_lineage carry extra regression risk and Phase 2/3 collision checks should treat 'no retrieved paper does X' as weaker evidence than usual. The TypeSafe AI Jev 'System One' model named in intake is a host-described product with no retrieved paper; it is treated as a deployment target, never as citable prior art.",
+
+  "intake": {
+    "domain": "LLM inference-cost reduction by substituting a cheaper model for an incumbent frontier LLM on classification-shaped production calls, with a statistical quality guarantee (ML systems x distribution-free / prediction-powered statistical inference)",
+    "venue": "inferred: an ML-systems or data-systems venue (MLSys, VLDB/SIGMOD, where the anchor BARGAIN appeared) or NeurIPS/ICML for the statistical core",
+    "time": "inferred: ~5 months (factory-default campaign horizon)",
+    "data": [
+      "production request logs of classification-shaped LLM calls with the incumbent frontier model's past answers (free, abundant)",
+      "a limited budget of human gold labels on sampled production calls",
+      "public stand-ins for offline evaluation: the cascade/routing benchmarks used by the retrieved leaves (e.g., RouterBench, MMLU, GSM8K, TruthfulQA, and BARGAIN's real-world classification datasets such as Court and Reviews) and public text-classification sets with human labels"
+    ],
+    "compute": "80GB-class GPUs (A100/H100), up to 8 concurrent (one node), ≈150 GPU-days over 5 months, plus ~$10k inference/API budget for the full falsification campaign",
+    "expertise": "inferred: solo founder-developer with applied ML and production-engineering skills; statistics depth unknown",
+    "preference": "both",
+    "baseline": "inferred: BARGAIN (openalex:W7109229324) and SMART (openalex:W4393111369) for incumbent-agreement guarantees; Conformal Cascade (dblp:journals/corr/abs-2607-25018) and Conformal LLM Routing (openalex:W7166878141) for ground-truth-calibrated guarantees; PPI++ / Active Statistical Inference (openalex:W4392539015) for label-efficient estimation; a plain gold-label binomial/Hoeffding acceptance test as the naive floor",
+    "user_direction": "build an evaluation set from production traffic using the incumbent frontier model's past answers plus limited human labels, and safely migrate those calls to a much cheaper constrained decision model (typed classifier such as a System-One model, or a small/distilled model) with a statistical guarantee that task accuracy does not drop beyond a tolerance, gating the swap in CI",
+    "excluded_direction": "n_a",
+    "limitation": "inferred: classification-shaped calls are served by an expensive frontier LLM; swapping them to a cheap typed/small model risks a silent accuracy loss, and there is no trustworthy, label-cheap gate that certifies the swap before (and after) it ships",
+    "contribution_type": "method",
+    "_inferred_fields": ["domain", "venue", "time", "data", "compute", "expertise", "preference", "baseline", "limitation", "contribution_type"],
+    "_compute_source": "factory default (no compute stated in the query; no IDEASPARK_DEFAULT_COMPUTE standing default was passed by the host)"
+  },
+
+  "bottleneck_statement": "Structural property: a substitution decision needs the paired accuracy change (candidate minus incumbent, against ground truth) on the traffic the call site will receive after the swap, but every certificate the frontier provides measures a different quantity on a different population. Agreement-type certificates — BARGAIN (openalex:W7109229324), SMART (openalex:W4393111369), and C3PO (openalex:W4416159353) — bound disagreement with the expensive model's outputs; because the incumbent's own errors are counted as candidate failures, the implied bound on the true accuracy drop is loose by up to the incumbent's error mass, so a candidate that is as accurate as the incumbent but errs on different items is rejected whenever that mass exceeds the tolerance, and BARGAIN's guarantee additionally covers only the finite dataset it samples from and assumes log-probability proxy scores. Ground-truth-type certificates — Conformal Cascade (dblp:journals/corr/abs-2607-25018) and Conformal LLM Routing (openalex:W7166878141) — avoid that bias but must buy a gold-labelled calibration set per call site whose size grows roughly as 1/epsilon^2 at the small tolerances practitioners want, require a finite, given answer set, and rest on exchangeability between calibration and deployment queries that neither paper evaluates under shift. The prediction-powered leaves that combine cheap proxies with few gold labels (openalex:W4414588259, openalex:W7162773354) show proxy evidence helps only above a proxy–truth correlation threshold, and they analyse single-population quantities in which the proxy is not simultaneously one arm of the comparison — which is exactly the incumbent's role here. The failure therefore bites twice in the primary instance (CI-gated migration of LLM call sites to a typed decision model): before the swap, the abundant free evidence (incumbent logs) cannot be converted into a valid, non-vacuous bound on the accuracy change without either the incumbent-error bias or a per-site gold-label bill that can rival the savings; after the swap, the incumbent stops producing outputs, so the very reference the certificate was computed against disappears and nothing in the machinery detects when post-swap traffic leaves the certified regime. Several distinct cures could address this (different estimands, different label-allocation rules, different validity notions for non-exchangeable traffic, different reference designs), and Phase 1 does not pick among them.",
+
+  "closest_adjacent": [
+    {
+      "paper_id": "openalex:W7109229324",
+      "is_anchor": true,
+      "summary_and_residue": "BARGAIN selects a proxy/oracle cascade threshold with a finite-sample guarantee by testing each candidate threshold, in descending order, with a variance-adaptive anytime-valid hypothesis test on oracle-labelled samples drawn adaptively from the records above that threshold, stopping at the first threshold estimated to miss the target (eta = 0). Its quality target is agreement with the oracle LLM ('outputs should match the oracle 90% of the time'), so oracle errors are charged to the proxy; its guarantee is over the finite dataset D it samples from rather than over future traffic; it assumes proxy scores such as log-probabilities are available; and it keeps the oracle in the loop for every record below the threshold — so it neither certifies a ground-truth accuracy change nor says anything once the oracle is switched off."
+    },
+    {
+      "paper_id": "dblp:journals/corr/abs-2607-25018",
+      "is_anchor": false,
+      "summary_and_residue": "Conformal Cascade replaces confidence-threshold deferral with per-tier split-conformal prediction sets built from a self-consistency frequency score, accepting only singleton sets and composing per-tier coverage into a cascade error bound of K*alpha (alpha under a selection-preservation assumption it cannot derive). It needs a gold-labelled calibration set per tier, a finite extractable answer set (open-ended outputs via answer clustering are left to future work), N repeated samples per query at each tier, and exchangeability between calibration and deployment — so per-call-site label cost, answer-space induction from free-text logs, and post-deployment shift are all outside its guarantee."
+    },
+    {
+      "paper_id": "openalex:W4393111369",
+      "is_anchor": false,
+      "summary_and_residue": "SMART profiles candidate LLMs against the most powerful LLM with binomial-style confidence intervals and picks a cost-minimising mix whose outputs deviate from the reference model's only with probability below a user threshold, trading profiling cost against expected savings. Its guarantee is equivalence to the reference model's outputs, not to ground truth, so incumbent errors are indistinguishable from candidate errors, and it is evaluated on three datasets with OpenAI models only [residue is abstract-level: no fulltext in cache]."
+    },
+    {
+      "paper_id": "openalex:W7166878141",
+      "is_anchor": false,
+      "summary_and_residue": "Conformal LLM Routing trains a logistic-regression safety gate on text embeddings and calibrates its threshold with Clopper-Pearson so that the cheap model's failure rate among routed queries stays below alpha with probability 1-delta, requiring binary correctness labels for calibration. The guarantee holds only under exchangeability of calibration and test data, is shown for one model pair (Mixtral-8x7B vs GPT-4) on GSM8K and MMLU, and does not address shift or the cost of obtaining correctness labels per deployment."
+    },
+    {
+      "paper_id": "openalex:W4414588259",
+      "is_anchor": false,
+      "summary_and_residue": "No Free Lunch gives an exact non-asymptotic characterisation of when PPI++ (proxy predictions plus few gold labels) beats gold-only mean estimation, as a proxy-truth correlation threshold that depends on the labelled sample size. The analysis covers mean estimation under Gaussian simplifications for a single population; it does not cover a paired comparison in which the proxy (the incumbent's answer) is itself one of the two systems being compared, so whether incumbent logs reduce the gold-label cost of a substitution certificate is left open."
+    },
+    {
+      "paper_id": "openalex:W4416159353",
+      "is_anchor": false,
+      "summary_and_residue": "C3PO learns cascade exit rules self-supervised from the consistency between a cheap model and the most powerful model (MPM) on a small unlabeled pool, with conformal bounds on inference cost and PAC-Bayesian generalization bounds on the learned rule. Its accuracy notion is the gap to the MPM rather than to ground truth and its formal guarantee is on cost, not on accuracy, so it offers no certificate on the accuracy change of a swap."
+    },
+    {
+      "paper_id": "openalex:W7148297671",
+      "is_anchor": false,
+      "summary_and_residue": "ParetoBandit enforces a per-request dollar ceiling in closed loop and adapts routing to price and quality drift with a forgetting-rate bandit. It needs per-request reward feedback, which a fully migrated call site no longer produces once the expensive model is off, and it provides no statistical certificate on accuracy, only adaptive behaviour evaluated on 1,824 prompts with a three-model portfolio [residue is abstract-level: no fulltext in cache]."
+    }
+  ],
+
+  "anchor_rule_pinning": {
+    "paper_id": "openalex:W7109229324",
+    "method_chars": 28583,
+    "pinned": [
+      "Reference/target: 'users provide an accuracy target, e.g., outputs should match the oracle 90% of the time' — quality is agreement with the oracle LLM, guaranteed 'with probability at least 1-delta'.",
+      "Proxy score: 'Proxy scores are provided as part of prediction, e.g., log-probability of LLM outputs'; the proxy answer is used 'for records whose proxy score is more than rho'.",
+      "Selection predicate (PT queries): 'E^BARGAIN(S,T,rho,alpha) = T(T, S_O^rho, alpha)', computed over 'S_O^rho = {I[O(x)=1]; x in S^rho}' where S^rho is 'the subset of S with proxy scores more than rho'.",
+      "Selection rule: 'rho* is the smallest candidate threshold such that both itself and all larger thresholds are estimated to meet the target' (eta = 0: 'in the rest of this paper, we set eta=0').",
+      "Uniform variant (Alg. 1): iterate C in descending order; 'if E^BARGAIN(S,T,rho,delta)=0 then return C[i-1]'.",
+      "Adaptive variant (Alg. 2): 'Sample a record uniformly from D^rho and add to S' while E^BARGAIN = 0; 'if Out of sampling budget then return C_M[i-1]'.",
+      "Candidate set: 'C_M = {S(x_i); i = floor(j n / M), j in [M]}' — every j/M-th percentile of the proxy scores of D.",
+      "Sampling: 'BARGAIN P-A uses sampling without replacement' and 'can reuse the oracle labels from samples from previous iterations'.",
+      "Guarantee: 'P_{S~D}(P_D(rho_S) < T) <= delta' (Lemma 3.6), relying on the anytime validity of the test from Waudby-Smith and Ramdas (2024) plus a union bound across thresholds."
+    ],
+    "unpinned": [
+      "The exact hypothesis test T of Lemma 2.1 (betting/confidence-sequence statistic, betting strategy, how the observed mean and variance enter) — Lemma 2.1 lives in the background section, not in the cached method text.",
+      "The AT-query (multiclass accuracy target) algorithm of Section 4 — the variant directly relevant to classification-shaped call migration — is not in the cache; only the PT-query algorithm is.",
+      "The value of M (candidate-set resolution) used in experiments (deferred to Appendix E).",
+      "The oracle sampling budget k and default delta used per dataset.",
+      "Tie-breaking among records with equal proxy scores, and the without-replacement estimator modification (Appx. B.3.1) and label-reuse rule details (Appx. B.3.2).",
+      "How a proxy score is defined when the cheap model exposes no log-probabilities (or, conversely, how a natively calibrated probability from a typed decision model would be used)."
+    ],
+    "sufficient_for_faithful_generator": false,
+    "why": "A downstream re-implementation of BARGAIN as the anchor baseline would have to guess the Lemma 2.1 test statistic, the entire AT-query (accuracy-target) procedure, M, the oracle budget, and tie-breaking; any claimed win over BARGAIN at one guessed setting is indistinguishable from a win manufactured by that guess."
+  },
+
+  "phase2_hard_constraints": [
+    "Any claim of improvement over BARGAIN (openalex:W7109229324) must be stated across a grid over its unpinned parameters — at minimum M in a range (e.g., 10 to 100 percentiles), oracle/label budget (several values spanning 1x to 10x the candidate's label budget), delta in {0.05, 0.1}, and both the uniform (P-U) and adaptive (P-A) variants — never at a single assumed setting.",
+    "If the AT-query (accuracy-target) variant of BARGAIN is used as the baseline, it must either be fetched verbatim from the paper's Section 4 before Phase 2.3, or be explicitly labelled as a reconstruction whose test statistic and selection rule are swept rather than fixed."
+  ],
+
+  "what_phase_0_did_not_address": [
+    "(additive; site: frontier leaves BARGAIN openalex:W7109229324, Conformal Cascade dblp:journals/corr/abs-2607-25018, No Free Lunch openalex:W4414588259) No retrieved leaf produces a valid, non-vacuous bound on the ground-truth accuracy CHANGE caused by substituting a candidate for the incumbent while drawing most of its evidence from the incumbent's free logged outputs: agreement certificates over-charge the candidate by the incumbent's own error mass, ground-truth certificates ignore the logs and pay gold labels at the full 1/epsilon^2 rate, and the proxy-plus-gold leaves analyse single-population estimands in which the proxy is not also a comparison arm — stakes: a practitioner with a 1–2 point tolerance either rejects swaps that are actually safe whenever the frontier model's own error on noisy business labels exceeds the tolerance (forfeiting the savings), or pays on the order of thousands of gold labels per call site (Hoeffding at epsilon=0.02, delta=0.05 needs roughly 3.7k), which for low-volume call sites exceeds the API savings the swap was meant to capture.",
+    "(additive; site: frontier leaves Conformal Cascade dblp:journals/corr/abs-2607-25018, Conformal LLM Routing openalex:W7166878141, BARGAIN openalex:W7109229324, ParetoBandit openalex:W7148297671) No retrieved leaf keeps a substitution guarantee meaningful on the traffic a call site receives after the swap: the conformal leaves assume calibration/deployment exchangeability and do not evaluate shift, BARGAIN's guarantee covers only the finite dataset it sampled, and the drift-adaptive router needs per-request feedback with no certificate — and the structural property is that any migration which retires the reference model also retires the free signal the certificate was measured against — stakes: silent post-migration accuracy loss when prompts, upstream data, or user mix shift (the CI gate passes once and never re-fires), and teams must either keep paying for shadow incumbent calls, eroding the savings, or operate blind on decisions such as moderation, routing, or triage.",
+    "(additive; site: frontier leaf Conformal Cascade dblp:journals/corr/abs-2607-25018, which states open-ended extension via answer clustering is future work; BARGAIN assumes a given class set) No retrieved leaf certifies a substitution when the call's answer space is not declared but must be induced from the incumbent's logged free-text outputs, so errors in the induced option set (missing long-tail labels, merged or split categories, an implicit 'other') sit entirely outside the guarantee — stakes: typed decision models that accept a Choice over a fixed option set (≤255 options) cannot even be evaluated until an option set exists, and a mis-induced set lets a certificate pass while the migrated call silently changes behaviour on exactly the rare categories that motivated using a frontier model.",
+    "(subtractive; shared ancestor n0 'acceptance testing on a held-out sample of the target population', inherited by every certificate-bearing leaf: BARGAIN, Conformal Cascade, Conformal LLM Routing, Conformal Arbitrage openalex:W4414893795, Semi-Supervised Risk Control openalex:W4405469767) No retrieved paper tests whether a substitution certificate must assume that the population it certifies is available, or exchangeable with the calibration sample, at certification time, rather than assuming it — stakes: intellectual — the published guarantees of this whole line are statements about a calibration population, and if production deployments routinely violate the assumption (logs always precede the swap), the reported coverage/accuracy numbers do not transfer to the setting they are cited for; practitioner — CI gates built on them give false assurance.",
+    "(subtractive; shared ancestor n5 'proxy/oracle query processing', inherited by SUPG, BARGAIN, SMART openalex:W4393111369, C3PO openalex:W4416159353) No retrieved paper tests whether treating the expensive model's outputs as the reference (the 'oracle') is necessary rather than assumed when the decision at stake is to retire that very model — stakes: intellectual — cost-quality results reported as 'X% savings at Y% quality' in this line are relative to a reference whose own error is never measured, so conclusions about which cheap model is 'safe' may be artefacts of the reference; practitioner — a swap that would actually raise accuracy is scored as a regression and blocked."
+  ],
+
+  "method_lineage": {
+    "line": "certifying that a cheaper model or policy can replace (wholly or per query) an expensive model on a classification workload within a user-specified quality tolerance, using a limited labelling budget",
+    "nodes": [
+      {
+        "node_id": "n0",
+        "method": "Acceptance testing of a replacement classifier on a held-out labelled sample (binomial / Hoeffding error bounds; McNemar paired test; non-inferiority margin testing)",
+        "move": "root: certify a replacement by estimating its error (or paired error difference) on an i.i.d. labelled sample of the target population",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "label cost scales as 1/epsilon^2 and the certificate is about the sampled population at one point in time",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n0a",
+        "method": "Model-assisted survey estimation / difference estimators (Cassel, Särndal & Wretman 1976; Särndal et al.)",
+        "move": "use cheap auxiliary predictions on the whole population and correct their bias with a small measured sample",
+        "parent": "n0",
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "efficiency depends on auxiliary–truth relationship; framed for survey totals, not ML model comparison",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n1",
+        "method": "Classifier cascades (Viola & Jones 2001)",
+        "move": "per-input deferral: a cheap stage resolves easy inputs and passes the rest to an expensive stage, instead of wholesale replacement",
+        "parent": "n0",
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "stage thresholds hand-tuned; no guarantee on end-to-end error",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n2",
+        "method": "Model compression (Buciluǎ, Caruana & Niculescu-Mizil 2006)",
+        "move": "wholesale replacement: train a small model on the large model's outputs over unlabelled data",
+        "parent": "n0",
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "no certificate that the student matches the teacher (or ground truth) on the deployment distribution",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n2b",
+        "method": "Knowledge distillation with soft targets (Hinton, Vinyals & Dean 2015)",
+        "move": "match the teacher's softened output distribution rather than hard labels",
+        "parent": "n2",
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "high",
+        "residual_problem": "fidelity measured on benchmarks; teacher errors are inherited; no deployment-time guarantee",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n3",
+        "method": "Split / inductive conformal prediction (Papadopoulos et al. 2002; Vovk, Gammerman & Shafer 2005)",
+        "move": "finite-sample, distribution-free coverage from an exchangeable calibration set, for any underlying model",
+        "parent": "n0",
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "validity rests on exchangeability between calibration and test points; needs gold labels for calibration",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n4",
+        "method": "Selective classification with guaranteed risk (El-Yaniv & Wiener 2010; Geifman & El-Yaniv 2017)",
+        "move": "calibrate an abstain threshold so the risk on accepted inputs is bounded w.h.p.",
+        "parent": "n3",
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "high",
+        "residual_problem": "single model; abstained inputs are simply dropped, not routed; labelled calibration required",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n5",
+        "method": "Proxy-model query processing (NoScope, Kang et al. 2017; probabilistic predicates, Lu et al. 2018)",
+        "move": "treat the expensive model as the 'oracle' and let a cheap proxy filter records above a score threshold",
+        "parent": "n1",
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "high",
+        "residual_problem": "no guarantee on meeting a quality target relative to the oracle; frequently misses targets",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n6",
+        "method": "SUPG (Kang et al. 2020)",
+        "move": "precision/recall-target proxy cascades with CLT-based (asymptotic) guarantees and importance sampling by proxy score",
+        "parent": "n5",
+        "provenance": "parametric",
+        "age_band": "4-8y",
+        "confidence": "high",
+        "residual_problem": "guarantee only asymptotic; sampling ignores the target; quality still relative to the oracle",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n7",
+        "method": "Learn-then-Test / conformal risk control (Angelopoulos, Bates et al. 2021–2022)",
+        "move": "distribution-free control of arbitrary risks over a family of thresholds via multiple testing",
+        "parent": "n3",
+        "provenance": "parametric",
+        "age_band": "4-8y",
+        "confidence": "high",
+        "residual_problem": "still requires an exchangeable, gold-labelled calibration set",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n8",
+        "method": "Anytime-valid betting confidence sequences for bounded means (Waudby-Smith & Ramdas 2020/2024)",
+        "move": "variance-adaptive mean bounds that stay valid under optional stopping and adaptive sampling",
+        "parent": "n0",
+        "provenance": "parametric",
+        "age_band": "4-8y",
+        "confidence": "high",
+        "residual_problem": "a tool, not a certificate design: says nothing about which quantity or population to certify",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n9",
+        "method": "LLM cascades with learned scorers (FrugalGPT, Chen et al. 2023)",
+        "move": "port classifier cascades to LLM APIs with a learned answer-reliability scorer",
+        "parent": "n1",
+        "provenance": "parametric",
+        "age_band": "2-4y",
+        "confidence": "medium",
+        "residual_problem": "no formal accuracy guarantee; scorer needs labelled data per task",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n10",
+        "method": "Prediction-powered inference and PPI++ (Angelopoulos et al. 2023)",
+        "move": "valid confidence intervals from abundant ML predictions plus a small gold sample via a bias rectifier, with power tuning",
+        "parent": "n0a",
+        "provenance": "parametric",
+        "age_band": "2-4y",
+        "confidence": "medium",
+        "residual_problem": "gains depend on proxy quality; framed for single-population estimands, not for comparing two systems where one is the proxy",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n11",
+        "method": "SMART",
+        "move": "profile cheaper LLMs against the most powerful LLM with confidence intervals and pick the cheapest mix meeting an output-equivalence tolerance",
+        "parent": "n9",
+        "provenance": "retrieved:openalex:W4393111369",
+        "age_band": "2-4y",
+        "confidence": "high",
+        "residual_problem": "equivalence to the reference model's outputs, not ground truth; three datasets, OpenAI models only",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n12",
+        "method": "Active Statistical Inference",
+        "move": "spend the label budget where the model is uncertain, with provably valid intervals for any black-box model",
+        "parent": "n10",
+        "provenance": "retrieved:openalex:W4392539015",
+        "age_band": "2-4y",
+        "confidence": "high",
+        "residual_problem": "single-population estimands; misspecified budgets and poorly calibrated uncertainty not tested",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "n13",
+        "method": "Trust or Escalate (Cascaded Selective Evaluation)",
+        "move": "fixed-sequence testing to guarantee human agreement of cheap-then-escalate LLM judges",
+        "parent": "n7",
+        "provenance": "retrieved:openalex:W4402466848",
+        "age_band": "2-4y",
+        "confidence": "high",
+        "residual_problem": "guarantee bought with reduced coverage (~80% at 80% agreement); human-labelled calibration; exchangeability",
+        "is_frontier_leaf": false
+      },
+      {
+        "node_id": "L1",
+        "method": "BARGAIN (Cut Costs, Not Accuracy)",
+        "move": "replace SUPG's CLT estimates with anytime-valid variance-adaptive tests, monotone threshold selection (eta=0) and target-aware adaptive sampling, giving finite-sample guarantees",
+        "parent": "n6",
+        "provenance": "retrieved:openalex:W7109229324",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "certifies agreement with the oracle on the finite dataset sampled, assumes log-probability proxy scores, keeps the oracle in the loop; ground-truth accuracy change and post-swap traffic are uncovered",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L2",
+        "method": "Conformal Cascade",
+        "move": "use per-tier conformal prediction-set size (from self-consistency frequencies) as the deferral signal, with a K*alpha cascade error bound and closed-form cost",
+        "parent": "n7",
+        "provenance": "retrieved:dblp:journals/corr/abs-2607-25018",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "needs gold-labelled calibration per tier, a finite given answer set, and calibration/deployment exchangeability",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L3",
+        "method": "Conformal LLM Routing",
+        "move": "embedding-based safety gate with Clopper-Pearson calibration bounding the cheap model's violation rate among routed queries",
+        "parent": "n7",
+        "provenance": "retrieved:openalex:W7166878141",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "exchangeability assumed, shift not evaluated; binary correctness labels required; one model pair",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L4",
+        "method": "C3PO",
+        "move": "label-free cascade rules learned from cheap-model/MPM consistency with conformal cost bounds and PAC-Bayes generalization",
+        "parent": "n9",
+        "provenance": "retrieved:openalex:W4416159353",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "accuracy measured against the MPM, not ground truth; guarantee is on cost, not accuracy",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L5",
+        "method": "Conformal Arbitrage",
+        "move": "conformal risk control of a score-gap threshold between a Primary and a Guardian model for arbitrary guardrail metrics",
+        "parent": "n13",
+        "provenance": "retrieved:openalex:W4414893795",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "long-run frequency guarantee under exchangeability; guardian error and shift not analysed",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L6",
+        "method": "No Free Lunch: non-asymptotic analysis of PPI",
+        "move": "exact finite-sample condition (correlation threshold in n) for PPI++ to beat gold-only mean estimation",
+        "parent": "n10",
+        "provenance": "retrieved:openalex:W4414588259",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "mean estimation under Gaussian simplifications; no paired-comparison estimand where the proxy is a comparison arm",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L7",
+        "method": "PPI across many tasks (GRePPI / ARePPI)",
+        "move": "share information across many related tasks to sharpen PPI intervals when few labels exist per task",
+        "parent": "n10",
+        "provenance": "retrieved:openalex:W7162773354",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "gains beyond power-tuned PPI require nonlinear proxy–truth structure whose prevalence is uncharacterised",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L8",
+        "method": "Semi-supervised risk control via PPI",
+        "move": "use unlabeled data plus predictions to tighten risk-controlling prediction-set calibration",
+        "parent": "n10",
+        "provenance": "retrieved:openalex:W4405469767",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "gains depend on unlabeled-set size; two real-data experiments; exchangeability assumed",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L9",
+        "method": "Filtered prediction-powered inference",
+        "move": "drop low-quality predictions instead of using all of them in PPI",
+        "parent": "n10",
+        "provenance": "retrieved:openalex:W7128704716",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "assumes informative predictions separate cleanly by a margin; one real-data application",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L10",
+        "method": "ParetoBandit",
+        "move": "closed-loop budget pacing with a forgetting bandit that adapts routing to price and quality drift",
+        "parent": "n9",
+        "provenance": "retrieved:openalex:W7148297671",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "needs per-request reward feedback; no statistical accuracy certificate; small evaluation",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "L11",
+        "method": "LLM-powered nuanced video attribute annotation distilled into production classifiers",
+        "move": "use an LLM as annotator and distil into cheap production classifiers at industrial scale",
+        "parent": "n2b",
+        "provenance": "retrieved:openalex:W4414034782",
+        "age_band": "0-2y",
+        "confidence": "high",
+        "residual_problem": "distillation fidelity to the LLM annotator not certified; label drift over time not addressed",
+        "is_frontier_leaf": true
+      },
+      {
+        "node_id": "c1",
+        "method": "Dawid–Skene latent-truth estimation of annotator error rates (1979)",
+        "move": "collateral (reference-error residual): estimate each labeller's confusion matrix and the latent truth jointly from agreement patterns",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "needs several conditionally independent labellers; no finite-sample certificate",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c2",
+        "method": "Estimating accuracy from unlabeled data via classifier agreement (Platanios, Blum & Mitchell 2014)",
+        "move": "collateral (reference-error residual): infer error rates of several classifiers from their agreement rates alone",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "medium",
+        "residual_problem": "relies on independence-type assumptions between classifiers' errors",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c3",
+        "method": "Active risk estimation / active testing (Sawade et al. 2010; Kossen et al. 2021)",
+        "move": "collateral (label-cost residual): importance-sample which test points to label to estimate a model's risk with fewer labels",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "high",
+        "residual_problem": "estimates one model's risk; unbiasedness but not finite-sample certification of a paired difference",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c4",
+        "method": "Sequential change detection (Page's CUSUM 1954; Wald's SPRT 1945; DDM drift detection, Gama et al. 2004)",
+        "move": "collateral (post-deployment shift residual): monitor a stream and raise an alarm when the error/statistic distribution changes",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": ">16y",
+        "confidence": "high",
+        "residual_problem": "needs a labelled or reference error stream to monitor",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c5",
+        "method": "Conformal prediction under covariate shift / adaptive conformal inference (Tibshirani et al. 2019; Gibbs & Candès 2021)",
+        "move": "collateral (exchangeability residual): reweight calibration scores by likelihood ratio, or adapt the miscoverage level online from realised errors",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": "4-8y",
+        "confidence": "high",
+        "residual_problem": "needs known/estimated density ratios or online label feedback",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c6",
+        "method": "Label-shift estimation via confusion-matrix inversion (BBSE, Lipton et al. 2018)",
+        "move": "collateral (post-deployment shift residual): estimate target label marginals from a fixed classifier's predictions on unlabeled target data",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": "8-16y",
+        "confidence": "high",
+        "residual_problem": "assumes pure label shift (p(x|y) fixed)",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      },
+      {
+        "node_id": "c7",
+        "method": "Semantic clustering of free-text generations (semantic entropy, Kuhn et al. 2023) / conformal language modeling (Quach et al. 2023)",
+        "move": "collateral (answer-space residual): group free-text outputs into meaning-equivalence classes, or calibrate sets of generations, so set-valued uncertainty applies to open-ended outputs",
+        "parent": null,
+        "provenance": "parametric",
+        "age_band": "2-4y",
+        "confidence": "medium",
+        "residual_problem": "clustering errors are not themselves covered by a guarantee",
+        "is_frontier_leaf": false,
+        "is_collateral": true
+      }
+    ],
+    "notes": "(1) PROVENANCE DISCIPLINE: nodes marked retrieved:<paper_id> are grounded and citable; nodes marked parametric (n0–n10, c1–c7) are reconstructed from internal knowledge and are AWARENESS-ONLY — dates/attributions may be approximate and they carry no hard novelty claim. The 2-4y parametric nodes (n9 FrugalGPT, n10 PPI/PPI++, c7) are medium confidence and, given the degraded Phase 0 connectors, the 0-2y band may also be missing leaves. (2) ANTI-FABRICATION: no ancestor was invented; the 'agreement-with-incumbent' line (n5→n6→L1, n9→n11) and the 'ground-truth calibration' line (n3→n7→L2/L3/L5/n13) are genuinely distinct, and the 'proxy-plus-gold estimation' line (n0a→n10→L6–L9) is a third. (3) REGRESSION MAP (named prior methods a candidate cure would collapse onto): a plain gold-label binomial/Hoeffding or McNemar acceptance test = n0; running PPI++ or active inference with the incumbent's answer as the proxy for each model's mean accuracy = n10/n12; a self-supervised cascade on incumbent/candidate consistency = L4 (C3PO); a per-query defer-to-incumbent cascade = n1/n9 and L1/L2; distilling a student on incumbent outputs = n2/n2b; CUSUM/SPRT post-swap monitoring = c4; likelihood-ratio-weighted or adaptive conformal recalibration = c5; latent-truth / agreement-based error estimation of the incumbent = c1/c2; active risk estimation = c3. A cure that is exactly one of these is a regression; a cure must change what is certified, over which population, or with which evidence, relative to these named moves. (4) COLLATERAL NODES c1–c7 are sidelines attached by shared residual (reference error, label cost, post-deployment shift, answer-space induction); they are never gap sites and never the shared ancestor for subtractive gaps — the subtractive gaps read off n0 (acceptance testing on an available/exchangeable sample) and n5 (expensive model as oracle)."
+  },
+
+  "domain_pattern_distribution": {
+    "n_total": 65,
+    "n_on_topic": 65,
+    "patterns": [
+      {"pattern_id": "self_supervised_signal_engineering", "count": 30, "share": 0.46, "saturation_band": "mid_frequency"},
+      {"pattern_id": "assumption_audit_and_pivot", "count": 24, "share": 0.37, "saturation_band": "mid_frequency"},
+      {"pattern_id": "heterogeneous_decomposition", "count": 16, "share": 0.25, "saturation_band": "mid_frequency"},
+      {"pattern_id": "reframe_as_solvable_object", "count": 15, "share": 0.23, "saturation_band": "mid_frequency"},
+      {"pattern_id": "architectural_operator_substitution", "count": 11, "share": 0.17, "saturation_band": "mid_frequency"},
+      {"pattern_id": "controlled_diagnostic_design", "count": 9, "share": 0.14, "saturation_band": "mid_frequency"},
+      {"pattern_id": "decompose_and_delegate", "count": 7, "share": 0.11, "saturation_band": "mid_frequency"},
+      {"pattern_id": "generative_process_redesign", "count": 4, "share": 0.06, "saturation_band": "mid_frequency"},
+      {"pattern_id": "unify_into_shared_representation", "count": 4, "share": 0.06, "saturation_band": "mid_frequency"},
+      {"pattern_id": "characterize_limit_then_surpass", "count": 3, "share": 0.05, "saturation_band": "mid_frequency"},
+      {"pattern_id": "adapt_via_conditioning", "count": 3, "share": 0.05, "saturation_band": "mid_frequency"},
+      {"pattern_id": "structural_prior_encoding", "count": 2, "share": 0.03, "saturation_band": "mid_frequency"},
+      {"pattern_id": "algebraic_equivalence_unification", "count": 1, "share": 0.02, "saturation_band": "untested"},
+      {"pattern_id": "relax_discrete_search_to_continuous", "count": 1, "share": 0.02, "saturation_band": "untested"}
+    ],
+    "saturation_threshold_saturated": 0.50,
+    "saturation_threshold_untested_count": 1,
+    "notes": "self_supervised_signal_engineering is the most-used pattern (0.46, just below saturation): the closest_adjacent papers using it (C3PO, the PPI leaves, LLM-annotation distillation) share the limitation that the cheap signal is either the expensive model's own output treated as truth or a proxy whose usefulness is analysed only for single-population estimands, never for certifying a two-system substitution. (No rows were tagged outside_taxonomy or flagged off-core/duplicate, so n_on_topic = n_total under the mechanical rule, although several rows — e.g. Huff-LLM, recidivism PPI, tabular foundation model — are only loosely related.)"
+  },
+
+  "state": "proceed",
+  "ood_reasons": [],
+  "remedial_steps": []
+}

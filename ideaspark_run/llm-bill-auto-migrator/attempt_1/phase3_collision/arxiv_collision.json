@@ -1,0 +1,1208 @@
+[
+ {
+  "title": "Pay Only for Disagreement: Certified No-Regression Verdicts for Model Updates with Matching Label-Complexity Bounds",
+  "title_norm": "pay only for disagreement certified no regression verdicts for model updates wit",
+  "abstract": "Every production model is updated, by retraining, fine-tuning, quantization, or a silent vendor swap, and each update risks being worse than what it replaced. We formalize update promotion as certified paired risk-difference auditing. Our starting point is a support identity: the risk difference between two models lives on the inputs where they disagree, observable without labels. We build DISCERN, a sequential two-tier protocol. A zero-label tier certifies benign updates whose disagreement rate is below tolerance from unlabeled traffic alone. An audited tier labels only sampled disagreements through an anytime-valid confidence sequence, valid at every stopping time and under any label-routing rule, even an adversarial judge. We prove finite-sample validity and matching label-complexity bounds of order rho^2/eps^2 at the rate level, so exploiting free disagreement provably saves a factor 1/rho over any pairing-blind auditor, and the guarantee composes across an unbounded sequence of promotions from one error budget. Across 14,000+ replayed audit streams over 785 update pairs, including LoRA fine-tunes of language models up to 1.4B parameters, miscoverage is 0.0002 (nominal 5%), power 0.986 with zero false alarms, and 56% of benign updates certify with zero labels. Each audit emits a machine-checkable evidence record for post-market monitoring.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Vishnu Bindu Balachandran"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.17560v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.17560v1",
+  "published_iso": "2026-07-22T02:51:14Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "A certified lower bound on the quantum-capacity threshold of the depolarizing channel",
+  "title_norm": "a certified lower bound on the quantum capacity threshold of the depolarizing ch",
+  "abstract": "The noise threshold below which the qubit depolarizing channel retains positive quantum capacity has been studied since 1996. The classic constructions come with exact finite formulae, but in every reported threshold to date -- most recently the record of Agarwal et al. -- the final step, the sign of the coherent information at the reported point, is a floating-point evaluation. We give the first exact-arithmetic, independently machine-checkable positivity proofs in this regime: an explicit 45-copy rank-two input state $A$, published as a 1,472-byte witness, with certified $I_c > 0$ at the exact rational $p = 16239/250000 = 0.064956$ (per-Pauli convention; total error rate $3p = 0.194868$) -- beyond both the best value printed in the Agarwal et al. paper ($0.064657$) and the strongest state in the same authors' public repository ($\\approx 0.064911$), both numerical. Because the depolarizing family is a semigroup under composition, fixed-input coherent information is nonincreasing in $p$ on $[0,1/4]$, so a single certified point extends to the entire interval below it. The same machinery confines the positivity boundaries of $A$ and of the strongest public state of Agarwal et al. to disjoint rational intervals separated by more than $1/25000$ -- to our knowledge the first proven ordering of the positivity boundaries of two explicit competing code states. Every computational claim in the paper reduces to a finite list of big-integer comparisons, checkable by a dependency-free few-hundred-line verifier whose soundness rests on three self-contained half-page lemmas. Payloads, certificates, and verifier accompany the paper as a supplementary artifact.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Artus Krohn-Grimberghe"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.15870v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.15870v2",
+  "published_iso": "2026-08-16T17:35:46Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Exact and Certified Data Shapley for Weighted Nearest Neighbor Regression",
+  "title_norm": "exact and certified data shapley for weighted nearest neighbor regression",
+  "abstract": "Data Shapley can be computed exactly and efficiently for unweighted K-nearest-neighbor (KNN) models, the basis of the popular KNN-Shapley. For weighted KNN, however, efficient exact algorithms are known only for hard-label classification. In regression, the prediction is a weighted average whose normalization term changes with every subset. The best exact algorithm then takes O(N^K) time for N training points. We show that this normalization term is not an obstacle. A subset affects the prediction only through two numbers: the total weight of its K nearest neighbors and their total weighted target. Once the weights are discretized, subsets with equal total weight share their normalization term and can be summed as a group. This gives an exact algorithm that is near-linear in N and polynomial in K and the number of weight levels, for real targets under the squared loss. The same idea gives exact values for soft-label classifiers in the same time, and speeds up the earlier exact algorithm for hard labels by a factor of N. For continuous weights, we give a deterministic approximation with a certified error bound, without discretizing the weights. On the downside, we prove that some exact values take exponentially many bits to write down, so the dependence on weight precision cannot be removed in general. In experiments on real datasets with up to 100,000 training points and with 10 or 100 validation points, we compare the exact values with Monte Carlo estimates computed in the same time. Monte Carlo ranks the points less and less like the exact values as the training set grows. Two of its runs also disagree on a large share of the top 10% of points.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Zongye Lyu",
+   "Lihua Peng"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.11956v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.11956v3",
+  "published_iso": "2026-07-12T04:38:38Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Mestra: Exploring Migration on Virtualized CGRAs",
+  "title_norm": "mestra exploring migration on virtualized cgras",
+  "abstract": "As modern Coarse Grain Reconfigurable Arrays (CGRAs) grow in size, efficient utilization of the available fabric by a single application becomes increasingly difficult. Existing CGRA mappers either fail to utilize the available fabric or rely on rigid static code transformations with limited adaptability. Multi-tenant CGRAs have emerged as a promising solution to increase hardware utilization, but current attempts fail to address key challenges such as fabric fragmentation and live migration. To address this gap, we present Mestra, an end-to-end system for CGRA multi-tenancy that supports dynamic scheduling and resource allocation in a shared environment. Mestra addresses fabric fragmentation caused by kernels completing out of order by supporting both stateless and stateful live kernel migration as a de-fragmentation mechanism. We assess our solution on an Alveo-U280 data-center-grade FPGA card, reporting area, frequency, and power. Performance is evaluated using routines from the PolyBench benchmark suite and kernels derived from common machine learning operators. Results show that spatial sharing of the available fabric across multiple users improves workload makespan by up to 70.48%, while live kernel migration reduces tail latency on fragmented layouts by up to 29.60%. The custom tightly coupled controller and read-back paths required for virtualization and stateful migration introduce a LUT cost of 0.13% per region. Our evaluation reveals that multi-tenancy is important for efficient CGRA utilization, and live kernel migration can further improve performance by recovering fragmented space with minimal hardware cost.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Agamemnon Kyriazis",
+   "Panagiotis Miliadis",
+   "Dimitris Theodoropoulos",
+   "Nectarios Koziris",
+   "Dionisios Pnevmatikatos"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2604.04694v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2604.04694v1",
+  "published_iso": "2026-04-06T14:03:31Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition",
+  "title_norm": "youzhi towards high concurrency financial llms via adaptive gqa to mla transitio",
+  "abstract": "Large language models (LLMs) drive significant financial innovations, yet their high-concurrency deployment is severely bottlenecked by KV cache memory overhead, which inflates infrastructure costs and throttles scalability. To address this, we propose YouZhi-LLM, a highly efficient financial LLM empowered by a comprehensive structural transition and training pipeline natively built on the Huawei Ascend ecosystem. At its algorithmic core, YouZhi-LLM features a layer-adaptive GQA-to-MLA transition framework that dynamically assigns per-layer FreqFold sizes, maximizing KV-cache compression while minimizing perplexity degradation. To recover representation capacity and inject domain expertise, the Ascend-based training pipeline seamlessly integrates generalized knowledge distillation with financial-specific supervised fine-tuning. Evaluations demonstrate the superiority of this systematic approach, with the adaptive transition reducing perplexity degradation by up to 35% over uniform baselines. Crucially, when evaluated on Ascend NPUs via vLLM-Ascend, the massive KV-cache reduction translates directly into deployment efficiency. Compared to their respective base models, YouZhi-7B yields a 12.3% improvement in average financial benchmark score alongside a 2.69$\\times$ increase in maximum concurrency; similarly, YouZhi-14B achieves a 7.0% accuracy gain and a 2.43$\\times$ concurrency boost, establishing a new paradigm for cost-effective, high-throughput financial inference.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   " PSBC LLM Team",
+   " Huawei LLM Team",
+   "Ruihan Long",
+   "Junjie Wu",
+   "Tianan Zhang",
+   "Duo Zhang",
+   "Yaozong Wu",
+   "Jinbin Fu",
+   "Chang Liu",
+   "Zhentao Tang",
+   "Wenshuang Yang",
+   "Xin Wang",
+   "Zhihao Song",
+   "Ning Huang",
+   "Wenjing Xu",
+   "Shuai Zong",
+   "Shupei Sun",
+   "Sen Wang",
+   "Jing Hu",
+   "Bin Wang",
+   "Xinyu Wang",
+   "Junkui Ju",
+   "Zequn Ding",
+   "Jie Ran",
+   "Man Luo",
+   "Shixiong Kai",
+   "Linkai Hou",
+   "Kaichao Liang",
+   "Hu Zhao",
+   "Yang Zhao",
+   "Shucheng Lin",
+   "Wei Yu",
+   "Chenghan Jiang",
+   "Jingjing Ding",
+   "Jiahui Zhang",
+   "Tian Jin",
+   "Yuhang Zhang",
+   "Dong Guo",
+   "Wei Sun",
+   "Jun Xie",
+   "Jianwei Li",
+   "Lei Cao",
+   "Pei Li",
+   "Jiabin Li",
+   "Jia Yuan",
+   "Rui Yuan",
+   "Jing Zhu",
+   "Mingxuan Yuan",
+   "Zhangcheng Lv",
+   "Xin Jiang",
+   "Xiuhong Fei",
+   "Xiaozhe Ren",
+   "Yulong Li",
+   "Zhipeng Zhang",
+   "Hang Wang",
+   "Zhaohui Xu",
+   "Rui Zhao",
+   "Yibo He",
+   "Xinzhuang Niu"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.05868v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.05868v1",
+  "published_iso": "2026-06-04T08:44:37Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Cross-Model Disagreement as a Label-Free Correctness Signal",
+  "title_norm": "cross model disagreement as a label free correctness signal",
+  "abstract": "Detecting when a language model is wrong without ground truth labels is a fundamental challenge for safe deployment. Existing approaches rely on a model's own uncertainty -- such as token entropy or confidence scores -- but these signals fail critically on the most dangerous failure mode: confident errors, where a model is wrong but certain. In this work we introduce cross-model disagreement as a correctness indicator -- a simple, training-free signal that can be dropped into existing production systems, routing pipelines, and deployment monitoring infrastructure without modification. Given a model's generated answer, cross-model disagreement computes how surprised or uncertain a second verifier model is when reading that answer via a single forward pass. No generation from the verifying model is required, and no correctness labels are needed. We instantiate this principle as Cross-Model Perplexity (CMP), which measures the verifying model's surprise at the generating model's answer tokens, and Cross-Model Entropy (CME), which measures the verifying model's uncertainty at those positions. Both CMP and CME outperform within-model uncertainty baselines across benchmarks spanning reasoning, retrieval, and mathematical problem solving (MMLU, TriviaQA, and GSM8K). On MMLU, CMP achieves a mean AUROC of 0.75 against a within-model entropy baseline of 0.59. These results establish cross-model disagreement as a practical, training-free approach to label-free correctness estimation, with direct applications in deployment monitoring, model routing, selective prediction, data filtering, and scalable oversight of production language model systems.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Matt Gorbett",
+   "Suman Jana"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2603.25450v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2603.25450v2",
+  "published_iso": "2026-03-26T13:46:22Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "On the Pólya Frequency Order of the de Bruijn--Newman Kernel: Certified Failure at Order Five",
+  "title_norm": "on the pólya frequency order of the de bruijn newman kernel certified failure at",
+  "abstract": "We prove that the classical de Bruijn--Newman kernel $K(u)=Φ(|u|)$ is not a Pólya frequency function of order $5$ (PF$_5$). At $(u_0,h)=(0.01,0.05)$ we exhibit an explicit $5\\times5$ Toeplitz minor whose determinant is rigorously enclosed in $[-1.8472496\\times10^{-9},-1.8472225\\times10^{-9}]$. The certificate uses 80-digit outward-rounded interval arithmetic and a proved truncation bound for the theta series. Eight further configurations are certified by both an explicit Leibniz expansion and an independent interval determinant computation. At the central configuration the determinants $D_2,D_3,D_4$ are positive, but this local sign pattern does not establish that the kernel is PF$_4$ globally. We also derive an exact finite formula for the first coefficient permitted by Vandermonde divisibility in the small-spacing expansion of $D_r(u_0,h)$. High-precision observations concerning the sign change of $C_5(u_0)$ and a Gaussian deformation are reported only as non-certified numerics. Version 2 withdraws the certified global sign and unique-threshold claims for $C_5$ made in version 1 because the derivative-tail enclosure was unsound; the direct PF$_5$ counterexample and its interval certificates are unaffected. The result concerns total positivity of this kernel and does not resolve the Riemann Hypothesis.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Wojciech Michalowski"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2602.20313v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2602.20313v2",
+  "published_iso": "2026-02-23T19:59:05Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Exact Stratification and Affine Mass Formulas for Split Richelot Data over Finite Fields",
+  "title_norm": "exact stratification and affine mass formulas for split richelot data over finit",
+  "abstract": "The Richelot $(2,2)$-step is the standard step of explicit genus-2 isogeny computation. We determine the exact stratification of its input space over a finite field $\\mathbb{F}_q$ of odd characteristic: ordered factorizations $f=uvw$ of a square-free sextic into monic quadratics fall into three strata by the geometric type of the quotient, governed by the incidence geometry of the discriminant locus. This yields closed formulas for each stratum and, modulo affine coordinate changes, mass formulas of degree four in $q$ with a complete classification of stabilisers. The classification is decided by data the step already computes, at $5\\mathrm{M}+6\\mathrm{S}$ beyond the brackets, and an output post-check is provably redundant. On the decomposable stratum the square class of one resultant determines the field of definition of the elliptic factors and the shape of the Weil polynomial of the Jacobian; the two cases are counted exactly, and in the nonsplit case the curve $y^2=f$ has $q+1$ rational points. Exhaustive enumeration over small finite fields verifies every proved count.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Hung T. Dang",
+   "Diep V. Nguyen"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.03376v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.03376v2",
+  "published_iso": "2026-07-03T14:29:46Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Signature Placement in Post-Quantum TLS Certificate Hierarchies: An Experimental Study of ML-DSA and SLH-DSA in TLS 1.3 Authentication",
+  "title_norm": "signature placement in post quantum tls certificate hierarchies an experimental ",
+  "abstract": "Post-quantum migration in TLS 1.3 couples signature-algorithm choice with certificate-hierarchy structure, chain exposure during the handshake, and role-dependent cryptographic cost. In certificate-based authentication, the practical effect of a signature family depends on where it appears in the certification hierarchy, how much of that hierarchy is exposed during the handshake, and how the resulting cryptographic cost is distributed across client and server roles. Post-quantum TLS migration must therefore be evaluated as cryptographic design within authenticated key establishment, with algorithm selection assessed in its deployment context. This paper presents a local experimental study of TLS 1.3 authentication strategies implemented with OpenSSL 3 and oqsprovider. Using a reproducible laboratory setting, it compares ML-DSA and SLH-DSA across multiple certificate placements, hierarchy depths, and key-exchange modes, including classical, hybrid, and pure post-quantum configurations. The analysis is organized into four complementary campaigns: a leaf-only comparison, a full hierarchy strategy matrix, a depth comparison, and a key-exchange exploration. Across the experimental matrix, the main discontinuity appears when SLH-DSA is placed in the server leaf certificate. In that configuration, handshake latency and server-side compute cost increase by orders of magnitude, whereas strategies that confine SLH-DSA to upper trust layers and preserve ML-DSA in the interactive leaf remain within a more plausible operational range. The results also show that transport size alone does not explain the heavy regime: outside leaf-SLH scenarios, transferred bytes and observed chain size track latency closely, but once SLH-DSA reaches the leaf, server-side cryptographic cost becomes dominant.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "José Luis Delgado Jiménez"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2604.06100v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2604.06100v3",
+  "published_iso": "2026-04-07T17:13:10Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "The Power of Power-of-SWAP: Postselected Quantum Computation with the Exchange Interaction",
+  "title_norm": "the power of power of swap postselected quantum computation with the exchange in",
+  "abstract": "We introduce Exchange Quantum Polynomial Time (XQP) circuits, which comprise quantum computation using only computational basis SPAM and the isotropic Heisenberg exchange interaction. Structurally, this restricted model captures decoherence-free subspace computation without access to singlet states. We prove that XQP, as well as its constrained family consisting solely of $\\sqrt{\\mathrm{SWAP}}$ gates, is universal for quantum computation under polynomial overheads in circuit depth and size. This establishes the universality of the $\\sqrt{\\mathrm{SWAP}}$ gate on its own under a logical encoding of qubits. We further prove that circuits generated by $\\sqrt{\\mathrm{SWAP}}$ gates are semi-universal, and thus generate $t$-designs for the uniform distribution over SU(2)-invariant unitaries. Finally, we study additional properties of the XQP model, including its relation to the six-vertex and Potts model in statistical physics. Our findings suggest that XQP circuits are naturally suited to near-term hardware and provide a simple platform for experimental demonstrations of quantum advantage.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Jędrzej Burkat",
+   "Sergii Strelchuk",
+   "Michał Studziński"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2603.28527v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2603.28527v2",
+  "published_iso": "2026-03-30T14:53:42Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Hard Cases, Bad Labels: Testing Error Exposure and Error Location in Uncertainty Sampling Under Bounded Label Noise",
+  "title_norm": "hard cases bad labels testing error exposure and error location in uncertainty s",
+  "abstract": "Active learning can reduce labeling cost by selecting informative examples, but the most uncertain examples may also be the hardest to label correctly. This study tests whether uncertainty sampling fails because it acquires more corrupted labels or because errors concentrated in difficult regions are especially harmful. Margin-based uncertainty sampling is compared with random sampling under clean labels, random classification noise (RCN), and bounded difficulty-dependent noise on three public binary tabular datasets. The design uses 100 paired seeds, nine expected noise rates from 0 to 0.30, annotation budgets from 20 to 120, and logistic regression with regularization re-selected by cross-validation at every budget. An exposure-matched RCN control aligns mean final acquired corruption, while a clean-label extension reaches budget 400. Under clean labels, uncertainty sampling improved normalized balanced-accuracy area under the learning curve by 1.09 to 1.77 percentage points on all datasets. Difficulty-dependent noise reduced this advantage more than RCN at six of eight rates on Breast Cancer Wisconsin, but at no tested rate on Banknote Authentication or MAGIC Gamma Telescope. Exposure-matched analyses found no corrected evidence for a universal additional penalty from structured error location. On clean MAGIC data, uncertainty sampling improved balanced accuracy while reducing average precision and true-positive rate at fixed false-positive rates. Thus, uncertainty sampling was label-efficient, but its apparent robustness depended on dataset, budget, noise structure, and evaluation metric.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "John Myron Uy"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.13601v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.13601v1",
+  "published_iso": "2026-08-05T03:01:19Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "Certified Lower Bounds and Efficient Estimation of Minimum Accuracy in Quantum Kernel Methods",
+  "title_norm": "certified lower bounds and efficient estimation of minimum accuracy in quantum k",
+  "abstract": "The minimum accuracy heuristic evaluates quantum feature maps without requiring full quantum support vector machine (QSVM) training. However, the original formulation is computationally expensive, restricted to balanced datasets, and lacks theoretical backing. This work generalizes the metric to arbitrary binary datasets and formally proves it constitutes a certified lower bound on the optimal empirical accuracy of any linear classifier in the same feature space. Furthermore, we introduce Monte Carlo strategies to efficiently estimate this bound using a random subset of Pauli directions, accompanied by rigorous probabilistic guarantees. These contributions establish minimum accuracy as a scalable, theoretically sound tool for pre-screening feature maps on near-term quantum devices.",
+  "year": 2025,
+  "venue": "arXiv",
+  "authors": [
+   "Demerson N. Gonçalves",
+   "Tharso D. Fernandes",
+   "Andrias M. M. Cordeiro",
+   "Pedro H. G. Lugao",
+   "João T. Dias"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2512.20588v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2512.20588v1",
+  "published_iso": "2025-12-23T18:34:58Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "The Café in Amsterdam: When the Incumbent Becomes the Oracle",
+  "title_norm": "the café in amsterdam when the incumbent becomes the oracle",
+  "abstract": "A field can reformulate its computations freely exactly where its demand is stated independently of any incumbent implementation, and finds itself unable to when the incumbent's own output has quietly become the specification. This note offers that observation as a lens on computational reformulation for modern accelerators, where posing a problem in a hardware-friendly form can yield large speed and energy gains, but only if a replacement can be judged at all. Building on the test-oracle problem (Weyuker; Barr et al.), on requirements engineering's notion of implementation bias (Zave and Jackson), and on the case for judging approximate designs by acceptability rather than numerical proximity (Felzmann et al.), it names the pathology \"baseline capture\": the moment an incumbent stops being evidence that a demand can be met and becomes the definition of meeting it. It then separates two questions that are easily confused: whether a reformulation can be judged at all, which turns on the existence of an incumbent-independent demand, and whether its discovery can be automated, which turns additionally on the cost of evaluating that demand. Short cases -- shortest-path routing, learnable audio frontends, ZIP-215 for Ed25519 signature validation, CESM-ECT for climate models, and a single-GEMM audio frontend measured at 1.64x-3.29x speedup and up to 3.03x less energy -- illustrate the pattern and the move of \"buying a verifier\": making a demand explicit, operational, and independent of the incumbent. No component is claimed novel in isolation; the contribution is the synthesis and the single question it makes easy to ask of any reformulation result -- does its acceptance test mention the incumbent's output?",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Augusto Camargo"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.13393v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.13393v3",
+  "published_iso": "2026-07-15T02:42:41Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Optimizing Explicit Unit-Distance Lower-Bound Certificates",
+  "title_norm": "optimizing explicit unit distance lower bound certificates",
+  "abstract": "The 2026 disproof of Erdős's unit-distance conjecture and Sawin's quantitative refinement show that the maximum number $u(n)$ of unit distances among $n$ planar points can exceed $n^{1+\\varepsilon}$ for a fixed positive $\\varepsilon$. Sawin's explicit bound gives more than $n^{1.014}$ unit distances for arbitrarily large $n$ and exposes integer parameters whose choice is not fully optimized. This report treats Sawin's parameter selection as a nonlinear integer optimization problem and develops an open-source Python optimization and verification pipeline for certificates involving prime sets $T$ and $S_Q$, integer multiplicities $k(p)$, and a rationally encoded real parameter $R$. After reproducing Sawin's certificate with $δ=0.014114\\ldots$, the pipeline yields improved certificates with the same $T$. We develop a tailored integer evolution strategy achieving a certificate with $δ=0.015263\\ldots$ and supporting the cautious statement $u(n)>n^{1.0152}$ for arbitrarily large $n$. For extended ramified prime ranges, the Emmerich--Cordella certificate obtained with the same framework reports $u(n)>n^{1.031}$ for $\\#T=67$, illustrating the importance of enlarging $T$. Very recent MathOverflow discussions, brought to the author's attention as of version~4, report further improvements, including certificates above $δ>0.035$ and beyond $δ>0.036$. Some of these improvements may rely not only on larger prime ranges but also on modified constraint systems and additional degrees of freedom that deviate from Sawin's original formulation. Beyond this application, the work illustrates how randomized optimization heuristics can improve, verify, and refine explicit certificates for combinatorial geometry through nonlinear integer optimization.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Michael T. M. Emmerich"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.03419v5",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.03419v5",
+  "published_iso": "2026-06-02T10:05:23Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "Grounding LLM Reasoning under Incomplete Graph Evidence",
+  "title_norm": "grounding llm reasoning under incomplete graph evidence",
+  "abstract": "Knowledge graphs can guide large language models (LLMs) reasoning, but the graph seen by a system is usually a retrieved, linked, temporally scoped, and incomplete evidence state rather than a complete account of truth. We develop a theoretical perspective on grounding observable LLM trajectories under such incomplete graph evidence.The evidence state induces entity anchors, typed relation residuals, path energies, and support regions, while the language model supplies a prior over candidate trajectories. We show that, under open-world incompleteness, no hard rule based only on the observed state can both reject every false unsupported trajectory and retain every true-but-unobserved one.We then characterize soft grounding as a KL-regularized deformation of the LLM prior: finite slack preserves support for unsupported but non-contradicted trajectories, whereas hard conditioning appears as an infinite-penalty limit.The framework also yields stability bounds under evidence perturbations and clarifies the constraint regimes appropriate for GraphRAG, KGQA, graph agents, constrained decoding, and faithful generation. The claims are evidence-relative: KG compatibility is treated as declared support, not factual truth.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Jiaqi Li",
+   "Fanghui Song"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.30247v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.30247v1",
+  "published_iso": "2026-06-29T12:56:21Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Mapping CVEs to MITRE ATT&CK Techniques: A Curated Gold-Set Classifier and the Limits of LLM-Assisted Label Expansion",
+  "title_norm": "mapping cves to mitre att ck techniques a curated gold set classifier and the li",
+  "abstract": "We present a reproducible pipeline for mapping Common Vulnerabilities and Exposures (CVEs) to MITRE ATT&CK Enterprise techniques from free-text vulnerability descriptions. Rather than relying on the CWE->CAPEC->ATT&CK derivation chain, whose table-expansion artifacts we quantify, we train a multi-label classifier on a curated gold dataset of 1,207 CVEs from expert MITRE Center for Threat-Informed Defense mappings. The resulting model approximately doubles recall@5 compared with a zero-shot embedding-similarity baseline and improves every ranking metric. We then investigate whether LLM-assisted labeling can extend the gold dataset. Initial experiments suggest contradictory conclusions: a single run indicates degraded performance, while averaging over five random seeds suggests a small gain. However, an independent replication and an expansion-size study (100--984 additional CVEs) show that the apparent improvement is an evaluation artifact. LLM-generated labels, with approximately 0.39 agreement with expert annotations, provide no reliable improvement at any expansion size and reduce rare-technique coverage at around 1,000 added CVEs (macro-F1 decreases by 0.04). The root cause is evaluation noise. Selecting checkpoints on a small test split effectively maximizes over many noisy evaluations, producing recall@5 differences of up to 0.05 between otherwise identical runs. Using a corrected protocol based on validation-split checkpoint selection, the gold-only model achieves recall@5 of (0.673 \\pm 0.019), and repeating the decisive experiment confirms the null result for LLM expansion. A final scaling study shows that additional expert-curated data consistently improves performance, whereas LLM-labeled data does not, indicating that the classifier is limited by label quality rather than dataset size. All datasets, models, code, and training logs are publicly released.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Cédric Bonhomme",
+   "Alexandre Dulaunoy"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.25572v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.25572v1",
+  "published_iso": "2026-07-28T10:59:04Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "Certified Interventional Fidelity: Anytime-Valid, Adaptive Evaluation of Causal Claims in Mechanistic Interpretability",
+  "title_norm": "certified interventional fidelity anytime valid adaptive evaluation of causal cl",
+  "abstract": "Mechanistic interpretability often evaluates explanations by intervening on a model: swapping hidden states, patching activations, ablating components, or comparing a compressed model to the original one. These experiments are usually summarized by a point estimate, even though the evaluation may be monitored while it runs or adapted toward suspected failures. This makes it hard to tell whether a reported fidelity or patching effect is a stable causal claim or a consequence of finite sampling and evaluation choices. We introduce Certified Interventional Fidelity (CIF), a statistical layer for interventional interpretability evaluations. CIF first writes the quantity being reported as a causal estimand: an expectation of a bounded score over a stated input distribution and a stated intervention distribution. It then provides confidence intervals and anytime-valid confidence sequences for this estimand, including under adaptive intervention sampling via bounded mixture importance weighting. We instantiate CIF with Hoeffding-style sequences and variance-adaptive betting sequences, the latter reducing certification cost by 10-30x in our experiments. On MNIST abstractions and GPT-2 Small IOI circuits, CIF certifies high-fidelity claims, shows when apparent method differences are not statistically supported, and makes sensitivity to the intervention distribution explicit.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Amir Asiaee"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.08349v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.08349v1",
+  "published_iso": "2026-07-09T10:55:04Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "LeaseGuard: Incumbent-Preserving Admission Control for Privileged LLM Agents",
+  "title_norm": "leaseguard incumbent preserving admission control for privileged llm agents",
+  "abstract": "Privileged language-model agents can satisfy a new system task by displacing a healthy incumbent that depends on the same file, process, socket, lock, or capacity allocation. This failure arises because execution privilege determines whether an operation can run, not whether the requester may preempt the current resource owner. We present LeaseGuard, a deterministic admission layer that represents preemption authority through canonical resource leases, incumbent-health checks, effect-aware admission, coexistence limits, safe alternatives, and resource-scoped overrides before adapter execution. We evaluate it on a frozen benchmark of 60 newly authored conflict scenarios with matched controls across two local model families. Relative to a preservation prompt, LeaseGuard reduces unauthorized preemption from 73.3% to 0.0% and increases safe completion by 70.0 percentage points (scenario-clustered 95% CI [60.8, 79.2]). Requested-task success changes by -3.3 points (95% CI [-9.2, 2.5]). The fully evaluated v0.2 broker also rejects a forged incumbent task identity in a hash-linked stress audit. Expiry-only reclamation can still expose a healthy incumbent after missed renewal. The evidence supports incumbent-preserving admission when effects are completely mediated, task ownership is authenticated, and lease expiry reflects incumbent liveness.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Junru Zhu",
+   "Yixin Yang",
+   "Xiaoqing Ding",
+   "Ruoyu Qi"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.24077v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.24077v1",
+  "published_iso": "2026-09-21T04:04:02Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "AlchemQ: Proof-Carrying Quantum Circuit Optimization with Per-Result Equivalence Certificates",
+  "title_norm": "alchemq proof carrying quantum circuit optimization with per result equivalence ",
+  "abstract": "We present AlchemQ v0.5, a proof-of-concept system that couples an untrusted beam-search optimizer with a machine-checkable per-result certification layer and a versioned certificate protocol (0.2.0), so that every optimized circuit ships with a verifiable artifact rather than a bare claim. The certifier proves equivalence up to global phase by ZX-calculus full reduction, with a numeric-tensor fallback based on the optimal Hilbert-Schmidt overlap. Certificates are self-contained and tamper-evident: canonical gate-canon-v1 hashes, measured residuals, tri-state verdicts (certified/rejected/inconclusive), and versioned phase-note schemas for cross-platform reproducibility. The agent aggregates three fuzzy t-norms, cannot return an uncertified circuit, and since v0.4 guarantees no componentwise regression against the original. On a benchmark of 100 circuits, all 400 optimizations terminate without error, every returned circuit is certified, every mutation is detected, and a 2998-test suite passes on two platforms. The PyZX baseline is strong (21.4% mean T-count reduction over 82 circuits) and the agent is strictly better on 9/100; the three t-norms return identical circuits on all 100 standard instances, diverging only on 4/38 of an adversarial suite. Two case studies are new: a false negative root-caused to a pivot-normalization bug in PyZX's compare_tensors (pivot 4.7e-9; the optimal-overlap residual is 7.4e-11), and eight certificates rejected on macOS due to BLAS-dependent floats in phase_note. Both were fixed; all artifact sets validate 400/400 on both platforms. A pilot run on IBM Heron r2 gives a certified circuit 78% shallower with 65% fewer two-qubit gates; output quality favors it on all three metrics but is not significant at 1024 shots. We release the certificate specification and a standalone reference verifier (Apache-2.0) with data and scripts; the engine is proprietary.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Adam Laabs"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.19160v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.19160v1",
+  "published_iso": "2026-08-24T10:17:57Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "When Does a Classifier Help an LLM? Classifier-Guided Prompting and Hybrid Classifier-LLM Models for Credit-Default Prediction",
+  "title_norm": "when does a classifier help an llm classifier guided prompting and hybrid classi",
+  "abstract": "Credit-default prediction is an important task in financial decision making. Traditional methods use fitted classifiers such as logistic regression and random forests on tabular features. Large language models (LLMs) have recently been applied to this task through prompting. In this work we study how a fitted classifier and an LLM can be combined for credit-default prediction. We distinguish telling the LLM to imitate a classifier from using the classifier to build the prompt. We hypothesize that a fitted classifier can supply the ranking ability that an LLM prompt lacks. We experiment on the Default of Credit Card Clients dataset, and report recall, F1, and the area under the ROC and precision-recall curves, with bootstrap confidence intervals. We observe that a few-shot LLM has the highest recall (0.47) and F1 (0.50) of any single model but ranks worse than a random forest (AUC-ROC 0.72 against 0.79). Instructing the LLM to imitate a classifier gives no significant change. Pruning the prompt to the classifier's eight most important features raises recall by 0.071 and F1 by 0.032. Adding the classifier's predicted probability to the prompt raises the LLM's AUC-ROC from 0.72 to 0.78, matching the random forest, while keeping 0.118 higher recall than it. The reverse composition, and the use of several classifiers, do not help. We thus recommend a simple classifier-guided prompt for LLM-based credit prediction.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Rishi Datta",
+   "Lavanya Prahallad"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.30086v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.30086v1",
+  "published_iso": "2026-08-30T23:17:37Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Adjacency labelling for proper minor-closed graph classes",
+  "title_norm": "adjacency labelling for proper minor closed graph classes",
+  "abstract": "We show that every proper minor-closed class of graphs admits a $(1+o(1))\\log_2 n$-bit adjacency labelling scheme. Equivalently, for every proper minor-closed class $\\mathcal{G}$ and every positive integer $n$ there exists an $n^{1+o(1)}$-vertex graph $U$ such that every $n$-vertex graph in $\\mathcal{G}$ is isomorphic to an induced subgraph of $U$. Both results are optimal up to the lower order term. They generalize the corresponding results for planar graphs and apex-minor-free classes (Dujmović et al., J.~ACM 2021) to all proper minor-closed classes, answering the open question raised in that paper and anticipated earlier by Bonamy, Gavoille, and Pilipczuk (SODA 2020).",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Vida Dujmović",
+   "Cyril Gavoille",
+   "Gwenaël Joret",
+   "Piotr Micek",
+   "Pat Morin",
+   "David R. Wood"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2605.06616v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2605.06616v3",
+  "published_iso": "2026-05-07T17:32:24Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "Quantum Interval Bound Propagation for Certified Training of Quantum Neural Networks",
+  "title_norm": "quantum interval bound propagation for certified training of quantum neural netw",
+  "abstract": "Quantum machine learning is a promising field for efficiently learning features of a dataset to perform a specified task, such as classification. Interval bound propagation (IBP) is a popular certified training method in classical machine learning, where the lower and upper bounds are tracked throughout the model. These bounds are used during training to ensure that the model is certified to predict the correct label even under adversarial perturbations. While IBP is successful in classical domain, there are limited certified training efforts in quantum domain. In this paper, we present quantum interval bound propagation (QIBP) to establish a certified training routine for quantum machine learning, certifying the accuracy of models under adversarial perturbations. We implement QIBP using both interval and affine arithmetic to explore the tradeoffs between the two implementations in terms of accuracy and other design considerations. Extensive evaluation demonstrates that the resulting certified trained models have robust decision boundaries, guaranteed to predict the correct class for the samples within the trained adversarial robustness bounds.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Emma Andrews",
+   "Nahyeon Kim",
+   "Prabhat Mishra"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2605.00747v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2605.00747v1",
+  "published_iso": "2026-05-01T15:55:40Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Certifying Model Upgrades with Slice-Wise Non-Regression and Incumbent Fallback",
+  "title_norm": "certifying model upgrades with slice wise non regression and incumbent fallback",
+  "abstract": "An updated model can improve an aggregate metric while degrading a slice that matters to a downstream user. We study checkpoint selection subject to non-regression tolerances relative to a retained incumbent. The central distinction is between failing to detect harm and certifying non-inferiority: the former can release harmful updates with high probability when evaluation is noisy. We give a reproducible release procedure that separates candidate search from independent, paired evaluation and returns the exact incumbent when certification fails. Applying established intersection-union and Learn-then-Test principles, we state finite-sample guarantees for one frozen candidate, a finite candidate library, and a prespecified testing order. A joint release decision does not require a slice-count Bonferroni penalty, although certification power can still decrease with the number of slices. In bounded-score simulations, a no-detected-harm gate releases a harmful candidate in 99.7% of trials in one 32-slice setting, compared with 2.6% for an exact non-inferiority gate at a 5% target. A constructed two-block family yields larger certified utility than a scalar path under matched candidate counts. Public digits experiments, including a subsequent continuation that improves average aggregate accuracy, return the incumbent in every run because certification is underpowered. These results establish an auditable protocol and its limitations; they do not establish benefits on foundation-model or multilingual translation upgrades.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Shengwei Zhang",
+   "Tao Wu",
+   "Fei Qian"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.13714v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.13714v1",
+  "published_iso": "2026-09-12T05:00:50Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Quantum-Ready Secure WAN: A Risk Assessment and Migration Framework",
+  "title_norm": "quantum ready secure wan a risk assessment and migration framework",
+  "abstract": "Enterprise wide-area networks (WANs) use quantum-vulnerable public-key cryptography to authenticate peers and establish keys for Internet Protocol Security (IPsec), Transport Layer Security (TLS), and software-defined WAN services. Harvest-now, decrypt-later collection already threatens data whose protection lifetime may exceed the time needed to migrate, while a future cryptographically relevant quantum computer would also endanger certificates and other authentication dependencies. Post-quantum standards and government directives now define algorithms and transition milestones, but they do not tell an enterprise which WAN services to migrate first or what evidence is sufficient for deployment. This paper proposes a vendor-neutral framework that separates exposure priority, migration readiness, and evidence confidence, and maps those outputs to staged security, operational, and governance gates. It also defines a complete evaluation design for classical and ML-KEM hybrid key establishment in TLS 1.3 and IKEv2/IPsec. The retained artifact is narrower: it contains author-reported aggregate TLS p50, p95, and p99 latencies at configured loss settings of 0%, 1%, 3%, and 5%, an arithmetic checker, and limited environment and MTU/MSS notes. At those settings, the TLS-H minus TLS-C p95 differences are 0.00, 0.16, 0.38, and 0.63 ms, corresponding to 0.00%, 1.32%, 3.07%, and 5.00% relative to TLS-C. These values are descriptive aggregate observations, not inferential results, because per-trial data, sample counts, original captures, and timestamped logs were not retained. Protocol-size and MTU/MSS calculations are reported separately from measured behavior, and unsupported IKE, resource, throughput, retransmission, and downgrade outcomes are excluded.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Saeed Alam"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.26225v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.26225v1",
+  "published_iso": "2026-08-11T17:02:57Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "Tyler: Typed Latent Reasoning for Language Models -- When to Think, What to Compute, and How Much to Allocate",
+  "title_norm": "tyler typed latent reasoning for language models when to think what to compute a",
+  "abstract": "Chain-of-thought (CoT) prompting improves reasoning in large language models (LLMs) by externalizing intermediate computation as discrete text tokens, but this textual interface also introduces redundancy and inference overhead. Latent reasoning offers a promising alternative by carrying part of the computation in continuous representations. However, existing methods typically predefine when latent computation is invoked and how it is allocated during decoding, leaving a key problem unresolved: when to invoke latent computation, what type of computation to perform, and how much budget to allocate. We propose \\textbf{Ty}ped \\textbf{L}at\\textbf{e}nt \\textbf{R}easoning (Tyler), a typed and budget-aware framework for latent reasoning during autoregressive decoding. Tyler learns a policy that, at each decoding step, chooses between emitting a text token and switching to a latent computation module specialized for a particular reasoning function. Once invoked, an operator maps the current reasoning state into latent tokens that support global planning, local state updates, or reusable procedural abstraction. Across extensive experiments on three backbone LLMs, Tyler improves accuracy by up to 14.49 points over CoT and by up to 4.30 points over the strongest competing baseline. It further generalizes across diverse reasoning domains and achieves the best final-stage performance with the lowest forgetting.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Hanyu Lin",
+   "Min Cai",
+   "Jiawei Wen",
+   "Haodi Zhang"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.16360v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.16360v1",
+  "published_iso": "2026-06-15T07:56:05Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Balance Constants, Majority Cycles, and the Gold Partition Conjecture through Fourteen Elements",
+  "title_norm": "balance constants majority cycles and the gold partition conjecture through four",
+  "abstract": "We determine the exact extremal balance data of all 1,338,193,159,771 unlabeled posets on fourteen elements. The least balance constant exceeding $1/3$ is $37/106$. The least over posets that are not nontrivial ordinal sums is $254/725$, attained by a ladder with broken rungs; this confirms a conjecture of Peczarski at order 14, while orders 12 and 13 reproduce De Loof, De Baets, and De Meyer. No balance constant lies in the gap above $1/3$ that Peczarski conjectures to be empty. Exactly 128 classes attain $1/3$, and every one is an ordinal sum of singletons and copies of the three-element poset with one relation, a family whose non-chain members are counted by $a(n)-1$, where $a(n)=a(n-1)+a(n-3)$. In the linear-extension-majority digraph the longest simple cycle has length 8, against 7 at order 13, and exactly 30 classes attain it; of the thirteen such classes whose witnesses the census retains, nine have a cycle spectrum containing no odd cycle at all. A second exhaustive pass over the same classes verifies Peczarski's Gold Partition Conjecture through fourteen elements, extending his order-11 frontier and implying in particular that the $1/3$-$2/3$ Conjecture holds through order 14. All arithmetic is exact and every extremal witness is recomputed by an independent program.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Anish Gupta"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.23926v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.23926v2",
+  "published_iso": "2026-07-27T01:41:27Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "Certified Multi-Source Integrity for Structured Agent Actions",
+  "title_norm": "certified multi source integrity for structured agent actions",
+  "abstract": "LLM agents increasingly take privileged, often irreversible structured actions, such as paying an invoice. They assemble each action from action-critical fields in documents and tool outputs that an adversary can corrupt, and indirect prompt injection can drive the model itself to extract attacker-chosen values. Current defenses gate on a source's trust label or certify free-text answer quality. None certifies the integrity of a coupled, policy-bound structured action under a corruption budget that accounts for shared upstream sources. We characterize when such an action is safely certifiable and give the maximally live safe certifier. It admits an action only when each field clears the rule its evidence structure supports: a bounded corruption radius over corruption-distinct evidence classes, counted by a minimum hitting set so that re-publishing or laundered copies cannot manufacture a quorum, deterministic reconciliation for complementary fields, and a trusted anchor where the evidence leaves a field single-sourced. We formalize two robustness notions, validate each mechanism by ablation, and measure how often the multi-source precondition holds on sanctions designations (70,966 entities) and software supply-chain provenance (450 packages). Under upper-bound proxies, genuine corroboration is a minority phenomenon in both, and naive attestation counting overstates it, since witnesses that look independent collapse to two corruption-distinct domains once shared origin is counted. Across five current models in a real agent loop, a realistic injection fools every model but one and a naive agent then executes the fraudulent action on most attacks. The certifier admits no unsafe action and recovers the correct value where corroboration permits, while action-gating and provenance baselines are broken in every world of our harness by some attack in its space.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Anmol Pandey",
+   "Aditya Jain",
+   "Liang Chen",
+   "Carsten Maple",
+   "Christo Panchev"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.34245v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.34245v1",
+  "published_iso": "2026-09-28T03:52:21Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Computing Lewis weights to high precision using local relative smoothness",
+  "title_norm": "computing lewis weights to high precision using local relative smoothness",
+  "abstract": "We provide algorithms that compute $ε$-estimates of the $\\ell_p$-Lewis weights of a matrix $A \\in \\mathbb{R}^{m \\times n}$ for $p \\geq 4$ using $O(p^2 \\log(m/ε))$ rounds of leverage score computation, where $\\ell_p$-Lewis weights and leverage scores are both standard measures of row importance. This improves upon the state-of-the-art round complexity of $O(p^3 \\log(m/ε))$ due to Fazel, Lee, Padmanabha, and Sidford (2022). We obtain our results by carefully applying a local variant of relatively smooth gradient descent to primal and dual forms of the $\\ell_p$-Lewis weight optimization problem and providing tools to convert between different notions of approximate $\\ell_p$-Lewis weights.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Sander Gribling",
+   "Aaron Sidford",
+   "Chenyi Zhang"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.29186v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.29186v1",
+  "published_iso": "2026-06-28T04:15:55Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Architecture-Derived CBOMs for Cryptographic Migration: A Security-Aware Architecture Tradeoff Method",
+  "title_norm": "architecture derived cboms for cryptographic migration a security aware architec",
+  "abstract": "Cryptographic migration driven by algorithm deprecation, regulatory change, and post-quantum readiness requires more than an inventory of cryptographic assets. Existing Cryptographic Bills of Materials (CBOMs) are typically tool- or inventory-derived. They lack architectural intent, rationale, and security context, limiting their usefulness for migration planning. This paper introduces Security-Aware Architecture Tradeoff Analysis Method (SATAM), a security-aware adaptation of scenario-based architecture evaluation that derives an architecture-grounded, context-sensitive CBOM. SATAM integrates established approaches: ATAM, arc42, STRIDE, ADR, and CARAF. These are included to identify and analyze security-relevant cryptographic decision points and document them as explicit architectural decisions. These artifacts are used to annotate CBOM entries with architectural context, security intent, and migration-critical metadata using CycloneDX-compatible extensions. Following a Design Science Research approach, the paper presents the method design, a conceptual traceability model, and an illustrative application. The results demonstrate that architecture-derived CBOMs capture migration-relevant context that is typically absent from inventory-based approaches. Thereby, SATAM improves availability of information required for informed cryptographic migration planning and long-term cryptographic agility.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Eduard Hirsch",
+   "Kristina Raab"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2603.22442v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2603.22442v2",
+  "published_iso": "2026-03-23T18:15:27Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "LLM-42: Enabling Determinism in LLM Inference with Verified Speculation",
+  "title_norm": "llm 42 enabling determinism in llm inference with verified speculation",
+  "abstract": "In LLM inference, the same prompt may yield different outputs across different runs. At the system level, this non-determinism arises from floating-point non-associativity combined with dynamic batching and GPU kernels whose reduction orders vary with batch size. A straightforward way to eliminate non-determinism is to disable dynamic batching during inference, but doing so severely degrades throughput. Another approach is to make kernels batch-invariant; however, this tightly couples determinism to kernel design, requiring new implementations. This coupling also imposes fixed runtime overheads, regardless of how much of the workload actually requires determinism.\n  Inspired by ideas from speculative decoding, we present LLM-42, a scheduling-based approach to enable determinism in LLM inference. Our key observation is that if a sequence is in a consistent state, the next emitted token is likely to be consistent even with dynamic batching. Moreover, most GPU kernels use shape-consistent reductions. Leveraging these insights, LLM-42 decodes tokens using a non-deterministic fast path and enforces determinism via a lightweight verify-rollback loop. The verifier replays candidate tokens under a fixed-shape reduction schedule, commits those that are guaranteed to be consistent across runs, and rolls back those violating determinism. LLM-42 mostly re-uses existing kernels unchanged and incurs overhead only in proportion to the traffic that requires determinism.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Raja Gond",
+   "Aditya K Kamath",
+   "Ramachandran Ramjee",
+   "Ashish Panwar"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2601.17768v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2601.17768v2",
+  "published_iso": "2026-01-25T09:58:57Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Disagreement-Regularized Importance Sampling for Adversarial Label Corruption",
+  "title_norm": "disagreement regularized importance sampling for adversarial label corruption",
+  "abstract": "Standard Importance Sampling (IS) collapses under label corruption because high-norm examples, prioritized for variance reduction, are often adversarial outliers. We formalize this misalignment using an $\\varepsilon$-contamination model and propose Disagreement-Regularized Importance Sampling (DR-IS), a sub-sampling method based on loss rank-disagreement across independent proxy ensemble. We prove finite-sample concentration bounds showing that the empirical rank disagreement of bulk corrupted examples is bounded above, and that of boundary-clean examples bounded below, both at rate $O(\\sqrt{\\log(N/δ)/K})$ with probability $1-δ$; when the structural expectation gap $Δ'$ between the two groups is positive and the boundary-clean set is at least as large as the selected subset, these bounds certify strict separation and control the contamination rate of the selected subset. Empirically, DR-IS remains robust under targeted high-norm attacks that break magnitude-based methods such as the Error $L_2$-norm (EL2N) on benchmark datasets. DR-IS complements training-dynamics approaches like Area Under the Margin ranking (AUM), offering improved robustness in the loss-aligned regime alongside explicit finite-sample concentration certificates and a contamination bound limiting noise leakage from the statistical tail of corrupted points.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Csongor Horváth",
+   "Ida-Maria Sintorn",
+   "Prashant Singh"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2605.07551v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2605.07551v1",
+  "published_iso": "2026-05-08T10:27:51Z",
+  "from_query": [
+   "gold labels only on disagreements"
+  ]
+ },
+ {
+  "title": "The bulk spectral gap is certifiable from above but uncomputable from below",
+  "title_norm": "the bulk spectral gap is certifiable from above but uncomputable from below",
+  "abstract": "Determining spectral gaps in the thermodynamic limit is a central challenge in quantum many-body physics. When a fixed boundary condition is imposed, this problem is undecidable: no algorithm, even with unlimited resources, can decide for every Hamiltonian whether it is gapped. Yet the thermodynamic limit is meant to capture the intrinsic properties of very large systems, which should not depend on how their boundaries are chosen. Here, we therefore consider the bulk spectral gap problem, which concerns only the intrinsic excitations of the infinite system, independently of any boundary. We first give a general algorithm producing a hierarchy of certified upper bounds on the bulk gap, arbitrarily tight at the cost of more computation. Second, we prove that the spectral gap problem remains undecidable in the bulk: no algorithm can decide whether the bulk gap is positive, already for translationally invariant nearest-neighbour chains of fixed local dimension. The bulk spectral gap is thus certifiable from above but uncomputable from below. More precisely, the bulk-gaplessness promise problem is RE-complete, exactly as hard as the halting problem. Finally, we apply the upper-bounding algorithm to the spin-1/2 kagome Heisenberg antiferromagnet to produce the first nontrivial certified upper bounds on its bulk gap.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Xiangling Xu",
+   "Matthias Schötz",
+   "Jie Wang",
+   "Victor Magron",
+   "Igor Klep",
+   "Omar Fawzi",
+   "Marc-Olivier Renou"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.03836v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.03836v3",
+  "published_iso": "2026-06-02T16:18:19Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Exact Zarankiewicz Values On Two Finite Frontier Slices",
+  "title_norm": "exact zarankiewicz values on two finite frontier slices",
+  "abstract": "The Zarankiewicz number Z(m,n,s,t) is the maximum number of edges in a bipartite graph with parts of orders m and n containing no copy of Ks,t. We give one combined, certificate-based computer-assisted proof for two finite slices and a corrected neighboring frontier: Z(12,n,3,3) = 6n (18 <= n <= 22), Z(13,22,3,3) = 137, Z(13, 18, 3, 3) = 116, Z(14, 18, 3, 3) = 124, Z(15,18,3,3) = 132, Z(14, 17, 3, 3) = 118, Z(15, 17, 3, 3) = 126, 132 <= Z(16,17,3,3) <= 133. The load-bearing new upper bounds are the exact 12 x 18 and 13 x 18 certificate packages. Their orbit certificates exclude every hypothetical matrix at the next edge count. Deletion lemmas and explicit witnesses close four neighboring cells, while the 16 x 17 entry is deliberately reported as an interval because only its 132-edge lower witness and the published 133 upper bound are certified here. Separately, the 13 x 22 proof excludes 138 ones by reducing to 83 degree profiles, rationally separating 77 of them, and eliminating the remaining six by marked-row congruences, leave enumeration, modular Gram tests, and exact Farkas certificates. All accepted claims are replayed by standard-library Python and exact integer/rational arithmetic; floating-point optimization is used only to discover certificates.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Koyar Afrasyab"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.08154v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.08154v1",
+  "published_iso": "2026-08-08T14:32:40Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Choric Masking in Ambient Release Systems: A Finite Certificate Calculus for Trace Indistinguishability under Bounded Audiences",
+  "title_norm": "choric masking in ambient release systems a finite certificate calculus for trac",
+  "abstract": "This paper develops a finite certificate calculus for ambient release systems, staged probabilistic environments in which a protected coordinate is not observed directly but can remain statistically readable through visible roles, timing, repeated movement, bounded attention, linked rooms, and post-release state. The security notion, choric masking, requires the trace law induced by a protected locus to lie inside or near the convex hull of admissible cover traces under the tests available to a specified audience. For finite horizons, trace laws form polytopes, audiences induce measurement operators, and masking becomes intersection in the projected measurement space. Exposure is certified by separating hyperplanes, kernel obstructions, hypothesis-testing bounds, Fano-type localization lower bounds, and support separation in downstream rooms. The calculus distinguishes trace residue from carrier localization, full-trace exposure from attention-filtered exposure, first-room masking from delayed post-release exposure, and unresolved system pressure from carrier hazard. It proves measurement-polytope equivalence for exact and approximate masks, dual separation certificates, data-processing laws for attention lenses, aperture identities for gaze-thinned observation, lower bounds for mandatory unique gestures, composition rules for linked releases, and a repeated-room debt theorem showing how unresolved pressure can broaden selection and shift cost onto cover populations without localizing the source. The result is a finite, checkable language for auditing privacy, unlinkability, side-channel leakage, and accountability in public-facing release systems.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Faruk Alpay",
+   "Taylan Alpay"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.13967v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.13967v1",
+  "published_iso": "2026-06-11T23:17:08Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "To Call or Not to Call: A Framework to Assess and Optimize LLM Tool Calling",
+  "title_norm": "to call or not to call a framework to assess and optimize llm tool calling",
+  "abstract": "Agentic AI architectures augment LLMs with external tools, unlocking strong capabilities but potentially incurring substantial costs. Moreover, tool use is not always beneficial: redundant or low-utility calls can even harm task performance. Effective tool use, therefore, hinges on a core LLM decision: whether to call or not call a tool when performing a task. We introduce a principled framework inspired by decision-making theory to understand tool-use decisions along three key factors: necessity, utility, and affordability. Our analysis combines two complementary lenses: a normative perspective that infers true need and utility for optimal tool calls, and a descriptive perspective that infers the model's self-perceived need and utility from their observed behaviors. We evaluate six open models and a proprietary OpenAI model across native and customized harnesses, two tools, and six tasks. Models' perceived need and utility remain misaligned with their true values, particularly under budget constraints. This misalignment produces both costly overuse and performance-degrading calls. To improve the tool decisions, we train lightweight latent estimators of need (LNEs) from model hidden states. LNEs generally predict true need more accurately than model self-reports and improve budgeted tool allocation across model scales and tool types. Code and dataset available at https://github.com/QinyuanWu0710/ToCall_or_NotToCall.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Qinyuan Wu",
+   "Soumi Das",
+   "Mahsa Amani",
+   "Arijit Nag",
+   "Seungeon Lee",
+   "Krishna P. Gummadi",
+   "Abhilasha Ravichander",
+   "Muhammad Bilal Zafar"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2605.00737v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2605.00737v3",
+  "published_iso": "2026-05-01T15:38:13Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Tighter Information-Theoretic Generalization Bounds via a Novel Class of Change of Measure Inequalities",
+  "title_norm": "tighter information theoretic generalization bounds via a novel class of change ",
+  "abstract": "Change of measure inequalities translate divergences between probability measures into explicit bounds on event probabilities, and play an important role in deriving probabilistic guarantees in learning theory, information theory, and statistics. We propose novel change of measure inequalities via a unified framework based on the data processing inequality, which is surprisingly elementary yet powerful enough to yield novel, tighter inequalities. We provide change of measure inequalities in terms of a broad family of information measures, including $f$-divergences (with Kullback-Leibler divergence and $χ^2$-divergence as special cases), Rényi divergence, and $α$-mutual information (with maximal leakage as a special case). We apply these results to generalization error analysis, PAC-Bayesian theory, differential privacy, and data memorization, obtaining stronger guarantees while recovering best-known results through simplified analyses.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Yanxiao Liu",
+   "Yijun Fan",
+   "Deniz Gündüz"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2602.07999v4",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2602.07999v4",
+  "published_iso": "2026-02-08T14:53:14Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "IU-GUARD: Privacy-Preserving Spectrum Coordination for Incumbent Users under Dynamic Spectrum Sharing",
+  "title_norm": "iu guard privacy preserving spectrum coordination for incumbent users under dyna",
+  "abstract": "With the growing demand for wireless spectrum, dynamic spectrum sharing (DSS) frameworks such as the Citizens Broadband Radio Service (CBRS) have emerged as practical solutions to improve utilization while protecting incumbent users (IUs) such as military radars. However, current incumbent protection mechanisms face critical limitations. The Environmental Sensing Capability (ESC) requires costly sensor deployments and remains vulnerable to interference and security risks. Alternatively, the Incumbent Informing Capability (IIC) requires IUs to disclose their identities and operational parameters to the Spectrum Coordination System (SCS), creating linkable records that compromise operational privacy and mission secrecy. We propose IU-GUARD, a privacy-preserving spectrum sharing framework that enables IUs to access spectrum without revealing their identities. Leveraging verifiable credentials (VCs) and zero-knowledge proofs (ZKPs), IU-GUARD allows IUs to prove their authorization to the SCS while disclosing only essential operational parameters. This decouples IU identity from spectrum access, prevents cross-request linkage, and mitigates the risk of centralized SCS data leakage. We implement a prototype, and our evaluation shows that IU-GUARD achieves strong privacy guarantees with practical computation and communication overhead, making it suitable for real-time DSS deployment.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Shaoyu Li",
+   "Hexuan Yu",
+   "Shanghao Shi",
+   "Md Mohaimin Al Barat",
+   "Yang Xiao",
+   "Y. Thomas Hou",
+   "Wenjing Lou"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2602.11023v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2602.11023v1",
+  "published_iso": "2026-02-11T16:49:04Z",
+  "from_query": [
+   "incumbent logs as exact stratum weights"
+  ]
+ },
+ {
+  "title": "Partial extended b-metric and some fixed point theorem",
+  "title_norm": "partial extended b metric and some fixed point theorem",
+  "abstract": "In this paper, we introduce the concept of partial extended b-metric spaces (PEBMS) as a unification and generalization of extended b-metric spaces and partial b-metric spaces. This new structure incorporates a point-dependent control function together with the possibility of non-zero self-distance, providing a more flexible framework for the study of generalized metric spaces. We establish several fundamental properties of PEBMS, including convergence, Cauchy sequences, and 0-completeness. By introducing the notion of 0-Cauchy sequences, we extend various results from extended b-metric spaces to the PEBMS setting. In particular, we prove fixed point theorems for contractive mappings and show the existence and uniqueness of fixed points under suitable conditions. Furthermore, we demonstrate that every extended b-metric space can be viewed as a special case of a PEBMS. As an application, we study the stability of discrete dynamical systems within this framework. The results presented here generalize and enrich existing theories in metric-type spaces and open new directions for further research.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Muhamad Abdillah Ahen",
+   "Ivan Hadinata",
+   "Raudhatul Mufizah"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2604.24728v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2604.24728v2",
+  "published_iso": "2026-04-27T17:38:58Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "Uncertainty Decomposition for Clarification Seeking in LLM Agents",
+  "title_norm": "uncertainty decomposition for clarification seeking in llm agents",
+  "abstract": "Recent position papers argue that the classical aleatoric/epistemic uncertainty framework is insufficient for interactive large language model (LLM) agents and call for underspecification-aware, decomposed, and communicable uncertainty representations that can unlock new agent capabilities such as proactive clarification seeking and shared mental-model building. Practical deployment constraints -- black-box APIs, interactive latency budgets, and the absence of labeled trajectories -- rule out logprob-based, multi-sampling, and training-based methods, leaving prompt-based estimation as the most viable family for surfacing such signals at deployment time. We answer this call with a simple prompt-based decomposition that separates action confidence from request uncertainty (u), enabling the agent to ask for clarification when the task specification is ambiguous. To evaluate it, we introduce two clarification-augmented benchmarks (WebShop-Clarification and ALFWorld-Clarification) in which 50% of tasks are deliberately underspecified, and systematically compare the proposed decomposition against ReAct+UE and Uncertainty-Aware Memory (UAM) across five LLM backbones (GPT-5.1, DeepSeek-v3.2-exp, GLM-4.7, Qwen3.5-35B, GPT-OSS-120B) on these variants together with the standard WebShop, ALFWorld, and REAL benchmarks for fault detection. Averaged across the five backbones, the proposed decomposition improves clarification F1 on ALFWorld-Clarification by 73% over ReAct+UE and by 36% over UAM, and leads clarification F1 on every backbone on WebShop-Clarification and on four of five backbones on ALFWorld-Clarification, indicating that the gains generalize beyond a single LLM.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Gregory Matsnev"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.19559v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.19559v1",
+  "published_iso": "2026-06-17T19:59:32Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Sequential Subspace Noise Injection Prevents Accuracy Collapse in Certified Unlearning",
+  "title_norm": "sequential subspace noise injection prevents accuracy collapse in certified unle",
+  "abstract": "Certified unlearning based on differential privacy offers strong guarantees but remains largely impractical: the noisy fine-tuning approaches proposed so far achieve these guarantees but severely reduce model accuracy. We propose sequential noise scheduling, which distributes the noise budget across orthogonal subspaces of the parameter space, rather than injecting it all at once. This simple modification mitigates the destructive effect of noise while preserving the original certification guarantees. We extend the analysis of noisy fine-tuning to the subspace setting, proving that the same $(\\varepsilon,δ)$ privacy budget is retained. Empirical results on image classification benchmarks show that our approach substantially improves accuracy after unlearning while remaining robust to membership inference attacks. These results show that certified unlearning can achieve both rigorous guarantees and practical utility.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Polina Dolgova",
+   "Sebastian U. Stich"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2601.05134v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2601.05134v2",
+  "published_iso": "2026-01-08T17:23:13Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Can Coding Agents Migrate to Post-Quantum Cryptography?",
+  "title_norm": "can coding agents migrate to post quantum cryptography",
+  "abstract": "A program migrated to post-quantum cryptography can verify its own signatures while producing keys or signatures that another implementation rejects. We introduce a contract-based task for migrating a Go file signer from RSA to ML-DSA-44, and compare coding agents with and without structured checker feedback. Both conditions receive the contract, compiler, documentation, and OpenSSL. Across 160 attempts in four local-agent configurations, twelve final patches pass local verification but fail external requirements. Checker access does not increase the observed completion rate in any comparison. Recorded traces show unresolved defects and checks invoked only after a patch is correct. Serving settings also affect completion: reducing only Qwen3.8's context window from 128K to 32K lowers full passes from 36/40 to 4/40. Four exploratory trials using GPT-6 Astra through Codex and Claude Fable 5.1 through Claude Code pass all 40 checks, including both baselines. These findings support evaluating interoperability separately from local agreement and reporting harness and serving limits alongside agent results.",
+  "year": 2025,
+  "venue": "arXiv",
+  "authors": [
+   "Abdulmalik Alquwayfili"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2512.12989v3",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2512.12989v3",
+  "published_iso": "2025-12-15T05:27:10Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "Adaptive Loss Balancing for Multi-Task Bioacoustic Classification of Bird Species and Call Types",
+  "title_norm": "adaptive loss balancing for multi task bioacoustic classification of bird specie",
+  "abstract": "Reliable analysis of bird vocalisations in passive acoustic monitoring requires models handling multiple, imbalanced annotation targets. We extend BirdCallNet for joint species and call-type classification on the long-tailed WiWa dataset and investigate how task-loss balancing interacts with pretrained representations and adaptation depth. We evaluate four bird-domain encoders, ConvNeXtBS, EAT, BirdMAE, and ProtoCLR, with separate species and call-type heads under linear probing, attentive probing, and full fine-tuning. A manually tuned fixed objective is compared with homoscedastic uncertainty weighting and Dynamic Weight Averaging across all three adaptation regimes, while GradNorm is evaluated only under full fine-tuning.\n  Results indicate that the factorised multi-task formulation yields the most consistent improvements over the combined single-task baseline for call-type recognition, while its effect on species recognition depends on the adaptation regime. Full fine-tuning is not consistently optimal: ConvNeXtBS achieves the highest mean species performance under linear probing, whereas BirdMAE provides the strongest call-type performance under attentive probing. Adaptive weighting benefits species recognition more consistently than call-type recognition. Uncertainty weighting is particularly effective for species recognition under attentive probing, whereas Dynamic Weight Averaging is generally stronger for the same task under full fine-tuning. GradNorm achieves competitive call-type performance for selected backbones but consistently underperforms other weighting strategies for species recognition and incurs higher computational and memory costs. Overall, the preferred loss-balancing strategy depends on the backbone, adaptation regime, and target task, while frozen-backbone adaptation can provide a more favourable performance-efficiency trade-off than end-to-end fine-tuning.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Paria Vali Zadeh",
+   "Sven Tomforde"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.03304v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.03304v1",
+  "published_iso": "2026-07-03T13:16:30Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "A Certified Lower Bound for Lebesgue's Universal Cover Problem",
+  "title_norm": "a certified lower bound for lebesgue s universal cover problem",
+  "abstract": "Lebesgue's universal cover problem asks for the infimum of the areas of planar sets that contain a congruent copy of every planar set of diameter at most one. We work in the convex Brass$-$Sharifi three-test-set framework, where the test sets are a closed disk, an equilateral triangle, and a regular pentagon of diameter one. For each normalized placement $v$, let $A(v)$ denote the area of the convex hull of these three test sets. We construct a finite certificate proving $A(v)\\ge 0.833$ throughout the admissible normalized domain. The threshold $0.833$ yields a certified improvement over the Brass$-$Sharifi lower bound $0.832$ within the same convex three-test-set framework.\n  The proof is a finite-cover argument. The admissible domain is covered by finitely many parameter domains, and each domain carries a local lower-bound certificate. The non-witness domains are certified by supporting local records. On the witness domains, the local bound is obtained from an inner-witness polygon construction. The witness points lie in the three test sets and determine an ordered polygonal region certified to be simple and positively oriented. Its area is bounded below by interval orientation and shoelace estimates. Since this certified polygonal region lies inside the corresponding convex hull, its area gives a lower bound for the hull area. Combining the local inequalities with the finite cover yields $α_{cvx}\\ge 0.833$, where $α_{cvx}$ is the infimum of the areas of convex universal covers.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Niantao Xie"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.04458v4",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.04458v4",
+  "published_iso": "2026-06-03T05:06:28Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Exact Nonnegative Matrix Factorization via Cone-Ray Witnesses: Certificates, a One-Sided Solver, and a Findability Phase Transition",
+  "title_norm": "exact nonnegative matrix factorization via cone ray witnesses certificates a one",
+  "abstract": "We study exact nonnegative matrix factorization (NMF) of small exact-rank-r matrices through the polyhedral cones of nonnegative preimages of the truncated SVD. Restricting each factor to an r-subset of a cone's extreme rays collapses the factorization constraint to the entrywise nonnegativity of a single r x r witness matrix; witness feasibility is a certificate that an exact size-r NMF exists, decided in one matrix inverse. A single-coupling completeness theorem shows every size-r NMF is representable this way, for every m, and a one-sided relaxation gives a closed-form solver that provably dominates the two-sided witness. Our main result concerns findability: at a fixed search budget, witness recoverability undergoes a sharp conic phase transition whose width collapses to a step as r grows. We rule out a universal-constant explanation (Goemans-Williamson) and a statistical-dimension one: the statistical dimension is flat across the transition, while the intrinsic-volume profile's variance tracks it. The transition is not an existence boundary; by completeness a ray-economical witness always exists and persists past the threshold, so what decays with m is its density among r-subsets. The threshold is thus budget-relative, moving logarithmically as the pool grows, and combinatorial rather than smooth-conic. A two-sided union of one-sided relaxations returns exact machine-precision factorizations; being budget-limited, its recovery obeys the transition we study, and a well-initialized coordinate-descent solver, not subject to this threshold, recovers more at larger sizes. Beyond the exact-rank case, the same coupling certifies the gap regime (nonnegative rank > r): infeasibility of its linear relaxation decidably proves no size-r factorization exists, exhibiting a dual witness. Our contribution is these certificates and the transition they expose, not a faster general-purpose solver.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Mithil Ramteke"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.22451v4",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.22451v4",
+  "published_iso": "2026-06-21T11:51:35Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "LLM-as-a-Verifier: A General-Purpose Verification Framework",
+  "title_norm": "llm as a verifier a general purpose verification framework",
+  "abstract": "Scaling pre-training, post-training, and test-time compute have become the central paradigms for improving the capabilities of LLMs. In this work, we identify verification, the ability to determine the correctness of a solution, as a new scaling axis. To unlock this and demonstrate its effectiveness, we introduce LLM-as-a-Verifier, a general-purpose verification framework that provides fine-grained feedback for agentic tasks without requiring additional training. Unlike standard LM judges that prompt LLMs to produce discrete scores for candidate solutions, LLM-as-a-Verifier computes the expectation over the distribution of scoring token logits to generate continuous scores. This probabilistic formulation enables verification to scale along multiple dimensions: (1) score granularity, (2) repeated evaluation, and (3) criteria decomposition. In particular, we show that scaling the scoring granularity leads to better separation between positive and negative solutions, resulting in more calibrated comparisons. Moreover, scaling repeated evaluation and criteria decomposition consistently lead to additional gains in verification accuracy through variance and complexity reduction. We further introduce a cost-efficient ranking algorithm for selecting the best solution among candidates using the verifier's continuous scores. LLM-as-a-Verifier achieves state-of-the-art performance on Terminal-Bench V2 (86.5%), SWE-Bench Verified (78.2%), RoboRewardBench (87.4%), and MedAgentBench (73.3%). Beyond verification, the fine-grained signals from LLM-as-a-Verifier can also serve as a proxy for estimating task progress. We build an extension for Claude Code, enabling developers to monitor and improve their own agentic systems. Finally, we show that LLM-as-a-Verifier can provide dense feedback for RL, improving the sample efficiency of SAC and GRPO on robotics and mathematical reasoning benchmarks.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Jacky Kwok",
+   "Shulu Li",
+   "Pranav Atreya",
+   "Yuejiang Liu",
+   "Yixing Jiang",
+   "Chelsea Finn",
+   "Marco Pavone",
+   "Ion Stoica",
+   "Azalia Mirhoseini"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.05391v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.05391v2",
+  "published_iso": "2026-07-06T17:59:35Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "S-GBT: Smooth Growth Bound Tensor for Certified Robustness Against Word Substitution Attacks in NLP",
+  "title_norm": "s gbt smooth growth bound tensor for certified robustness against word substitut",
+  "abstract": "Despite recent progress in Natural Language Processing (NLP), models remain vulnerable to word substitution attacks. Most existing defenses focus on first order sensitivity and measure how much the output changes when the input is slightly perturbed. However, they ignore how this sensitivity evolves, which is described by curvature. When gradients vary sharply, models can still fail. This paper introduces the Smooth Growth Bound Tensor (S-GBT), a second order method that bounds the Hessian element-wise, for which we provide formal theoretical proofs on the resulting robustness bounds. A regularization term is added during training to minimize these bounds. This yields tighter certified robustness against word substitution attacks. The change in the output under word substitution is bounded by both a linear term and a quadratic term. S-GBT is derived for two architectures: Long Short-Term Memory (LSTM) and Convolutional Neural Networks (CNN). The method is integrated directly into the training objective. Its effectiveness is evaluated on multiple benchmark datasets. The results show that combining first and second order regularization improves certified robust accuracy by up to 23.4% compared to prior methods, while clean accuracy remains competitive. These findings indicate that controlling both the gradient and its variation is a promising direction for building more robust models.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Mohammed Bouri",
+   "Mohammed Erradi",
+   "Adnane Saoud"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.13439v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.13439v1",
+  "published_iso": "2026-06-11T15:01:49Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Streaming Contraction Certificates for Nonlinear Networks: Topology-Aware Data Sufficiency with Partial Observation",
+  "title_norm": "streaming contraction certificates for nonlinear networks topology aware data su",
+  "abstract": "Certifying the safety of a control action in real time, from streaming partial observations of a nonlinear, interconnected system under non-stationary disturbances, is a problem no existing data-driven framework solves. Batch methods such as data-enabled predictive control require a pre-collected dataset and offer no stability certificate for nonlinear dynamics; informativity-based approaches characterize data sufficiency offline and non-recursively; neither exploits the known graph topology of networked systems as a structural prior. This paper addresses both limitations. First, we develop a streaming contraction certificate beta_cert(t) = beta_hat(t) - rho(t), where beta_hat(t) is estimated recursively via integral regression on a sliding window of partial input-output observations, and rho(t) is a data-dependent uncertainty radius mapping estimation error to a conservative bound on the true closed-loop contraction rate. The certificate issues a provably safe deployment signal the moment beta_cert(t) crosses and sustains above zero. Second, we introduce a topology-aware estimator enforcing known graph adjacency as exact zero constraints on the Jacobian, reducing the effective parameter count per row from O(N) to O(d_max) for maximum node degree d_max. On a five-node nonlinear benchmark under heavy-tailed Laplace disturbances with two observed nodes, the streaming certificate achieves certified deployment at t*=2.6s from 130 samples, 17 seconds earlier than an offline batch baseline, with 16x lower accumulated error during the unprotected window. The topology-aware estimator cuts certification time by 59% (1.62s vs 3.98s) and accumulated disturbance cost by 58%, with the advantage persisting across all window sizes below 40 samples. The framework is domain-agnostic and applies to any large-scale nonlinear networked system under streaming data and partial observations.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Faegheh K. Moazeni"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.10893v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.10893v1",
+  "published_iso": "2026-07-12T19:48:55Z",
+  "from_query": [
+   "fixed-sequence partial migration threshold certificate"
+  ]
+ },
+ {
+  "title": "Zero-Shot Embedding Drift Detection: A Lightweight Defense Against Prompt Injections in LLMs",
+  "title_norm": "zero shot embedding drift detection a lightweight defense against prompt injecti",
+  "abstract": "Prompt injection attacks have become an increasing vulnerability for LLM applications, where adversarial prompts exploit indirect input channels such as emails or user-generated content to circumvent alignment safeguards and induce harmful or unintended outputs. Despite advances in alignment, even state-of-the-art LLMs remain broadly vulnerable to adversarial prompts, underscoring the urgent need for robust, productive, and generalizable detection mechanisms beyond inefficient, model-specific patches. In this work, we propose Zero-Shot Embedding Drift Detection (ZEDD), a lightweight, low-engineering-overhead framework that identifies both direct and indirect prompt injection attempts by quantifying semantic shifts in embedding space between benign and suspect inputs. ZEDD operates without requiring access to model internals, prior knowledge of attack types, or task-specific retraining, enabling efficient zero-shot deployment across diverse LLM architectures. Our method uses adversarial-clean prompt pairs and measures embedding drift via cosine similarity to capture subtle adversarial manipulations inherent to real-world injection attacks. To ensure robust evaluation, we assemble and re-annotate the comprehensive LLMail-Inject dataset spanning five injection categories derived from publicly available sources. Extensive experiments demonstrate that embedding drift is a robust and transferable signal, outperforming traditional methods in detection accuracy and operational efficiency. With greater than 93% accuracy in classifying prompt injections across model architectures like Llama 3, Qwen 2, and Mistral and a false positive rate of <3%, our approach offers a lightweight, scalable defense layer that integrates into existing LLM pipelines, addressing a critical gap in securing LLM-powered systems to withstand adaptive adversarial threats.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Anirudh Sekar",
+   "Mrinal Agarwal",
+   "Rachel Sharma",
+   "Akitsugu Tanaka",
+   "Jasmine Zhang",
+   "Arjun Damerla",
+   "Kevin Zhu"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2601.12359v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2601.12359v1",
+  "published_iso": "2026-01-18T11:33:35Z",
+  "from_query": [
+   "LLM call swap to typed classifier"
+  ]
+ },
+ {
+  "title": "Evidence Records for Public-Record Changes: Definitional Class Membership as the Certifiable Citation Unit",
+  "title_norm": "evidence records for public record changes definitional class membership as the ",
+  "abstract": "Public records change in ways that matter for later interpretation, yet citing a change precisely is difficult--most consequentially, separating what the change demonstrably is from what it is claimed to mean. Definitional class membership--whether a change matches an objectively checkable predicate--is certifiable: it can be independently verified against the cited source. Importance or review-priority did not certify in our review design: competent reviewers did not converge on it. We introduce the Evidence Record, a deterministic, hash-pinned, claim-bounded primitive that makes a public-record change citable through a record whose integrity any reader can verify, and that carries its definitional class memberships explicitly. Integrity is checkable from the published package alone; deciding most class predicates additionally requires registry state that records identify by hash but do not embed. We implement it in TrialDiff for ClinicalTrials.gov protocol amendments and report both directions of the boundary. On the certifiable side, deterministic event-classes over a fixed, non-random corpus of 100 breast-cancer-related interventional trials yield citable records; a naive \"primary endpoint changed after completion\" flag fires on 73 patches, but 63 co-occur with results posting and only 10 are clean--a separation made as a checkable definitional predicate, not a validated priority judgment. Two defects found after publication, in opposite directions, were corrected by reissue rather than rewriting. On the uncertifiable side, a derived severity/priority label could not be certified under blinded adversarial review (reviewer confirmations of 4 to 17 of 30 against a pre-registered 24/30 gate) and is released only as uncalibrated metadata. The certifiable citation unit for a public-record change is definitional class membership, not a priority ranking.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Amadeus Brandes"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.11978v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.11978v1",
+  "published_iso": "2026-09-04T14:14:16Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "From estimate to proof: certified ground-state energy bounds for singular Schrödinger operators",
+  "title_norm": "from estimate to proof certified ground state energy bounds for singular schrödi",
+  "abstract": "Many predictions in quantum chemistry, materials science, and spectral geometry hinge on the lowest energy levels of a Schrödinger operator, yet standard simulations return approximations with no guarantee of how far they sit from the true value. We present a computational framework that returns mathematically certified bounds---an interval provably containing the exact energy---even for the singular, unbounded, sign-changing potentials of real molecules, where existing certified methods fail. For the hydrogen molecular ion this framework delivers, to our knowledge, the first guaranteed two-sided enclosure of the true infinite-domain ground-state energy: an interval of width below $5\\times10^{-4}$ that provably contains the accepted reference value. The key that makes a whole-space guarantee possible is an \\emph{explicit}, computable bound on the error of restricting the problem to a finite box---replacing the classical argument that the wavefunction merely decays---which brackets the true energy from both sides. Remarkably, the certified interval reproduces the uncertified numerical value to eleven digits, so mathematical rigor costs almost nothing in accuracy. The result turns eigenvalue computation from an estimate into a proof.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Xuefeng Liu"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.25760v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.25760v1",
+  "published_iso": "2026-08-26T13:07:03Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Training-Free Certified Bounds for Quantum Regression: A Scalable Framework",
+  "title_norm": "training free certified bounds for quantum regression a scalable framework",
+  "abstract": "We present a training-free, certified error bound for quantum regression derived directly from Pauli expectation values. Generalizing the heuristic of minimum accuracy from classification to regression, we evaluate axis-aligned predictors within the Pauli feature space. We formally prove that the optimal axis-aligned predictor constitutes a rigorous upper bound on the minimum training Mean Squared Error (MSE) attainable by any linear or kernel-based regressor defined on the same quantum feature map. Since computing this exact bound requires an intractable scan of the full Pauli basis, we introduce a Monte Carlo framework to efficiently estimate it using a tractable subset of measurement axes. We further provide non-asymptotic statistical guarantees to certify performance within a practical measurement budget. This method enables rapid comparison of quantum feature maps and early diagnosis of expressivity, allowing for the informed selection of architectures before deploying higher-complexity models.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Demerson N. Gonçalves",
+   "Tharso D. Fernandes",
+   "Pedro H. G. Lugao",
+   "João T. Dias"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2601.00745v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2601.00745v1",
+  "published_iso": "2026-01-02T17:05:48Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Improving Certified Robustness via Adversarial Distillation",
+  "title_norm": "improving certified robustness via adversarial distillation",
+  "abstract": "Certified training aims to produce models whose predictions can be formally verified against adversarial perturbations, typically by optimising upper bounds on the worst-case loss over an allowed perturbation set. For neural networks, certified training methods based purely on tight relaxation bounds produce networks that are amenable to certification, but sacrifice standard accuracy. Conversely, adversarial training often yields stronger empirical robustness and standard accuracy, but the resulting models are generally difficult to certify with neural network verifiers. Recently, the literature has shown that better standard-certified accuracy trade-offs can be achieved by combining adversarial training objectives with loose over-approximations based on Interval Bound Propagation (IBP), effectively interpolating between lower and upper bounds of the worst-case loss. Building on this, we introduce AD-CERT, a certified training objective that combines adversarial distillation with an IBP upper bound. We show that distilling adversarial information over the logit space from an empirically robust teacher provides an effective lower bound surrogate for certified training, with AD-CERT achieving state-of-the-art certified performance on several robustness benchmarks. Furthermore, in a unified setup, distilling adversarial information at the logit-level is shown to improve certified accuracy over a robust feature-space distillation objective by up to 5.40 percentage points.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Matteo Melis",
+   "Jesus Martinez Del Rincon",
+   "Vishal Sharma"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2606.31653v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2606.31653v1",
+  "published_iso": "2026-06-30T13:31:35Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Certified Multi-Turn Robustness for LLM Safety via Compositional Bounds and Safety Persistence",
+  "title_norm": "certified multi turn robustness for llm safety via compositional bounds and safe",
+  "abstract": "Large language models (LLMs) are vulnerable to multi-turn jailbreak attacks that progressively manipulate conversation context. Existing certified robustness methods are limited to single-turn inputs; naive multi-turn composition yields bounds that degrade exponentially in the number of turns. We introduce Multi-Turn Certified Robustness (MTCR), a framework that models conversational safety via State-Adversarial MDPs and defines $k$-turn certified robustness as the worst-case safety probability across $k$ adversarial turns. MTCR comprises: (i) compositional certification via embedding-space mode decomposition, yielding tighter certified lower bounds than naive multiplication; (ii) $(α,β)$-safety persistence, improving the degradation rate from $\\underline{p}^{k}$ to $β^k$ (with $β> \\underline{p}$) and yielding interpretable horizon estimates; (iii) matching information-theoretic upper bounds establishing tightness; and (iv) a unified algorithm combining these results. Experiments on six LLMs under $ε$-bounded and Crescendo-style attacks confirm that empirical safety consistently exceeds the certified bounds.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Yang Liu",
+   "Bin Chong",
+   "Wenkai Yang",
+   "Shuai Zhang",
+   "Yancheng Chen",
+   "Feiyu Han",
+   " GuoZhen",
+   "Cheng Zhang",
+   "Huaibing Xie",
+   "Changze Lv",
+   "Shihan Dou",
+   "Pluto Zhou"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2608.20820v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2608.20820v1",
+  "published_iso": "2026-08-21T07:43:06Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Certifying Lower Bounds for Risk-Sensitive Reinforcement Learning under Adversarial State Perturbations",
+  "title_norm": "certifying lower bounds for risk sensitive reinforcement learning under adversar",
+  "abstract": "Reinforcement learning (RL) agents deployed in real-world environments are often vulnerable to adversarial perturbations in state observations, creating risks in safety-critical applications. Certification methods can improve robustness against adversarial perturbations by providing lower bounds on expected cumulative rewards. Existing certification methods, however, mainly focus on risk-neutral objectives. In this paper, we extend certification methods to risk-sensitive objectives by establishing lower bounds on the exponential utility of cumulative rewards under $l_{p}$-norm-bounded state adversarial perturbations ($1\\leq p <\\infty$). By introducing a $φ$-divergence relaxation of the perturbation set, we formulate the risk-sensitive certification problem as a convex optimization and derive its dual to obtain a tractable approximation of the certified lower bound. We further propose an empirical method that improves certified lower bounds by selecting the training risk-aversion parameter $β$ independently of the risk level used during evaluation. Experiments on both OpenAI Gym environments and a machine replacement problem show that, compared to risk-neutral training, risk-averse training generally yields policies with higher certified lower bounds, particularly under larger perturbation budgets. Moreover, under both risk-neutral and risk-averse evaluation settings, increasing risk aversion during training leads to non-monotonic certification performance, where certified lower bounds initially improve but eventually decrease due to overly conservative policies.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Tong Li",
+   "Saunak Kumar Panda",
+   "Yisha Xiang"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2609.10866v1",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2609.10866v1",
+  "published_iso": "2026-09-09T22:06:23Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ },
+ {
+  "title": "Arranging circles of radii 1,2,...,n around a central circle: a Supnick TSP and certified finite optima",
+  "title_norm": "arranging circles of radii 1 2 n around a central circle a supnick tsp and certi",
+  "abstract": "We study a discrete-geometric optimization problem: circles of radii $1,2,\\dots,n$ are all externally tangent to a central circle, and the central radius $R$ is minimized over cyclic orders of the surrounding circles. We prove that the chain-ordering component is governed by a fixed Supnick/anti-Monge traveling-salesman order. For every $R$, the angular-separation matrix is symmetric anti-Monge, so Supnick's theorem gives one minimizing cyclic order, independent of $R$. This proves the conjectured \"pyramid\" order optimal whenever the corresponding chain necklace is geometrically realizable, and gives an unconditional lower bound in all cases. Full geometric feasibility can fail because non-adjacent circle constraints are not captured by the chain equation; from $n=8$ the smallest circle can become a floating circle tangent only to the central circle. We formulate the full problem as a circular system of pairwise angular constraints, equivalently a simple temporal network, and certify global optima for $3\\le n\\le14$ using branch-and-bound plus an independent 50-digit verifier. Continuation of the floating-circle pattern beyond that range remains conjectural. The v1 conjecture $R^\\ast(n)=n^2/8(1+o(1))$ has been disproved by subsequent work (see the cited standalone sequel); this correction does not invalidate the finite results. The repository contains the saved certificate artifacts, verifier, and reproducibility commands.",
+  "year": 2026,
+  "venue": "arXiv",
+  "authors": [
+   "Maurizio Falconi"
+  ],
+  "citations": null,
+  "source": "arxiv",
+  "source_id": "2607.28654v2",
+  "doi": "",
+  "paper_url": "https://arxiv.org/abs/2607.28654v2",
+  "published_iso": "2026-06-25T08:45:02Z",
+  "from_query": [
+   "certified paired accuracy change bound"
+  ]
+ }
+]

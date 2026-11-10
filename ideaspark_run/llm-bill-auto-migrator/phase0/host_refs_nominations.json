@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+    "id_hint": "arXiv:2607.25018",
+    "why": "Jul 2026; distribution-free accuracy guarantee for accept-or-defer cheap-tier decisions on multiple-choice (classification-shaped) tasks — closest frontier mechanism to a guaranteed swap gate",
+    "relevance": "core",
+    "source": "websearch"
+  },
+  {
+    "title": "C3PO: Optimized Large Language Model Cascades with Probabilistic Cost Constraints for Reasoning",
+    "id_hint": "arXiv:2511.07396",
+    "why": "Nov 2025 (NeurIPS 2025); label-free cascade built from unlabeled outputs, using regret relative to the strongest model plus conformal cost bounds — matches using the incumbent model's past answers as reference",
+    "relevance": "core",
+    "source": "websearch"
+  },
+  {
+    "title": "Prediction-Powered Inference Across Many Tasks for AI Evaluation & Social Science Research",
+    "id_hint": "arXiv:2605.29249",
+    "why": "May 2026 (ICML 2026); multi-task PPI that pools scarce human labels across many tasks — directly relevant to certifying many migrated call sites at once with few labels per site",
+    "relevance": "core",
+    "source": "websearch"
+  },
+  {
+    "title": "Conformal Arbitrage: Risk-Controlled Balancing of Competing Objectives in Language Models",
+    "id_hint": "arXiv:2506.00911",
+    "why": "Jun 2025 (NeurIPS 2025); conformal-risk-controlled threshold between a primary and a fallback model with finite-sample guarantees — template for a risk-controlled cheap/incumbent switch",
+    "relevance": "core",
+    "source": "websearch"
+  },
+  {
+    "title": "Can Unconfident LLM Annotations Be Used for Confident Conclusions?",
+    "id_hint": "arXiv:2408.15204 (NAACL 2025)",
+    "why": "NAACL 2025; confidence-driven choice of which items get human labels, combined with LLM labels, with validity guarantees — core to the limited-human-label budget of the eval set",
+    "relevance": "core",
+    "source": "websearch"
+  },
+  {
+    "title": "SMART: Automatically Scaling Down Language Models with Accuracy Guarantees for Reduced Processing Fees",
+    "id_hint": "arXiv:2403.13835",
+    "why": "2024; direct precedent baseline — picks the cheapest LLM whose accuracy against the reference best LLM meets a tolerance, using binomial confidence intervals; the swap gate must beat it",
+    "relevance": "adjacent",
+    "source": "websearch"
+  },
+  {
+    "title": "Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement",
+    "id_hint": "arXiv:2407.18370 (ICLR 2025)",
+    "why": "2024/ICLR 2025; cascaded selective evaluation with a provable human-agreement guarantee via fixed-sequence testing — the baseline for risk control on cheap-then-escalate decisions",
+    "relevance": "adjacent",
+    "source": "websearch"
+  },
+  {
+    "title": "Active Statistical Inference",
+    "id_hint": "arXiv:2403.03208 (ICML 2024)",
+    "why": "2024; foundational method for budgeted, uncertainty-guided label collection with valid CIs — the backbone for choosing which production calls get human labels",
+    "relevance": "adjacent",
+    "source": "websearch"
+  }
+]

@@ -1,0 +1,430 @@
+{
+  "contract_version": 2,
+  "base_candidate_sha256": "5bb1ddc82733bdd5bb336db45e91711ebb90b912263d5fe1c31d0b111b49e320",
+  "verdict": "findings",
+  "unrepaired": [
+    {
+      "finding": "Step 5 has no halting rule once D_L(tau_j) is fully labelled before budget B is reached. With-replacement draws then hit the label cache forever (no label is bought, so the 'cumulative labels reach budget B' stop can never fire). Whenever the certified interval for Delta_P(tau_j) straddles -epsilon, neither the certify stop nor the futility stop fires and the loop does not terminate. Because the label-free slack does not shrink with labels, this straddle band has positive width for every finite |D_L|.",
+      "severity": "note",
+      "why_not_repaired": "This gate does not edit the candidate. A one-sentence definitional stop (W1) fixes it, and the assignment B <= |D_L(tau_1)| already guarantees halting, so it is a parameter-dependent defect rather than an impossibility.",
+      "tag": "parameter",
+      "source": "T3",
+      "derivation": "Labels are bought only for items of D_L(tau_j) not in the cache, and there are at most |D_L(tau_j)| of them. If cumulative labels plus |D_L(tau_j)| is less than B, the budget stop is unreachable. Once every item is cached, LCB_D converges to mu_D,L from below and UCB_D converges to mu_D,L from above. Certification needs p_d^+ (LCB_D - slack) >= -eps, and futility needs p_d^- (UCB_D + slack) < -eps (when negative). For any mu_D,L with p_d^+ (mu_D,L - slack) < -eps <= p_d^{+/-} (mu_D,L + slack), neither condition ever holds. Admissible assignment that halts: B <= |D_L(tau_1)|, since D_L(tau_j) is non-decreasing in j.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "stop when the certified bound on Delta_P(tau_j) clears -epsilon (move to j+1), when the confidence sequence's upper bound shows Delta_P(tau_j) < -epsilon, or when cumulative labels reach budget B (stop the sequence).",
+      "executed_evidence": "trace.py, probe 'D_L fully cached': |L|=2000, |D_L|=40 (20 items with d=-1, 6 with d=+1, 14 with d=0, so mu_D,L=-0.35), B=4000, delta=0.05, eps=0.02 (my values). Result: res='NO_HALT(guard 200000 draws, labels=40)', lcb_mu=-0.3639, slack_mu=0.4296, p_up=0.02972, lb_Delta=-0.02358. The same log with B=30 stops with res='budget'. Main instance, hypothesis j=4: the run labelled all 2144 items of D_L and then made 75,423 draws, certifying at lb_Delta exactly -0.02000, so it was one rounding step from the same stall.",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    },
+    {
+      "finding": "The categorical shell selector Categorical(w_i/p_d(tau_j)) and the Hoeffding slack on |D_L(tau_j)| are undefined (0/0 and division by zero) for any hypothesis j with p_d(tau_j)=0. Step 3 states the label-free shortcut only for tau_M. Separately, the procedure never checks the label-free certificate before buying the first label, and it does not floor the bracket LCB_D - slack at -1.",
+      "severity": "note",
+      "why_not_repaired": "Definitional; W2 states the intended label-free rule for every j. A grid whose first migrated set A(tau_1) contains at least one disagreement avoids the division, so this is a parameter (grid) edge, not an impossibility.",
+      "tag": "parameter",
+      "source": "T3",
+      "derivation": "w_i/p_d(tau_j) with p_d(tau_j) = sum_{i<=j} w_i = 0 is 0/0. The slack sqrt(2 ln(2/delta_pop)/|D_L(tau_j)|) with |D_L(tau_j)|=0 divides by zero. Because d >= -1, Delta_P >= -p_d,P >= -p_d^+, so H_j is certifiable with zero labels whenever p_d^+ <= eps. The bracket (LCB_D - slack) can drop below -1, which only loosens the bound.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "if p_d(tau_M) = 0 the full-migration certificate is immediate up to the label-free slack.",
+      "executed_evidence": "trace.py, probe p_d=0: an all-agree log of 1000 records gives 'p_d=0: selector w_i/p_d is 0/0 and slack sqrt(.../|D_L|) divides by 0'. Python raises ZeroDivisionError on 0/0.0. Main instance, j=0: p_d,L=0.00535, p_up=0.00688, slack=0.2626. The unfloored bound p_up*(-1-slack) = -0.00868 and the floored bound p_up*(-1) = -0.00688 both clear -0.02, yet one label was bought before the check (labels_cum=1). The same happened at j=1.",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    },
+    {
+      "finding": "The delta-split rule ('assign delta_pop the smallest share that keeps its slack below the label-term width') has no solution in (0, delta) whenever the unlabeled disagreement count |D_L(tau_j)| is not well above the label budget, and the text gives no fallback. The rule is also circular until 'label-term width' is pinned to a label-free quantity: under the reading 'observed CS width', the level delta_lab is chosen from the labels it then certifies.",
+      "severity": "note",
+      "why_not_repaired": "This is a wording/definition issue (W3). Admissible assignments exist where the rule is feasible (for example |L|=200000 with B=4000, or B=1000 with |L|=20000), so it is a parameter finding.",
+      "tag": "parameter",
+      "source": "T1",
+      "derivation": "Under reading (a), with the label-term width taken as range-based at budget B: pop width ~ p_d sqrt(2 ln(2/dp)/(p_d |L|)) and label width = p_d sqrt(2 ln(1/dl)/B). Their ratio is ~ sqrt(B ln(2/dp) / (|D_L| ln(1/dl))). Since ln(2/dp) > ln(1/dl) near the crossing, the ratio exceeds 1 for every dp in (0, delta) whenever |D_L| is at most about B, so the 'smallest share' does not exist. Under reading (b), with the label-term width taken as the observed confidence-sequence width, the split depends on the labels, and the level-delta guarantee then needs a separate argument.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "with delta_lab + delta_pop = delta (split rule: assign delta_pop the smallest share that keeps its slack below the label-term width, since it is paid only in unlabeled counts)",
+      "executed_evidence": "trace2.py feasibility scan over dp = delta*k/400 with delta=0.05: (p_d=0.107, |L|=20000, B=4000, nD=2140) gives feasible=False. (0.107, 20000, B=1000) gives feasible=True with first dp=0.04925. (0.107, |L|=200000, B=4000) gives feasible=True with first dp=0.01775. (0.01, 20000, 4000) gives feasible=False. (0.01, 1000000, 4000) gives feasible=True. In the main instance every j was infeasible (for example j=0: popw=0.00333 vs labw=0.00036), and my script fell back to dp=0.04988, leaving delta_lab=0.000125.",
+      "reading_dependence": "reading_dependent: infeasibility holds under reading (a) (range-based width at budget B, label-free); the circularity concern holds under reading (b) (observed CS width)",
+      "structural_requirement": null
+    },
+    {
+      "finding": "The hook's guarantee 'never worse on their binding axis — gold labels per call site — at equal epsilon and delta' fails on the family p_d -> 1. When every call disagrees, the mechanism is a gold-only paired test that runs its labels at delta_lab < delta and also subtracts a label-free slack, so it needs more gold labels than a gold-only anytime test at full delta. The candidate's reasoning concedes that the method degrades to stratified gold-only testing, but it never says the result is worse than gold-only.",
+      "severity": "note",
+      "why_not_repaired": "The claim sits in `hook`, which this gate may edit only when a repair makes it factually wrong. The regime statement is suggested for core_mechanism_reasoning (W6), and the hook wording is left to the author and the audit.",
+      "tag": "regime",
+      "source": "T5",
+      "derivation": "At p_d=1, D(tau)=A(tau), and the mechanism's lower bound is p_d^+ (LCB_{delta_lab} - slack). Here LCB at delta_lab < delta is at most the LCB at delta, slack > 0, and p_d^+ >= 1 multiplies a negative bracket. A gold-only test sampling L without replacement targets Delta_P directly at level delta with no slack. So at any fixed label count the mechanism's bound is at most the naive's, and labels-to-decision can only be larger.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "Against the strongest ground-truth certificates (a gold-only paired test; Conformal LLM Routing's Clopper-Pearson gate) it is never worse on their binding axis — gold labels per call site — at equal epsilon and delta",
+      "executed_evidence": "trace2.py, p_d=1 with B=|L|, eps=0.02, delta=0.05 (my values). |L|=20000, Delta_P=0.06: mechanism used 7923 labels (delta_pop=0.0334, delta_lab=0.01662, slack floor 0.0202) vs naive 1109. |L|=20000, Delta_P=0.08: 3773 vs 691. |L|=100000, Delta_P=0.06: 923 vs 259. The label-free floor sqrt(2 p_d ln(2/dp)/|L|) at p_d=1 is 0.0225 (|L|=20000, dp=0.0125) and 0.0071 (|L|=200000).",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    }
+  ],
+  "previous_findings_status": [],
+  "suggested_repairs": [
+    {
+      "kind": "definition",
+      "op": "append_sentence",
+      "field": "core_mechanism_steps",
+      "value": "Hypothesis j also stops buying when every item of D_L(tau_j) carries a cached label: mu_D,L(tau_j) is then known exactly and replaces LCB_D(tau_j), H_j is rejected iff p_d^+ * (mu_D,L(tau_j) - slack) >= -epsilon, and otherwise the sequence stops.",
+      "delta_summary": "T3 non-termination (|D_L(tau_j)| < B with a straddling interval loops forever). This adds the missing halting branch and leaves validity unchanged, because an exactly known mu_D,L needs no label-term width."
+    },
+    {
+      "kind": "definition",
+      "op": "append_sentence",
+      "field": "core_mechanism_steps",
+      "value": "Set A(tau_0) to the empty set. For every j, before any label is bought for H_j, the bracket LCB_D - slack is floored at -1 (d >= -1), so H_j is rejected label-free whenever p_d^+(tau_j) <= epsilon. When p_d(tau_j) = 0 the shell selector and the Hoeffding slack are not evaluated.",
+      "delta_summary": "T3 probes: the selector 0/0 and the slack's division by zero at p_d(tau_j)=0 for j<M, a label bought before a label-free certificate (main instance j=0,1), and an unfloored bracket (-0.00868 vs -0.00688)."
+    },
+    {
+      "kind": "wording",
+      "op": "replace",
+      "field": "core_mechanism",
+      "value": "with delta_lab + delta_pop = delta (split rule, fixed per hypothesis before any label is bought and computed from label-free quantities only: delta_pop is the smallest share for which the population slack, in Delta units, is at most the range-based label-term width at budget B; if no share in (0, delta) satisfies this, delta_pop is the share minimising the sum of the two widths)",
+      "delta_summary": "T1 dual reading plus infeasibility: under 'observed CS width' the split is data-dependent, and under the label-free reading the rule has no solution when |D_L| is not well above B (executed: infeasible at p_d=0.107, |L|=20000, B=4000). This replaces the parenthetical '(split rule: assign delta_pop the smallest share that keeps its slack below the label-term width, since it is paid only in unlabeled counts)'."
+    },
+    {
+      "kind": "wording",
+      "op": "replace",
+      "field": "core_mechanism_steps",
+      "value": "take the next item of that shell's stream not yet consumed by this hypothesis (each hypothesis reads every shell stream from its start, so items labelled for earlier hypotheses are re-read from the cache at no label cost)",
+      "delta_summary": "T1 dual reading of 'take that shell's next stream item for this hypothesis'. A per-hypothesis pointer gives the claimed label reuse, and a global pointer gives none. Both readings are valid, but only the first matches 'reusing every label bought for earlier hypotheses'."
+    },
+    {
+      "kind": "claim_grade",
+      "op": "replace",
+      "field": "gap_closure[0].how_closed",
+      "value": "whose width at a fixed label count shrinks by the factor p_d for range-based sequences and, for variance-adaptive sequences, by the stratified-variance ratio p_d sqrt(Var_D(d)) / sqrt(p_d E_D[d^2] - p_d^2 mu_D^2), which is about sqrt(p_d) when mu_D is small",
+      "delta_summary": "T4 grade conditional (overclaim in the hook): the variance identity gives an sd ratio of 0.3261, about sqrt(p_d)=0.3274, not p_d=0.1072. The executed variance-adaptive width ratios are 0.405 and 0.438. The p_d factor holds for range-based bounds only. This replaces 'whose width scales with the disagreement mass'. The hook sentence 'contracts by the disagreement mass p_d (derived from the stratified variance identity)' carries the same overclaim and is left to the author because hook is not an allowed target here."
+    },
+    {
+      "kind": "claim_grade",
+      "op": "append_sentence",
+      "field": "core_mechanism_reasoning",
+      "value": "The label advantage over a gold-only test at equal (epsilon, delta) holds when p_d is small. As p_d -> 1 the mechanism becomes a gold-only test run at delta_lab < delta plus a label-free slack floor of about sqrt(2 p_d ln(2/delta_pop)/|L|), so it then needs more gold labels than a gold-only anytime test at full delta.",
+      "delta_summary": "T5/T4 regime: 'never worse ... at equal epsilon and delta' is refuted at p_d=1 (executed: 7923 vs 1109 labels, 3773 vs 691, 923 vs 259). This states the premise under which the claim can be kept."
+    },
+    {
+      "kind": "wording",
+      "op": "append_sentence",
+      "field": "core_mechanism",
+      "value": "The threshold grid is fixed before C and s_C are replayed on L_cert (or chosen on L_train), because the conditional-i.i.d. argument behind the Hoeffding slack on |D_L(tau_j)| and the fixed-sequence family-wise bound require A(tau_j) not to depend on L_cert.",
+      "delta_summary": "T4: 'family-wise error is at most delta without a union bound' is conditional on a grid that does not depend on L_cert. Step 3 says only 'practitioner-chosen, swept in evaluation'."
+    }
+  ],
+  "trace_report": {
+    "likely_fatal_pick": "Steps 5-6, where shared shell streams with a label cache feed per-hypothesis selectors under optional stopping and a with-replacement sample of the finite D_L is converted to a superpopulation certificate. I picked this because the unconditional claims ('i.i.d. uniform sample over D(tau_j) while reusing every label', 'valid under the mechanism's own optional stopping', 'family-wise error at most delta without a union bound') all rest on how these three parts interact, and the candidate's reasoning treats that interaction as routine. I attacked it first with executed code. Selector uniformity matched (picks [3726,5979,11831,20938,32949] vs expected [3764,5980,11890,20826,32962]). A boundary FWER instance gave 0/300 violations, which is not proof. Validity survived, but the attack exposed a halting hole: once D_L is fully cached, the loop can run forever (U1).",
+    "formalized_procedure": [
+      {
+        "step": "S1",
+        "consumes": [
+          "request log of (x, I(x)) records",
+          "split seed"
+        ],
+        "produces": [
+          "L_cert (|L| records), optional L_train, disjointness assertion"
+        ],
+        "note": "Quote: 'Split the call site's request log by time-stratified random assignment into L_train ... and L_cert'. No parameter.",
+        "status": "instantiated"
+      },
+      {
+        "step": "S2",
+        "consumes": [
+          "L_cert",
+          "deterministic candidate"
+        ],
+        "produces": [
+          "C(x), s_C(x) per record; agreement flag a(x)=1{C(x)=I(x)}"
+        ],
+        "note": "Quote: 'Replay the deterministic candidate on L_cert ... zero gold labels used.' Instantiated synthetically: s_C on 20 equiprobable bins, disagreement prob q(s)=0.02+0.25(1-s)^2 (my values). C and I are not modelled; only the flag and the realised d are drawn.",
+        "status": "instantiated"
+      },
+      {
+        "step": "S3",
+        "consumes": [
+          "s_C, agreement flags",
+          "grid tau_1>...>tau_M, tau_M=-inf"
+        ],
+        "produces": [
+          "A(tau_j), shells R_i, w_i=|R_i|/|L|, p_d(tau_j)=sum_{i<=j} w_i"
+        ],
+        "note": "Quote: 'compute migrated sets A(tau_j), disagreement shells R_i, exact weights w_i and p_d(tau_j)'. A(tau_0) is used but not defined (read as the empty set). The grid is the candidate's variable (M named). I used tau=(0.8,0.6,0.4,0.2,-inf). Shortcut stated only for p_d(tau_M)=0 (see U2).",
+        "status": "instantiated"
+      },
+      {
+        "step": "S4",
+        "consumes": [
+          "shells R_i",
+          "seeds"
+        ],
+        "produces": [
+          "per-shell i.i.d. uniform-with-replacement item streams; empty label cache"
+        ],
+        "note": "Quote: 'For each shell create a seeded uniform-with-replacement item stream and an empty label cache'.",
+        "status": "instantiated"
+      },
+      {
+        "step": "S5",
+        "consumes": [
+          "streams, cache, w_i/p_d(tau_j), delta_lab, eps, B, slacks from S6"
+        ],
+        "produces": [
+          "per-hypothesis anytime LCB_D/UCB_D on mu_D,L(tau_j); stop reason; cumulative label count"
+        ],
+        "note": "Quote: 'repeatedly draw a shell index from Categorical(w_i/p_d(tau_j)), take that shell's next stream item for this hypothesis ... stop when the certified bound on Delta_P(tau_j) clears -epsilon ..., when the confidence sequence's upper bound shows Delta_P(tau_j) < -epsilon, or when cumulative labels reach budget B'. The stop rule consumes S6's slacks, so S5 and S6 are evaluated jointly at each draw (not circular, since the slacks are label-free). Dual reading of 'next stream item for this hypothesis': (R1) per-hypothesis pointer from stream start, which reuses labels, and (R2) a global pointer, which gives no reuse. I implemented R1. CS: predictable-plug-in empirical-Bernstein (betting-derived, variance-adaptive), my stand-in for 'the anytime-valid tool of n8'. Undefined at p_d=0 (U2); no halting when D_L is fully cached (U1).",
+        "status": "instantiated"
+      },
+      {
+        "step": "S6",
+        "consumes": [
+          "|L|, |D_L(tau_j)|, delta_pop, LCB_D"
+        ],
+        "produces": [
+          "p_d^+/p_d^- (binomial, I used KL-Chernoff at delta_pop/2), Hoeffding slack sqrt(2 ln(2/delta_pop)/|D_L|), certified lower bound p_d^{+/-} (LCB_D - slack)"
+        ],
+        "note": "Quote: 'Convert the confidence-sequence bound to the Delta_P certificate using exact p_d, the binomial bound on p_d from |L_cert| and the Hoeffding slack from |D_L(tau_j)| at level delta_pop'. How delta_pop is divided between the binomial and Hoeffding terms is not stated (I used an equal split). Split rule dual reading: (a) label-free range width at B, which I implemented and which is infeasible on the main instance, and (b) observed CS width, which is data-dependent (U3).",
+        "status": "instantiated"
+      },
+      {
+        "step": "S7",
+        "consumes": [
+          "per-hypothesis outcomes in order j=1..M"
+        ],
+        "produces": [
+          "tau* = last certified threshold; certificate artifact; CI pass/fail"
+        ],
+        "note": "Quote: 'Emit tau* = the last certified threshold ... the gate fails the migration PR if no threshold is certified.'",
+        "status": "instantiated"
+      },
+      {
+        "step": "S8",
+        "consumes": [
+          "tau*"
+        ],
+        "produces": [
+          "router: candidate on s_C >= tau*, incumbent otherwise"
+        ],
+        "note": "Deployment only. The served change on A(tau*) equals 1{x in A(tau*)} d(x), which matches the estimand. T1(b): no unbound parameters in core_mechanism / core_mechanism_steps (eps, delta, delta_lab, delta_pop, M, B and the grid are named). T1(d): the declared estimand Delta_P(tau)=E[1{s_C>=tau} d] = p_d,P * mu_D,P is targeted by binomial(p_d) times (CS on mu_D,L minus Hoeffding to mu_D,P), so the estimand matches.",
+        "status": "instantiated"
+      }
+    ],
+    "negative_control": {
+      "executed": true,
+      "moved_outcome": true,
+      "evidence": "Falsification negative control: acquire labels uniformly from the whole migrated set A(tau), so that every call is a shell member, using the same machinery. On the T2 instance (|L|=20000, eps=0.02, delta=0.05, B=4000), the mechanism gave tau*=-inf (full migration) with 2144 labels. The ablation gave tau*=0.4 with 4000 labels (budget exhausted at tau=0.2, lb_Delta=-0.03035), and its first hypothesis needed 477 labels against 1 for the mechanism. The outcome moved. The ablation lands at or below the gold-only curve rather than on it: the constructed gold-only naive certified tau=0.2, because the ablation still pays the delta split and the label-free slack."
+    },
+    "dry_run": {
+      "instance": "My illustrative values: P has 20 equiprobable s_C bins s=(k+.5)/20 with disagreement prob q(s)=0.02+0.25(1-s)^2. On disagreements P(d=+1)=0.30+0.25s and P(d=-1)=0.25+0.35(1-s), else d=0. Agreement gives d=0 (P1). |L|=20000, grid tau=(0.8,0.6,0.4,0.2,-inf), eps=0.02, delta=0.05, B=4000, seed 1. True Delta_P = (0.00110, 0.00208, 0.00199, -0.00158, -0.01247) and p_d,P = (0.00466, 0.01331, 0.02997, 0.05863, 0.10328), so every threshold is truly safe. Probes: p_d=1 logs, an all-agree log, a 40-disagreement log with B=4000, and a boundary FWER instance (Delta_P(tau1)=0.006, Delta_P(tau2)=-0.02475, 300 reps).",
+      "execution": {
+        "mode": "executed",
+        "script": "# Coherence dry-run of \"Disagreement-Restricted Certificates\" (stdlib only).\n# Executes the candidate's OWN rules (shells, exact weights, categorical shell selector with\n# shared per-shell streams + label cache, anytime CS on mu_D, label-free p_d / mu_D slacks,\n# fixed-sequence testing, budget B) on SYNTHETIC logs. No learned component is simulated:\n# C, I, s_C and gold-label outcomes d are drawn synthetic inputs.\n# Anytime CS used: predictable-plug-in empirical-Bernstein (WSR 2023), a betting-derived,\n# variance-adaptive one-sided CS (stand-in for \"the betting CS of n8\"; my choice).\nimport math, random\n\ndef kl(p, q):\n    q = min(max(q, 1e-15), 1 - 1e-15)\n    t = 0.0\n    if p > 0: t += p * math.log(p / q)\n    if p < 1: t += (1 - p) * math.log((1 - p) / (1 - q))\n    return t\n\ndef p_upper(k, n, d):\n    ph = k / n; lo, hi = ph, 1.0\n    for _ in range(60):\n        m = (lo + hi) / 2\n        if n * kl(ph, m) <= math.log(1 / d): lo = m\n        else: hi = m\n    return lo\n\ndef p_lower(k, n, d):\n    ph = k / n; lo, hi = 0.0, ph\n    for _ in range(60):\n        m = (lo + hi) / 2\n        if n * kl(ph, m) <= math.log(1 / d): hi = m\n        else: lo = m\n    return hi\n\nclass CS:  # one-sided PrPl-EB lower & upper CS for X in [-1,1] (via Y=(X+1)/2)\n    def __init__(s, a):\n        s.a = a; s.t = 0; s.sumY = 0.0; s.mu_prev = 0.5; s.var_acc = 0.25; s.sig_prev = 0.25\n        s.sl = 0.0; s.slY = 0.0; s.pen = 0.0; s.lcb = -1.0; s.ucb = 1.0\n    def update(s, x):\n        y = (x + 1) / 2; s.t += 1; t = s.t\n        lam = min(math.sqrt(2 * math.log(1 / s.a) / (s.sig_prev * t * math.log(1 + t))), 0.5)\n        v = 4 * (y - s.mu_prev) ** 2\n        s.sl += lam; s.slY += lam * y; s.pen += v * (-math.log(1 - lam) - lam) / 4\n        s.sumY += y; mu = (0.5 + s.sumY) / (t + 1)\n        s.var_acc += (y - mu) ** 2; s.sig_prev = s.var_acc / (t + 1); s.mu_prev = mu\n        c = s.slY / s.sl; w = (math.log(1 / s.a) + s.pen) / s.sl\n        s.lcb = max(s.lcb, 2 * (c - w) - 1); s.ucb = min(s.ucb, 2 * (c + w) - 1)\n\nNEG_INF = float('-inf')\n\ndef make_pop(qf, af, bf, K=20):\n    # discrete P: s-bins (k+.5)/K equiprobable; q=P(C!=I|s); on disagreements a=P(d=+1), b=P(d=-1)\n    return [((k + .5) / K, 1 / K, qf((k + .5) / K), af((k + .5) / K), bf((k + .5) / K)) for k in range(K)]\n\ndef delta_P(pop, tau):\n    return sum(w * q * (a - b) for s, w, q, a, b in pop if s >= tau)\n\ndef pd_P(pop, tau):\n    return sum(w * q for s, w, q, a, b in pop if s >= tau)\n\ndef draw_log(pop, N, rng):\n    cells = [c for c in pop]; cum = []; acc = 0\n    for c in cells: acc += c[1]; cum.append(acc)\n    L = []\n    for _ in range(N):\n        u = rng.random(); k = 0\n        while cum[k] < u and k < len(cum) - 1: k += 1\n        s, w, q, a, b = cells[k]\n        dis = rng.random() < q\n        if dis:\n            u2 = rng.random(); d = 1 if u2 < a else (-1 if u2 < a + b else 0)\n        else:\n            d = 0  # P1: agreement => d = 0 for any gold label\n        L.append((s, dis, d))\n    return L\n\ndef split_rule(pd, nD, N, delta, B):\n    # READING (a): delta_pop = smallest share on a grid whose pop slack (in Delta units) is <= the\n    # range-based label-term width at budget B -- label-free, fixed before any label is bought.\n    for k in range(1, 400):\n        dp = delta * k / 400; dl = delta - dp\n        pu = p_upper(round(pd * N), N, dp / 2)\n        slack = math.sqrt(2 * math.log(2 / dp) / nD)\n        popw = pu * slack + (pu - pd)\n        labw = pd * math.sqrt(2 * math.log(1 / dl) / B)\n        if popw <= labw: return dp, popw, labw\n    return delta * 399 / 400, popw, labw\n\ndef mechanism(L, taus, eps, delta, B, seed=0, mode='disagree', max_draws=300000, fixed_split=None, verbose=False):\n    N = len(L); M = len(taus)\n    def shell_of(s):\n        for j, t in enumerate(taus):\n            if s >= t: return j\n        return None\n    shells = [[] for _ in range(M)]\n    for idx, (s, dis, d) in enumerate(L):\n        j = shell_of(s)\n        if j is None: continue\n        if mode == 'disagree' and not dis: continue\n        shells[j].append(idx)\n    w = [len(r) / N for r in shells]\n    streams = [[] for _ in range(M)]; srng = [random.Random(seed * 7919 + i) for i in range(M)]\n    cache = {}; out = []; tau_star = None; stopped = None\n    for j in range(M):\n        pd = sum(w[:j + 1]); nD = round(pd * N)\n        if nD == 0:\n            out.append(dict(j=j, pd=0.0, note='p_d=0: selector w_i/p_d is 0/0 and slack sqrt(.../|D_L|) divides by 0'))\n            stopped = 'p_d=0 undefined'; break\n        if fixed_split is None: dp, popw, labw = split_rule(pd, nD, N, delta, B)\n        else: dp = fixed_split; popw = labw = None\n        dl = delta - dp\n        pu = p_upper(nD, N, dp / 2); plo = p_lower(nD, N, dp / 2)\n        slack = math.sqrt(2 * math.log(2 / dp) / nD)\n        cs = CS(dl); ptr = [0] * M; probs = [w[i] / pd for i in range(j + 1)]\n        sel = random.Random(seed * 104729 + 31 * j); res = None; draws = 0; shellcount = [0] * (j + 1)\n        while True:\n            u = sel.random(); acc = 0; i = 0\n            for i in range(j + 1):\n                acc += probs[i]\n                if u < acc: break\n            k = ptr[i]; ptr[i] += 1; shellcount[i] += 1\n            while len(streams[i]) <= k: streams[i].append(shells[i][srng[i].randrange(len(shells[i]))])\n            idx = streams[i][k]\n            if idx not in cache:\n                if len(cache) >= B: res = 'budget'; break\n                cache[idx] = L[idx][2]\n            cs.update(cache[idx]); draws += 1\n            b = cs.lcb - slack\n            lb = (plo if b >= 0 else pu) * b\n            ub_in = cs.ucb + slack\n            ub = (pu if ub_in >= 0 else plo) * ub_in\n            if lb >= -eps: res = 'certified'; break\n            if ub < -eps: res = 'futile'; break\n            if draws >= max_draws: res = 'NO_HALT(guard %d draws, labels=%d)' % (max_draws, len(cache)); break\n        out.append(dict(j=j, tau=taus[j], pd=round(pd, 5), nD=nD, delta_pop=round(dp, 5), popw=popw and round(popw, 5),\n                        labw=labw and round(labw, 5), slack_mu=round(slack, 4), p_up=round(pu, 5), lcb_mu=round(cs.lcb, 4),\n                        lb_Delta=round(lb, 5), res=res, draws=draws, labels_cum=len(cache), shellcount=shellcount))\n        if res == 'certified': tau_star = taus[j]\n        else: stopped = res; break\n    return tau_star, len(cache), out\n\ndef naive(L, taus, eps, delta, B, seed=0, max_draws=None):\n    # constructed naive: one uniform without-replacement label stream over L (iid from P),\n    # z = 1{s>=tau_j} d, same anytime CS at full delta, same fixed-sequence & budget, no partition/slack.\n    rng = random.Random(seed + 555); order = list(range(len(L))); rng.shuffle(order)\n    used = 0; tau_star = None; out = []\n    for j, t in enumerate(taus):\n        cs = CS(delta); res = None; n = 0\n        while True:\n            if n >= B or n >= len(L): res = 'budget'; break\n            s, dis, d = L[order[n]]; n += 1; used = max(used, n)\n            cs.update(d if s >= t else 0)\n            if cs.lcb >= -eps: res = 'certified'; break\n            if cs.ucb < -eps: res = 'futile'; break\n        out.append(dict(j=j, tau=t, res=res, labels_cum=used, lcb=round(cs.lcb, 5)))\n        if res == 'certified': tau_star = t\n        else: break\n    return tau_star, used, out\n\ndef declared_naive(L, taus, eps, delta, n, seed=0):\n    # candidate's declared naive: n uniform gold labels, fixed-n Hoeffding lower bound on Delta, z in [-1,1]\n    rng = random.Random(seed + 777); S = rng.sample(range(len(L)), n); tau_star = None; out = []\n    h = math.sqrt(2 * math.log(1 / delta) / n)\n    for t in taus:\n        zbar = sum((L[i][2] if L[i][0] >= t else 0) for i in S) / n\n        out.append((t, round(zbar - h, 5)))\n        if zbar - h >= -eps: tau_star = t\n        else: break\n    return tau_star, out\n\nprint('=== T2 main instance (my illustrative values) ===')\neps, delta, B, N = 0.02, 0.05, 4000, 20000\ntaus = [0.8, 0.6, 0.4, 0.2, NEG_INF]\npop = make_pop(lambda s: 0.02 + 0.25 * (1 - s) ** 2, lambda s: 0.30 + 0.25 * s, lambda s: 0.25 + 0.35 * (1 - s))\nfor t in taus: print('tau=%s  p_d,P=%.5f  Delta_P=%.5f  mu_D,P=%.4f' % (t, pd_P(pop, t), delta_P(pop, t), delta_P(pop, t) / pd_P(pop, t)))\nL = draw_log(pop, N, random.Random(1))\nts, lab, out = mechanism(L, taus, eps, delta, B, seed=1)\nprint('MECHANISM tau*=%s labels=%d' % (ts, lab))\nfor o in out: print('  ', o)\ntn, labn, outn = naive(L, taus, eps, delta, B, seed=1)\nprint('CONSTRUCTED NAIVE tau*=%s labels=%d' % (tn, labn))\nfor o in outn: print('  ', o)\ntd, outd = declared_naive(L, taus, eps, delta, B, seed=1)\nprint('DECLARED NAIVE (Hoeffding, n=B=%d) tau*=%s  LBs=%s' % (B, td, outd))\nprint('declared-naive n needed at Delta=0: 2ln(1/delta)/eps^2 =', round(2 * math.log(1 / delta) / eps ** 2))\n\nprint('\\n=== T2b negative control: shells = all of A(tau) (no disagreement restriction), same machinery ===')\ntc, labc, outc = mechanism(L, taus, eps, delta, B, seed=1, mode='all')\nprint('ABLATED tau*=%s labels=%d' % (tc, labc))\nfor o in outc: print('  ', o)\n\nprint('\\n=== selector uniformity check (hypothesis j=4): shell picks vs |R_i|/|D| ===')\no4 = out[-1] if out[-1]['j'] == 4 else None\nif o4:\n    sc = o4['shellcount']; tot = sum(sc)\n    shells_sz = []\n    for j in range(5):\n        shells_sz.append(sum(1 for (s, dis, d) in L if dis and (s >= taus[j]) and (j == 0 or s < taus[j - 1])))\n    print('  picks', sc, 'expected', [round(tot * x / sum(shells_sz)) for x in shells_sz])\n\nprint('\\n=== width at fixed label count n (tau_M), range-based vs variance-adaptive ===')\npdM = sum(1 for r in L if r[1]) / N\ndvals = [r[2] for r in L if r[1]]; muD = sum(dvals) / len(dvals); ED2 = sum(x * x for x in dvals) / len(dvals)\nvar_mech = pdM ** 2 * (ED2 - muD ** 2); var_unif = pdM * ED2 - (pdM * muD) ** 2\nprint('  p_d=%.4f mu_D=%.4f E_D[d^2]=%.4f  sd ratio mech/uniform=%.4f  p_d=%.4f sqrt(p_d)=%.4f' % (pdM, muD, ED2, math.sqrt(var_mech / var_unif), pdM, math.sqrt(pdM)))\nfor n in (500, 2000):\n    rng = random.Random(9); D = [r for r in L if r[1]]\n    cm = CS(delta); cu = CS(delta)\n    for _ in range(n): cm.update(rng.choice(D)[2]); cu.update(rng.choice(L)[2])\n    wm = pdM * (sum(r[2] for r in D) / len(D) - cm.lcb)\n    wu = (sum(r[2] for r in L) / N - cu.lcb)\n    print('  n=%d  EB-CS lower width: mech(p_d*(mu-LCB))=%.4f uniform=%.4f ratio=%.3f ; Hoeffding ratio = p_d = %.4f' % (n, wm, wu, wm / wu, pdM))\n\nprint('\\n=== T3 probe p_d -> 1 (every call disagrees): \"never worse on gold labels\" ===')\npop1 = make_pop(lambda s: 1.0, lambda s: 0.40, lambda s: 0.38)\nL1 = draw_log(pop1, N, random.Random(2)); t1 = [NEG_INF]\nprint('  Delta_P=%.4f' % delta_P(pop1, NEG_INF))\nprint('  mechanism:', mechanism(L1, t1, eps, delta, B, seed=2)[:2], mechanism(L1, t1, eps, delta, B, seed=2)[2][0]['slack_mu'], 'slack_mu*p_up (floor in Delta units) =', round(mechanism(L1, t1, eps, delta, B, seed=2)[2][0]['slack_mu'] * mechanism(L1, t1, eps, delta, B, seed=2)[2][0]['p_up'], 4))\nprint('  naive    :', naive(L1, t1, eps, delta, B, seed=2)[:2])\nfor NN in (20000, 200000):\n    for dp in (0.0125, 0.025):\n        print('  label-free floor sqrt(2 p_d ln(2/dpop)/|L|) at p_d=1,|L|=%d,dpop=%s: %.4f' % (NN, dp, math.sqrt(2 * math.log(2 / dp) / NN)))\n\nprint('\\n=== T3 probe: p_d(tau_j)=0 ===')\nL0 = [(0.5, False, 0) for _ in range(1000)]\nprint('  ', mechanism(L0, [NEG_INF], eps, delta, B)[2])\ntry:\n    _ = [0 / 0.0]\nexcept ZeroDivisionError as e:\n    print('  selector prob w_i/p_d with p_d=0 -> ZeroDivisionError:', e)\n\nprint('\\n=== T3 probe: D_L fully cached before budget (|D_L| < B), straddling band ===')\nLs = [(0.5, False, 0)] * 1960 + [(0.5, True, -1)] * 20 + [(0.5, True, 1)] * 6 + [(0.5, True, 0)] * 14\nprint('  |L|=%d |D_L|=40 mu_D,L=%.3f B=%d' % (len(Ls), (6 - 20) / 40, B))\nr = mechanism(Ls, [NEG_INF], eps, delta, B, seed=3, max_draws=200000)\nprint('  ', r[0], r[1], r[2][0])\nr2 = mechanism(Ls, [NEG_INF], eps, delta, 30, seed=3, max_draws=200000)\nprint('   same with B=30 (B<|D_L|):', r2[0], r2[1], r2[2][0]['res'])\n\nprint('\\n=== break attempt: FWER with shared streams + optional stopping, boundary instance ===')\n# tau_1 safe (Delta_P>=-eps), tau_2 unsafe (Delta_P = -eps - small). Violation = certify tau_2.\npopb = make_pop(lambda s: 0.12 if s >= 0.5 else 0.30, lambda s: 0.45 if s >= 0.5 else 0.30, lambda s: 0.35 if s >= 0.5 else 0.505)\ntb = [0.5, NEG_INF]\nprint('  Delta_P(tau1)=%.5f  Delta_P(tau2)=%.5f  (-eps=%.3f)' % (delta_P(popb, 0.5), delta_P(popb, NEG_INF), -eps))\nR = 300; viol = 0; cert1 = 0; labs = []\nfor rep in range(R):\n    Lb = draw_log(popb, 20000, random.Random(1000 + rep))\n    ts_, lab_, o_ = mechanism(Lb, tb, eps, delta, 3000, seed=1000 + rep, fixed_split=0.0125)\n    if ts_ is not None: cert1 += 1\n    if ts_ == NEG_INF: viol += 1\n    labs.append(lab_)\nprint('  reps=%d  certified tau1: %d  VIOLATIONS (certified unsafe tau2): %d  rate=%.4f  (delta=%.2f)  mean labels=%.0f' % (R, cert1, viol, viol / R, delta, sum(labs) / R))\n\n# ---- trace2.py (supplementary probes) ----\n# Supplementary probes (imports the rules from trace.py without re-running its main block).\nimport math, random, sys, io\nsrc = open(__file__.replace('trace2.py', 'trace.py'), encoding='utf-8').read().split(\"print('=== T2 main instance\")[0]\nexec(src)\neps, delta = 0.02, 0.05\nprint('=== p_d = 1 regime: mechanism vs constructed naive, labels-to-decision (budget B = |L|) ===')\nfor (a, b, N) in [(0.44, 0.38, 20000), (0.45, 0.37, 20000), (0.44, 0.38, 100000)]:\n    pop1 = make_pop(lambda s: 1.0, lambda s, a=a: a, lambda s, b=b: b)\n    L1 = draw_log(pop1, N, random.Random(5))\n    m = mechanism(L1, [NEG_INF], eps, delta, N, seed=5, max_draws=2000000)\n    nv = naive(L1, [NEG_INF], eps, delta, N, seed=5)\n    o = m[2][0]\n    print('  N=%d Delta_P=%.3f | mech tau*=%s labels=%d delta_pop=%.4f delta_lab=%.5f slack_floor=%.4f res=%s | naive tau*=%s labels=%d'\n          % (N, a - b, m[0], m[1], o['delta_pop'], delta - o['delta_pop'], o['slack_mu'] * o['p_up'], o['res'], nv[0], nv[1]))\nprint('\\n=== split rule feasibility: popw <= labw at ANY delta_pop in (0, delta)? ratio ~ sqrt(B/nD * ln(2/dp)/ln(1/dl)) ===')\nfor (pd, N, B) in [(0.107, 20000, 4000), (0.107, 20000, 1000), (0.107, 200000, 4000), (0.01, 20000, 4000), (0.01, 1000000, 4000)]:\n    nD = round(pd * N); feas = []\n    for k in range(1, 400):\n        dp = delta * k / 400; dl = delta - dp\n        pu = p_upper(nD, N, dp / 2); popw = pu * math.sqrt(2 * math.log(2 / dp) / nD) + (pu - pd)\n        labw = pd * math.sqrt(2 * math.log(1 / dl) / B)\n        if popw <= labw: feas.append(dp)\n    print('  p_d=%.3f |L|=%d B=%d nD=%d : feasible=%s first=%s' % (pd, N, B, nD, bool(feas), feas[0] if feas else None))\nprint('\\n=== un-clamped bracket: LCB_D - slack below -1 ===')\npu = p_upper(107, 20000, 0.025); sl = math.sqrt(2 * math.log(2 / 0.05) / 107)\nprint('  p_d,L=0.00535 p_up=%.5f slack=%.4f  bound unclamped p_up*(-1-slack)=%.5f  clamped p_up*(-1)=%.5f' % (pu, sl, pu * (-1 - sl), -pu))\n",
+        "output": "=== T2 main instance (my illustrative values) ===\ntau=0.8  p_d,P=0.00466  Delta_P=0.00110  mu_D,P=0.2360\ntau=0.6  p_d,P=0.01331  Delta_P=0.00208  mu_D,P=0.1563\ntau=0.4  p_d,P=0.02997  Delta_P=0.00199  mu_D,P=0.0663\ntau=0.2  p_d,P=0.05863  Delta_P=-0.00158  mu_D,P=-0.0270\ntau=-inf  p_d,P=0.10328  Delta_P=-0.01247  mu_D,P=-0.1207\nMECHANISM tau*=-inf labels=2144\n   {'j': 0, 'tau': 0.8, 'pd': 0.00535, 'nD': 107, 'delta_pop': 0.04988, 'popw': 0.00333, 'labw': 0.00036, 'slack_mu': 0.2627, 'p_up': 0.00688, 'lcb_mu': -1.0, 'lb_Delta': -0.00868, 'res': 'certified', 'draws': 1, 'labels_cum': 1, 'shellcount': [1]}\n   {'j': 1, 'tau': 0.6, 'pd': 0.01385, 'nD': 277, 'delta_pop': 0.04988, 'popw': 0.00501, 'labw': 0.00093, 'slack_mu': 0.1633, 'p_up': 0.01622, 'lcb_mu': -1.0, 'lb_Delta': -0.01886, 'res': 'certified', 'draws': 1, 'labels_cum': 2, 'shellcount': [0, 1]}\n   {'j': 2, 'tau': 0.4, 'pd': 0.03075, 'nD': 615, 'delta_pop': 0.04988, 'popw': 0.00718, 'labw': 0.00206, 'slack_mu': 0.1096, 'p_up': 0.03418, 'lcb_mu': -0.4643, 'lb_Delta': -0.01962, 'res': 'certified', 'draws': 80, 'labels_cum': 78, 'shellcount': [17, 23, 40]}\n   {'j': 3, 'tau': 0.2, 'pd': 0.06035, 'nD': 1207, 'delta_pop': 0.04988, 'popw': 0.00977, 'labw': 0.00405, 'slack_mu': 0.0782, 'p_up': 0.06503, 'lcb_mu': -0.228, 'lb_Delta': -0.01992, 'res': 'certified', 'draws': 331, 'labels_cum': 296, 'shellcount': [25, 54, 97, 155]}\n   {'j': 4, 'tau': -inf, 'pd': 0.1072, 'nD': 2144, 'delta_pop': 0.04988, 'popw': 0.01269, 'labw': 0.00719, 'slack_mu': 0.0587, 'p_up': 0.11324, 'lcb_mu': -0.1179, 'lb_Delta': -0.02, 'res': 'certified', 'draws': 75423, 'labels_cum': 2144, 'shellcount': [3726, 5979, 11831, 20938, 32949]}\nCONSTRUCTED NAIVE tau*=0.2 labels=4000\n   {'j': 0, 'tau': 0.8, 'res': 'certified', 'labels_cum': 559, 'lcb': -0.01999}\n   {'j': 1, 'tau': 0.6, 'res': 'certified', 'labels_cum': 638, 'lcb': -0.02}\n   {'j': 2, 'tau': 0.4, 'res': 'certified', 'labels_cum': 793, 'lcb': -0.01998}\n   {'j': 3, 'tau': 0.2, 'res': 'certified', 'labels_cum': 1521, 'lcb': -0.01995}\n   {'j': 4, 'tau': -inf, 'res': 'budget', 'labels_cum': 4000, 'lcb': -0.02651}\nDECLARED NAIVE (Hoeffding, n=B=4000) tau*=None  LBs=[(0.8, -0.03645)]\ndeclared-naive n needed at Delta=0: 2ln(1/delta)/eps^2 = 14979\n\n=== T2b negative control: shells = all of A(tau) (no disagreement restriction), same machinery ===\nABLATED tau*=0.4 labels=4000\n   {'j': 0, 'tau': 0.8, 'pd': 0.2028, 'nD': 4056, 'delta_pop': 0.04988, 'popw': 0.01678, 'labw': 0.01359, 'slack_mu': 0.0427, 'p_up': 0.2106, 'lcb_mu': -0.0523, 'lb_Delta': -0.02, 'res': 'certified', 'draws': 509, 'labels_cum': 477, 'shellcount': [509]}\n   {'j': 1, 'tau': 0.6, 'pd': 0.3978, 'nD': 7956, 'delta_pop': 0.04775, 'popw': 0.02196, 'labw': 0.02196, 'slack_mu': 0.0306, 'p_up': 0.40728, 'lcb_mu': -0.0182, 'lb_Delta': -0.01988, 'res': 'certified', 'draws': 913, 'labels_cum': 902, 'shellcount': [462, 451]}\n   {'j': 2, 'tau': 0.4, 'pd': 0.60205, 'nD': 12041, 'delta_pop': 0.02838, 'popw': 0.02634, 'labw': 0.02636, 'slack_mu': 0.0266, 'p_up': 0.61212, 'lcb_mu': -0.006, 'lb_Delta': -0.01997, 'res': 'certified', 'draws': 2872, 'labels_cum': 2562, 'shellcount': [973, 925, 974]}\n   {'j': 3, 'tau': 0.2, 'pd': 0.79955, 'nD': 15991, 'delta_pop': 0.00562, 'popw': 0.03151, 'labw': 0.03155, 'slack_mu': 0.0271, 'p_up': 0.80913, 'lcb_mu': -0.0104, 'lb_Delta': -0.03035, 'res': 'budget', 'draws': 4590, 'labels_cum': 4000, 'shellcount': [1117, 1120, 1210, 1144]}\n\n=== selector uniformity check (hypothesis j=4): shell picks vs |R_i|/|D| ===\n  picks [3726, 5979, 11831, 20938, 32949] expected [3764, 5980, 11890, 20826, 32962]\n\n=== width at fixed label count n (tau_M), range-based vs variance-adaptive ===\n  p_d=0.1072 mu_D=-0.0877 E_D[d^2]=0.8657  sd ratio mech/uniform=0.3261  p_d=0.1072 sqrt(p_d)=0.3274\n  n=500  EB-CS lower width: mech(p_d*(mu-LCB))=0.0194 uniform=0.0479 ratio=0.405 ; Hoeffding ratio = p_d = 0.1072\n  n=2000  EB-CS lower width: mech(p_d*(mu-LCB))=0.0128 uniform=0.0291 ratio=0.438 ; Hoeffding ratio = p_d = 0.1072\n\n=== T3 probe p_d -> 1 (every call disagrees): \"never worse on gold labels\" ===\n  Delta_P=0.0200\n  mechanism: (None, 4000) 0.0311 slack_mu*p_up (floor in Delta units) = 0.0311\n  naive    : (None, 4000)\n  label-free floor sqrt(2 p_d ln(2/dpop)/|L|) at p_d=1,|L|=20000,dpop=0.0125: 0.0225\n  label-free floor sqrt(2 p_d ln(2/dpop)/|L|) at p_d=1,|L|=20000,dpop=0.025: 0.0209\n  label-free floor sqrt(2 p_d ln(2/dpop)/|L|) at p_d=1,|L|=200000,dpop=0.0125: 0.0071\n  label-free floor sqrt(2 p_d ln(2/dpop)/|L|) at p_d=1,|L|=200000,dpop=0.025: 0.0066\n\n=== T3 probe: p_d(tau_j)=0 ===\n   [{'j': 0, 'pd': 0.0, 'note': 'p_d=0: selector w_i/p_d is 0/0 and slack sqrt(.../|D_L|) divides by 0'}]\n  selector prob w_i/p_d with p_d=0 -> ZeroDivisionError: division by zero\n\n=== T3 probe: D_L fully cached before budget (|D_L| < B), straddling band ===\n  |L|=2000 |D_L|=40 mu_D,L=-0.350 B=4000\n   None 40 {'j': 0, 'tau': -inf, 'pd': 0.02, 'nD': 40, 'delta_pop': 0.04988, 'popw': 0.02248, 'labw': 0.00134, 'slack_mu': 0.4296, 'p_up': 0.02972, 'lcb_mu': -0.3639, 'lb_Delta': -0.02358, 'res': 'NO_HALT(guard 200000 draws, labels=40)', 'draws': 200000, 'labels_cum': 40, 'shellcount': [200000]}\n   same with B=30 (B<|D_L|): None 30 budget\n\n=== break attempt: FWER with shared streams + optional stopping, boundary instance ===\n  Delta_P(tau1)=0.00600  Delta_P(tau2)=-0.02475  (-eps=-0.020)\n  reps=300  certified tau1: 300  VIOLATIONS (certified unsafe tau2): 0  rate=0.0000  (delta=0.05)  mean labels=2991\n\n# ---- trace2.py output ----\n=== p_d = 1 regime: mechanism vs constructed naive, labels-to-decision (budget B = |L|) ===\n  N=20000 Delta_P=0.060 | mech tau*=-inf labels=7923 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0202 res=certified | naive tau*=-inf labels=1109\n  N=20000 Delta_P=0.080 | mech tau*=-inf labels=3773 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0202 res=certified | naive tau*=-inf labels=691\n  N=100000 Delta_P=0.060 | mech tau*=-inf labels=923 delta_pop=0.0334 delta_lab=0.01662 slack_floor=0.0090 res=certified | naive tau*=-inf labels=259\n\n=== split rule feasibility: popw <= labw at ANY delta_pop in (0, delta)? ratio ~ sqrt(B/nD * ln(2/dp)/ln(1/dl)) ===\n  p_d=0.107 |L|=20000 B=4000 nD=2140 : feasible=False first=None\n  p_d=0.107 |L|=20000 B=1000 nD=2140 : feasible=True first=0.04925000000000001\n  p_d=0.107 |L|=200000 B=4000 nD=21400 : feasible=True first=0.017750000000000002\n  p_d=0.010 |L|=20000 B=4000 nD=200 : feasible=False first=None\n  p_d=0.010 |L|=1000000 B=4000 nD=10000 : feasible=True first=0.04800000000000001\n\n=== un-clamped bracket: LCB_D - slack below -1 ===\n  p_d,L=0.00535 p_up=0.00688 slack=0.2626  bound unclamped p_up*(-1-slack)=-0.00868  clamped p_up*(-1)=-0.00688\n"
+      },
+      "computed_quantities": [
+        {
+          "quantity": "mechanism tau*, labels",
+          "value": "tau*=-inf (full migration), 2144 labels",
+          "arithmetic": "j=0..4 certified with labels_cum 1, 2, 78, 296, 2144. lb_Delta = p_up*(LCB_D - slack) = (-0.00868, -0.01886, -0.01962, -0.01992, -0.02000)"
+        },
+        {
+          "quantity": "constructed naive tau*, labels",
+          "value": "tau*=0.2, 4000 labels (budget hit at tau_M, LCB=-0.02651)",
+          "arithmetic": "Labels needed for j=0 (tau=0.8): 559 vs mechanism 1"
+        },
+        {
+          "quantity": "declared naive (fixed-n Hoeffding, n=B)",
+          "value": "tau*=None, LB(tau_1)=-0.03645; n needed at Delta=0 is 14979",
+          "arithmetic": "2 ln(1/0.05)/0.02^2 = 14979 for d in [-1,1]"
+        },
+        {
+          "quantity": "stratified sd ratio (mechanism/uniform) at tau_M",
+          "value": "0.3261 (p_d=0.1072, sqrt(p_d)=0.3274)",
+          "arithmetic": "sqrt(p_d^2 Var_D / (p_d E_D d^2 - p_d^2 mu_D^2)), mu_D=-0.0877, E_D d^2=0.8657"
+        },
+        {
+          "quantity": "executed EB-CS width ratio",
+          "value": "0.405 (n=500), 0.438 (n=2000)",
+          "arithmetic": "p_d (mu_D - LCB_D) / (mean z - LCB_z)"
+        },
+        {
+          "quantity": "label-free slack floor at p_d=1",
+          "value": "0.0225 (|L|=20000, dp=0.0125), 0.0071 (|L|=200000)",
+          "arithmetic": "sqrt(2 p_d ln(2/dp)/|L|)"
+        },
+        {
+          "quantity": "FWER break attempt (shared streams, optional stopping)",
+          "value": "0/300 violations; tau1 certified 300/300",
+          "arithmetic": "Delta_P(tau2) = -0.02475 < -eps. This is a check on one invented boundary instance, not arbitration."
+        },
+        {
+          "quantity": "forced results",
+          "value": "j=0 and j=1 certified after 1 label each",
+          "arithmetic": "Forced by construction: p_up*(-1-slack) = -0.00868 and -0.01886 already clear -0.02 with LCB_D=-1 (label-free), so these say nothing about label efficiency"
+        }
+      ],
+      "anomalies": [
+        {
+          "anomaly": "No halting: |D_L|=40 < B=4000 ran 200000 draws with 40 labels, lcb_mu=-0.3639, slack=0.4296, lb_Delta=-0.02358, and neither stop fired. The main-instance j=4 also exhausted D_L (2144 labels) and needed 75,423 draws.",
+          "kind": "structural",
+          "why": "For any instance with |D_L(tau_j)| + earlier labels < B, the budget stop is unreachable, and the label-free slack keeps a straddle band of positive width. This becomes a parameter finding because B <= |D_L(tau_1)| halts (U1).",
+          "contradicts_claim": null
+        },
+        {
+          "anomaly": "Split rule infeasible: in the main instance popw > labw at every dp (j=0: 0.00333 vs 0.00036), so delta_lab fell to 0.000125 under my fallback.",
+          "kind": "structural",
+          "why": "popw/labw ~ sqrt(B ln(2/dp)/(|D_L| ln(1/dl))) > 1 whenever |D_L| is at most about B, for any p_d. It is a parameter finding because larger |L| or smaller B makes it feasible (U3).",
+          "contradicts_claim": null
+        },
+        {
+          "anomaly": "Width ratio is 0.405-0.438 for the variance-adaptive CS and 0.3261 from the identity, against p_d=0.1072",
+          "kind": "structural",
+          "why": "The stratified identity gives an sd ratio of p_d sqrt(Var_D)/sqrt(p_d E_D d^2 - p_d^2 mu_D^2), which is about sqrt(p_d) when mu_D is small. The factor p_d holds only when both sides use the same range constant.",
+          "contradicts_claim": "its confidence width at a fixed label count contracts by the disagreement mass p_d (derived from the stratified variance identity)"
+        },
+        {
+          "anomaly": "At p_d=1 the mechanism needs 7923 / 3773 / 923 labels against the naive's 1109 / 691 / 259",
+          "kind": "structural",
+          "why": "At p_d=1 the mechanism is the gold-only test at delta_lab<delta minus a positive slack, so it is never better and strictly worse in this regime.",
+          "contradicts_claim": "it is never worse on their binding axis — gold labels per call site — at equal epsilon and delta"
+        }
+      ]
+    },
+    "degenerate_probes": [
+      {
+        "probe": "p_d(tau_j)=0 for some j (all-agree log, or an empty top shell)",
+        "behavior": "Selector probabilities w_i/p_d are 0/0, and the Hoeffding slack divides by |D_L|=0 (ZeroDivisionError). Step 3 gives the shortcut only for j=M.",
+        "finding": "U2 / W2"
+      },
+      {
+        "probe": "|D_L(tau_j)| < B with the certified interval straddling -eps",
+        "behavior": "Does not halt (200000 draws, 40 labels)",
+        "finding": "U1 / W1"
+      },
+      {
+        "probe": "p_d = 1 (every migrated call disagrees)",
+        "behavior": "Computes, but needs 3.6-7.1x more labels than the gold-only anytime test (delta split plus slack floor 0.0202 at |L|=20000)",
+        "finding": "U4 / W6"
+      },
+      {
+        "probe": "tiny p_d (main j=0,1)",
+        "behavior": "Certified label-free (p_up*(-1-slack) >= -eps), yet one label is bought before the check, and the bracket is not floored at -1 (-0.00868 vs -0.00688)",
+        "finding": "W2 (efficiency/definition; validity unaffected)"
+      },
+      {
+        "probe": "split rule with |D_L| <= about B",
+        "behavior": "No delta_pop in (0, delta) satisfies the rule, and no fallback is stated",
+        "finding": "U3 / W3"
+      },
+      {
+        "probe": "budget B smaller than the labels needed for H_1",
+        "behavior": "Stops with reason 'budget'. tau*=none unless the label-free certificate applies, and the CI gate fails. This is well defined.",
+        "finding": null
+      },
+      {
+        "probe": "ties s_C(x)=tau_j",
+        "behavior": "A(tau) uses >=, so shells are disjoint and nested. Well defined.",
+        "finding": null
+      },
+      {
+        "probe": "M=1 (full migration only)",
+        "behavior": "Reduces to one test of Delta_P(-inf). Well defined.",
+        "finding": null
+      }
+    ],
+    "claim_step_map": [
+      {
+        "claim": "whenever C(x) = I(x), d(x) = 0 for every possible Y",
+        "established_by": "S2/S3",
+        "strength_grade": "established",
+        "assumptions_missing": [],
+        "arbitration": "argument",
+        "measured": null
+      },
+      {
+        "claim": "an i.i.d. categorical shell selector with probabilities w_i/p_d(tau_j) yields an i.i.d. uniform sample over D(tau_j) while reusing every label bought for earlier (smaller) hypotheses",
+        "established_by": "S4/S5",
+        "strength_grade": "conditional",
+        "assumptions_missing": [
+          "each hypothesis reads every shell stream from its start (per-hypothesis pointer); under a global pointer there is no reuse"
+        ],
+        "arbitration": "argument",
+        "measured": null
+      },
+      {
+        "claim": "LCB_D valid under the mechanism's own optional stopping",
+        "established_by": "S5",
+        "strength_grade": "conditional",
+        "assumptions_missing": [
+          "the CS targets the finite-population mean mu_D,L under with-replacement sampling (i.i.d. given L)",
+          "delta_lab is fixed before labels (split rule from label-free quantities)"
+        ],
+        "arbitration": "proof-obligations",
+        "measured": null
+      },
+      {
+        "claim": "family-wise error is at most delta without a union bound (fixed-sequence testing); P(Delta_P(tau*) >= -epsilon) >= 1 - delta",
+        "established_by": "S5-S7",
+        "strength_grade": "conditional",
+        "assumptions_missing": [
+          "the threshold grid does not depend on L_cert",
+          "the delta split is fixed per hypothesis from label-free quantities",
+          "delta_pop is shared between the binomial and Hoeffding terms by a union bound"
+        ],
+        "arbitration": "proof-obligations",
+        "measured": null
+      },
+      {
+        "claim": "the superpopulation correction is paid in unlabeled counts only",
+        "established_by": "S6",
+        "strength_grade": "established",
+        "assumptions_missing": [],
+        "arbitration": "argument",
+        "measured": null
+      },
+      {
+        "claim": "certificate whose width scales with the disagreement mass (how_closed)",
+        "established_by": "S5/S6",
+        "strength_grade": "conditional",
+        "assumptions_missing": [
+          "the factor p_d holds for range-based sequences; for variance-adaptive sequences the factor is about sqrt(p_d) (stratified sd ratio)"
+        ],
+        "arbitration": "argument",
+        "measured": null
+      },
+      {
+        "claim": "if p_d(tau_M) = 0 the full-migration certificate is immediate up to the label-free slack",
+        "established_by": "S3/S6",
+        "strength_grade": "conditional",
+        "assumptions_missing": [
+          "the bracket is floored at -1, so that certification holds iff p_d^+ <= epsilon; the selector and slack are skipped at p_d=0"
+        ],
+        "arbitration": "argument",
+        "measured": null
+      },
+      {
+        "claim": "hook: never worse than gold-only on gold labels at equal epsilon and delta",
+        "established_by": "UNESTABLISHED",
+        "strength_grade": "overclaim",
+        "assumptions_missing": [],
+        "arbitration": "argument",
+        "measured": null
+      }
+    ],
+    "naive_comparison": {
+      "declared_branch": "(i) false-premise",
+      "naive_version": "A single uniform without-replacement gold-label stream over L_cert, with z = 1{s_C >= tau_j} d, the same anytime CS at full delta, and the same fixed-sequence order and cumulative budget B. No partition, shell selector, delta split or label-free slack.",
+      "naive_fairness": "It respects the same budget B, the same information (log plus bought labels), the same eps/delta and the same CS family and fixed-sequence family. It is simpler: no partition, no selector, no superpopulation conversion, and no delta split.",
+      "declared_naive": {
+        "version": "Draw n gold labels uniformly from logged traffic and accept if a Hoeffding/McNemar-style (or PPI++) lower bound on Delta is at least -epsilon.",
+        "instance_behavior": "Fixed-n Hoeffding with n=B=4000 gives LB(tau_1) = -0.03645, so tau*=None. It needs 14979 labels at Delta=0.",
+        "agrees_with_constructed": "yes"
+      },
+      "instance_behavior": {
+        "naive": "tau*=0.2, 4000 labels (budget exhausted at tau_M, LCB=-0.02651)",
+        "mechanism": "tau*=-inf (full migration), 2144 labels",
+        "divergence": "The mechanism certifies one more threshold with 1856 fewer labels. Labels for H_1: 1 vs 559.",
+        "kind": "instance_contingent"
+      },
+      "naive_kind": "alternative_design",
+      "identity": "differs",
+      "verdict": "confronts_obstacle",
+      "reasoning": "The naive spends a fraction 1-p_d (about 0.89 here) of every label on agreement calls, where d is exactly 0. The partition removes that waste, and the stratified sd ratio of 0.326 is the structural core of the gain. The size of the gain depends on the instance, and the direction reverses as p_d -> 1 (U4)."
+    }
+  }
+}

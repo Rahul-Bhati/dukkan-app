@@ -1,0 +1,119 @@
+{
+  "findings": [],
+  "suggested_repairs": [
+    {
+      "kind": "definition",
+      "op": "append_sentence",
+      "field": "core_mechanism_steps",
+      "value": "Hypothesis j also stops buying when every item of D_L(tau_j) carries a cached label: mu_D,L(tau_j) is then known exactly and replaces LCB_D(tau_j), H_j is rejected iff p_d^+ * (mu_D,L(tau_j) - slack) >= -epsilon, and otherwise the sequence stops.",
+      "delta_summary": "T3 non-termination (|D_L(tau_j)| < B with a straddling interval loops forever). This adds the missing halting branch and leaves validity unchanged, because an exactly known mu_D,L needs no label-term width.",
+      "id": "W1"
+    },
+    {
+      "kind": "definition",
+      "op": "append_sentence",
+      "field": "core_mechanism_steps",
+      "value": "Set A(tau_0) to the empty set. For every j, before any label is bought for H_j, the bracket LCB_D - slack is floored at -1 (d >= -1), so H_j is rejected label-free whenever p_d^+(tau_j) <= epsilon. When p_d(tau_j) = 0 the shell selector and the Hoeffding slack are not evaluated.",
+      "delta_summary": "T3 probes: the selector 0/0 and the slack's division by zero at p_d(tau_j)=0 for j<M, a label bought before a label-free certificate (main instance j=0,1), and an unfloored bracket (-0.00868 vs -0.00688).",
+      "id": "W2"
+    },
+    {
+      "kind": "wording",
+      "op": "replace",
+      "field": "core_mechanism",
+      "value": "with delta_lab + delta_pop = delta (split rule, fixed per hypothesis before any label is bought and computed from label-free quantities only: delta_pop is the smallest share for which the population slack, in Delta units, is at most the range-based label-term width at budget B; if no share in (0, delta) satisfies this, delta_pop is the share minimising the sum of the two widths)",
+      "delta_summary": "T1 dual reading plus infeasibility: under 'observed CS width' the split is data-dependent, and under the label-free reading the rule has no solution when |D_L| is not well above B (executed: infeasible at p_d=0.107, |L|=20000, B=4000). This replaces the parenthetical '(split rule: assign delta_pop the smallest share that keeps its slack below the label-term width, since it is paid only in unlabeled counts)'.",
+      "id": "W3"
+    },
+    {
+      "kind": "wording",
+      "op": "replace",
+      "field": "core_mechanism_steps",
+      "value": "take the next item of that shell's stream not yet consumed by this hypothesis (each hypothesis reads every shell stream from its start, so items labelled for earlier hypotheses are re-read from the cache at no label cost)",
+      "delta_summary": "T1 dual reading of 'take that shell's next stream item for this hypothesis'. A per-hypothesis pointer gives the claimed label reuse, and a global pointer gives none. Both readings are valid, but only the first matches 'reusing every label bought for earlier hypotheses'.",
+      "id": "W4"
+    },
+    {
+      "kind": "claim_grade",
+      "op": "replace",
+      "field": "gap_closure[0].how_closed",
+      "value": "whose width at a fixed label count shrinks by the factor p_d for range-based sequences and, for variance-adaptive sequences, by the stratified-variance ratio p_d sqrt(Var_D(d)) / sqrt(p_d E_D[d^2] - p_d^2 mu_D^2), which is about sqrt(p_d) when mu_D is small",
+      "delta_summary": "T4 grade conditional (overclaim in the hook): the variance identity gives an sd ratio of 0.3261, about sqrt(p_d)=0.3274, not p_d=0.1072. The executed variance-adaptive width ratios are 0.405 and 0.438. The p_d factor holds for range-based bounds only. This replaces 'whose width scales with the disagreement mass'. The hook sentence 'contracts by the disagreement mass p_d (derived from the stratified variance identity)' carries the same overclaim and is left to the author because hook is not an allowed target here.",
+      "id": "W5"
+    },
+    {
+      "kind": "claim_grade",
+      "op": "append_sentence",
+      "field": "core_mechanism_reasoning",
+      "value": "The label advantage over a gold-only test at equal (epsilon, delta) holds when p_d is small. As p_d -> 1 the mechanism becomes a gold-only test run at delta_lab < delta plus a label-free slack floor of about sqrt(2 p_d ln(2/delta_pop)/|L|), so it then needs more gold labels than a gold-only anytime test at full delta.",
+      "delta_summary": "T5/T4 regime: 'never worse ... at equal epsilon and delta' is refuted at p_d=1 (executed: 7923 vs 1109 labels, 3773 vs 691, 923 vs 259). This states the premise under which the claim can be kept.",
+      "id": "W6"
+    },
+    {
+      "kind": "wording",
+      "op": "append_sentence",
+      "field": "core_mechanism",
+      "value": "The threshold grid is fixed before C and s_C are replayed on L_cert (or chosen on L_train), because the conditional-i.i.d. argument behind the Hoeffding slack on |D_L(tau_j)| and the fixed-sequence family-wise bound require A(tau_j) not to depend on L_cert.",
+      "delta_summary": "T4: 'family-wise error is at most delta without a union bound' is conditional on a grid that does not depend on L_cert. Step 3 says only 'practitioner-chosen, swept in evaluation'.",
+      "id": "W7"
+    }
+  ],
+  "regime": [
+    {
+      "finding": "The hook's guarantee 'never worse on their binding axis — gold labels per call site — at equal epsilon and delta' fails on the family p_d -> 1. When every call disagrees, the mechanism is a gold-only paired test that runs its labels at delta_lab < delta and also subtracts a label-free slack, so it needs more gold labels than a gold-only anytime test at full delta. The candidate's reasoning concedes that the method degrades to stratified gold-only testing, but it never says the result is worse than gold-only.",
+      "severity": "note",
+      "why_not_repaired": "The claim sits in `hook`, which this gate may edit only when a repair makes it factually wrong. The regime statement is suggested for core_mechanism_reasoning (W6), and the hook wording is left to the author and the audit.",
+      "tag": "regime",
+      "source": "T5",
+      "derivation": "At p_d=1, D(tau)=A(tau), and the mechanism's lower bound is p_d^+ (LCB_{delta_lab} - slack). Here LCB at delta_lab < delta is at most the LCB at delta, slack > 0, and p_d^+ >= 1 multiplies a negative bracket. A gold-only test sampling L without replacement targets Delta_P directly at level delta with no slack. So at any fixed label count the mechanism's bound is at most the naive's, and labels-to-decision can only be larger.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "Against the strongest ground-truth certificates (a gold-only paired test; Conformal LLM Routing's Clopper-Pearson gate) it is never worse on their binding axis — gold labels per call site — at equal epsilon and delta",
+      "executed_evidence": "trace2.py, p_d=1 with B=|L|, eps=0.02, delta=0.05 (my values). |L|=20000, Delta_P=0.06: mechanism used 7923 labels (delta_pop=0.0334, delta_lab=0.01662, slack floor 0.0202) vs naive 1109. |L|=20000, Delta_P=0.08: 3773 vs 691. |L|=100000, Delta_P=0.06: 923 vs 259. The label-free floor sqrt(2 p_d ln(2/dp)/|L|) at p_d=1 is 0.0225 (|L|=20000, dp=0.0125) and 0.0071 (|L|=200000).",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    }
+  ],
+  "parameter_notes": [
+    {
+      "finding": "Step 5 has no halting rule once D_L(tau_j) is fully labelled before budget B is reached. With-replacement draws then hit the label cache forever (no label is bought, so the 'cumulative labels reach budget B' stop can never fire). Whenever the certified interval for Delta_P(tau_j) straddles -epsilon, neither the certify stop nor the futility stop fires and the loop does not terminate. Because the label-free slack does not shrink with labels, this straddle band has positive width for every finite |D_L|.",
+      "severity": "note",
+      "why_not_repaired": "This gate does not edit the candidate. A one-sentence definitional stop (W1) fixes it, and the assignment B <= |D_L(tau_1)| already guarantees halting, so it is a parameter-dependent defect rather than an impossibility.",
+      "tag": "parameter",
+      "source": "T3",
+      "derivation": "Labels are bought only for items of D_L(tau_j) not in the cache, and there are at most |D_L(tau_j)| of them. If cumulative labels plus |D_L(tau_j)| is less than B, the budget stop is unreachable. Once every item is cached, LCB_D converges to mu_D,L from below and UCB_D converges to mu_D,L from above. Certification needs p_d^+ (LCB_D - slack) >= -eps, and futility needs p_d^- (UCB_D + slack) < -eps (when negative). For any mu_D,L with p_d^+ (mu_D,L - slack) < -eps <= p_d^{+/-} (mu_D,L + slack), neither condition ever holds. Admissible assignment that halts: B <= |D_L(tau_1)|, since D_L(tau_j) is non-decreasing in j.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "stop when the certified bound on Delta_P(tau_j) clears -epsilon (move to j+1), when the confidence sequence's upper bound shows Delta_P(tau_j) < -epsilon, or when cumulative labels reach budget B (stop the sequence).",
+      "executed_evidence": "trace.py, probe 'D_L fully cached': |L|=2000, |D_L|=40 (20 items with d=-1, 6 with d=+1, 14 with d=0, so mu_D,L=-0.35), B=4000, delta=0.05, eps=0.02 (my values). Result: res='NO_HALT(guard 200000 draws, labels=40)', lcb_mu=-0.3639, slack_mu=0.4296, p_up=0.02972, lb_Delta=-0.02358. The same log with B=30 stops with res='budget'. Main instance, hypothesis j=4: the run labelled all 2144 items of D_L and then made 75,423 draws, certifying at lb_Delta exactly -0.02000, so it was one rounding step from the same stall.",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    },
+    {
+      "finding": "The categorical shell selector Categorical(w_i/p_d(tau_j)) and the Hoeffding slack on |D_L(tau_j)| are undefined (0/0 and division by zero) for any hypothesis j with p_d(tau_j)=0. Step 3 states the label-free shortcut only for tau_M. Separately, the procedure never checks the label-free certificate before buying the first label, and it does not floor the bracket LCB_D - slack at -1.",
+      "severity": "note",
+      "why_not_repaired": "Definitional; W2 states the intended label-free rule for every j. A grid whose first migrated set A(tau_1) contains at least one disagreement avoids the division, so this is a parameter (grid) edge, not an impossibility.",
+      "tag": "parameter",
+      "source": "T3",
+      "derivation": "w_i/p_d(tau_j) with p_d(tau_j) = sum_{i<=j} w_i = 0 is 0/0. The slack sqrt(2 ln(2/delta_pop)/|D_L(tau_j)|) with |D_L(tau_j)|=0 divides by zero. Because d >= -1, Delta_P >= -p_d,P >= -p_d^+, so H_j is certifiable with zero labels whenever p_d^+ <= eps. The bracket (LCB_D - slack) can drop below -1, which only loosens the bound.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "if p_d(tau_M) = 0 the full-migration certificate is immediate up to the label-free slack.",
+      "executed_evidence": "trace.py, probe p_d=0: an all-agree log of 1000 records gives 'p_d=0: selector w_i/p_d is 0/0 and slack sqrt(.../|D_L|) divides by 0'. Python raises ZeroDivisionError on 0/0.0. Main instance, j=0: p_d,L=0.00535, p_up=0.00688, slack=0.2626. The unfloored bound p_up*(-1-slack) = -0.00868 and the floored bound p_up*(-1) = -0.00688 both clear -0.02, yet one label was bought before the check (labels_cum=1). The same happened at j=1.",
+      "reading_dependence": "reading_robust",
+      "structural_requirement": null
+    },
+    {
+      "finding": "The delta-split rule ('assign delta_pop the smallest share that keeps its slack below the label-term width') has no solution in (0, delta) whenever the unlabeled disagreement count |D_L(tau_j)| is not well above the label budget, and the text gives no fallback. The rule is also circular until 'label-term width' is pinned to a label-free quantity: under the reading 'observed CS width', the level delta_lab is chosen from the labels it then certifies.",
+      "severity": "note",
+      "why_not_repaired": "This is a wording/definition issue (W3). Admissible assignments exist where the rule is feasible (for example |L|=200000 with B=4000, or B=1000 with |L|=20000), so it is a parameter finding.",
+      "tag": "parameter",
+      "source": "T1",
+      "derivation": "Under reading (a), with the label-term width taken as range-based at budget B: pop width ~ p_d sqrt(2 ln(2/dp)/(p_d |L|)) and label width = p_d sqrt(2 ln(1/dl)/B). Their ratio is ~ sqrt(B ln(2/dp) / (|D_L| ln(1/dl))). Since ln(2/dp) > ln(1/dl) near the crossing, the ratio exceeds 1 for every dp in (0, delta) whenever |D_L| is at most about B, so the 'smallest share' does not exist. Under reading (b), with the label-term width taken as the observed confidence-sequence width, the split depends on the labels, and the level-delta guarantee then needs a separate argument.",
+      "repair_kind": "formula",
+      "verbatim_step_quote": "with delta_lab + delta_pop = delta (split rule: assign delta_pop the smallest share that keeps its slack below the label-term width, since it is paid only in unlabeled counts)",
+      "executed_evidence": "trace2.py feasibility scan over dp = delta*k/400 with delta=0.05: (p_d=0.107, |L|=20000, B=4000, nD=2140) gives feasible=False. (0.107, 20000, B=1000) gives feasible=True with first dp=0.04925. (0.107, |L|=200000, B=4000) gives feasible=True with first dp=0.01775. (0.01, 20000, 4000) gives feasible=False. (0.01, 1000000, 4000) gives feasible=True. In the main instance every j was infeasible (for example j=0: popw=0.00333 vs labw=0.00036), and my script fell back to dp=0.04988, leaving delta_lab=0.000125.",
+      "reading_dependence": "reading_dependent: infeasibility holds under reading (a) (range-based width at budget B, label-free); the circularity concern holds under reading (b) (observed CS width)",
+      "structural_requirement": null
+    }
+  ],
+  "t5_notes": [],
+  "demoted_to_notes": []
+}

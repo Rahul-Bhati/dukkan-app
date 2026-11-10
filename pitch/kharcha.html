@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<title>दुकान ऐप — खर्चा</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8EC;
+    --ink: #1F2A24;
+    --muted: #5C6560;
+    --green: #0F6B4F;
+    --green-soft: #E3F2EC;
+    --marigold: #F2A007;
+    --marigold-soft: #FFEFC7;
+    --red: #B8321F;
+    --card: #FFFFFF;
+    --line: #EADFC9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; background: var(--bg); }
+  body {
+    font-family: 'Mukta', 'Nirmala UI', sans-serif;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .page { width: 1080px; padding: 56px 60px 52px; }
+
+  /* Header */
+  .greet {
+    display: inline-block; background: var(--marigold-soft); color: #7A4E00;
+    font-size: 34px; font-weight: 700; padding: 6px 26px; border-radius: 999px;
+  }
+  h1 { font-size: 72px; font-weight: 800; color: var(--green); margin-top: 22px; line-height: 1.12; }
+  .sub { font-size: 36px; color: var(--muted); margin-top: 12px; }
+
+  /* 3 parts */
+  .parts { display: flex; gap: 20px; margin-top: 36px; }
+  .part {
+    flex: 1; background: var(--card); border: 3px solid var(--line); border-radius: 28px;
+    padding: 24px 18px 22px; text-align: center;
+  }
+  .part .ico { font-size: 70px; line-height: 1; }
+  .part .who { font-size: 36px; font-weight: 800; margin-top: 10px; }
+  .part .what { font-size: 27px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  /* Big total */
+  .total {
+    display: flex; margin-top: 36px; border-radius: 32px; overflow: hidden;
+    background: var(--green); color: #fff;
+  }
+  .total > div { flex: 1; padding: 28px 30px; text-align: center; }
+  .total > div + div { border-left: 3px solid rgba(255,255,255,0.25); }
+  .total .lbl { font-size: 34px; opacity: 0.9; }
+  .total .val { font-size: 76px; font-weight: 800; line-height: 1.05; margin-top: 4px; }
+  .total .lbl.small { font-size: 26px; margin-top: 6px; opacity: 0.85; }
+  .total { align-items: stretch; }
+  .total > div { display: flex; flex-direction: column; justify-content: center; }
+
+  /* Section title */
+  h2 { font-size: 50px; font-weight: 800; margin-top: 44px; }
+
+  .month {
+    display: inline-block; margin-top: 22px; font-size: 32px; font-weight: 800;
+    background: var(--ink); color: #fff; padding: 6px 24px; border-radius: 14px;
+  }
+
+  .row {
+    display: flex; align-items: center; gap: 22px; background: var(--card);
+    border: 3px solid var(--line); border-radius: 26px; padding: 20px 24px; margin-top: 16px;
+  }
+  .row .ico { font-size: 62px; width: 84px; text-align: center; flex: none; }
+  .row .txt { flex: 1; }
+  .row .t { font-size: 38px; font-weight: 800; }
+  .row .d { font-size: 28px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+  .row .amt {
+    flex: none; font-size: 34px; font-weight: 800; color: var(--green); text-align: center;
+    background: var(--green-soft); padding: 8px 18px; border-radius: 18px; line-height: 1.15;
+  }
+
+  .sum {
+    display: flex; justify-content: space-between; align-items: center; margin-top: 18px;
+    border-top: 4px dashed var(--line); padding-top: 18px;
+  }
+  .sum .l { font-size: 42px; font-weight: 800; }
+  .sum .r { font-size: 58px; font-weight: 800; color: var(--green); }
+
+  .extra {
+    display: flex; align-items: center; gap: 22px; margin-top: 22px;
+    background: var(--marigold-soft); border: 3px dashed var(--marigold); border-radius: 26px; padding: 22px 24px;
+  }
+  .extra .ico { font-size: 62px; width: 84px; text-align: center; flex: none; }
+  .extra .tag { font-size: 28px; font-weight: 800; color: #7A4E00; }
+  .extra .t { font-size: 36px; font-weight: 800; }
+  .extra .d { font-size: 28px; color: #6B5A33; margin-top: 2px; }
+  .extra .amt { flex: none; text-align: right; }
+  .extra .amt .p { font-size: 44px; font-weight: 800; color: #7A4E00; }
+  .extra .amt .n { font-size: 26px; color: #6B5A33; }
+
+  /* Running cost */
+  .run { margin-top: 18px; background: var(--card); border: 3px solid var(--line); border-radius: 28px; padding: 8px 26px; }
+  .run .r { display: flex; align-items: center; gap: 20px; padding: 18px 0; }
+  .run .r + .r { border-top: 3px solid var(--line); }
+  .run .ico { font-size: 52px; width: 70px; text-align: center; flex: none; }
+  .run .t { flex: 1; font-size: 34px; font-weight: 700; }
+  .run .t small { display: block; font-size: 26px; color: var(--muted); font-weight: 500; }
+  .run .v { font-size: 38px; font-weight: 800; text-align: right; }
+  .run .v.free { color: var(--green); }
+  .run .v small { display: block; font-size: 24px; color: var(--muted); font-weight: 500; }
+
+  .foot {
+    margin-top: 36px; text-align: center; font-size: 36px; font-weight: 700; color: var(--green);
+  }
+</style>
+</head>
+<body>
+<div class="page" id="poster">
+
+  <span class="greet">राम राम जी 🙏</span>
+  <h1>आपकी दुकान की<br>अपनी मोबाइल ऐप</h1>
+  <p class="sub">ग्राहक फ़ोन से सामान मँगाएँगे,<br>आप दुकान बैठे ऑर्डर संभालेंगे</p>
+
+  <div class="parts">
+    <div class="part">
+      <div class="ico">🛒</div>
+      <div class="who">ग्राहक</div>
+      <div class="what">सामान देखे,<br>ऑर्डर करे</div>
+    </div>
+    <div class="part">
+      <div class="ico">🏪</div>
+      <div class="who">आप</div>
+      <div class="what">ऑर्डर लें,<br>कमाई देखें</div>
+    </div>
+    <div class="part">
+      <div class="ico">🛵</div>
+      <div class="who">डिलीवरी वाला</div>
+      <div class="what">सामान घर<br>पहुँचाए</div>
+    </div>
+  </div>
+
+  <div class="total">
+    <div><div class="lbl">ऐप बनाने का बजट</div><div class="val">₹25–30 हज़ार</div><div class="lbl small">₹25,000 से ₹30,000 तक</div></div>
+    <div><div class="lbl">समय</div><div class="val">2 महीने</div></div>
+  </div>
+
+  <h2>पैसा कहाँ लगेगा? 👇</h2>
+
+  <span class="month">पहला महीना</span>
+  <div class="row">
+    <div class="ico">🛒</div>
+    <div class="txt">
+      <div class="t">ग्राहक वाली ऐप</div>
+      <div class="d">सामान की फ़ोटो, दाम, खोजना, थैला, घर का पता</div>
+    </div>
+    <div class="amt">₹9,000 –<br>10,000</div>
+  </div>
+  <div class="row">
+    <div class="ico">🏪</div>
+    <div class="txt">
+      <div class="t">आपका हिस्सा (दुकानदार)</div>
+      <div class="d">फ़ोन से सामान, फ़ोटो, दाम डालें — ऑर्डर देखें</div>
+    </div>
+    <div class="amt">₹6,000 –<br>7,000</div>
+  </div>
+
+  <span class="month">दूसरा महीना</span>
+  <div class="row">
+    <div class="ico">💰</div>
+    <div class="txt">
+      <div class="t">पैसे लेने का सिस्टम</div>
+      <div class="d">UPI, कार्ड या नकद (सामान मिलने पर)</div>
+    </div>
+    <div class="amt">₹4,000 –<br>5,000</div>
+  </div>
+  <div class="row">
+    <div class="ico">🛵</div>
+    <div class="txt">
+      <div class="t">डिलीवरी + नक्शा + घंटी</div>
+      <div class="d">ग्राहक नक्शे पर देखे सामान कहाँ पहुँचा, नए ऑर्डर पर आपके फ़ोन में घंटी</div>
+    </div>
+    <div class="amt">₹4,000 –<br>5,000</div>
+  </div>
+  <div class="row">
+    <div class="ico">📲</div>
+    <div class="txt">
+      <div class="t">Play Store पर ऐप + सिखाना</div>
+      <div class="d">आपको और डिलीवरी वाले को चलाना सिखाएँगे</div>
+    </div>
+    <div class="amt">₹2,000 –<br>3,000</div>
+  </div>
+
+  <div class="sum"><span class="l">कुल बजट</span><span class="r">₹25,000 – ₹30,000</span></div>
+
+  <h2>ऐप बनने के बाद का खर्चा</h2>
+  <div class="run">
+    <div class="r">
+      <div class="ico">💾</div>
+      <div class="t">सर्वर (ऐप का डेटा)</div>
+      <div class="v free">₹0<small>मुफ़्त</small></div>
+    </div>
+    <div class="r">
+      <div class="ico">📩</div>
+      <div class="t">लॉगिन वाले OTP मैसेज</div>
+      <div class="v">₹300–500<small>हर महीने</small></div>
+    </div>
+    <div class="r">
+      <div class="ico">▶️</div>
+      <div class="t">Play Store खाता</div>
+      <div class="v">₹2,100<small>सिर्फ़ एक बार</small></div>
+    </div>
+    <div class="r">
+      <div class="ico">💳</div>
+      <div class="t">ऑनलाइन पेमेंट<small>नकद पर कुछ नहीं कटेगा</small></div>
+      <div class="v">₹100 पर ₹2<small>कटेंगे</small></div>
+    </div>
+  </div>
+
+  <p class="foot">कोई भी सवाल हो, बेझिझक पूछिए 🙏</p>
+</div>
+</body>
+</html>
